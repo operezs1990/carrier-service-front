@@ -1,0 +1,95 @@
+@media screen and (max-width: 899px) {
+    .width-span {
+        display: none;
+    }
+
+    .padding-header-data {
+        padding: 0px 0px 0px;
+    }
+
+    .custom-padding-card {
+        padding-left: 0px; 
+        padding-right: 0px;
+    }
+
+    .width-col {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .width-span {
+        flex-grow: 1;
+    }
+
+    .padding-header-data {
+        padding: 0px 40px 0px;
+    }
+
+    .width-title {
+        width: 65%;
+    }
+
+    .custom-padding-card {
+        padding-left: 70px; 
+        padding-right: 70px;
+    }
+
+    .width-col {
+        width: 30%;
+    }
+
+}
+
+.title-color-black {
+    color: #000000;
+}
+
+.page-title {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 47px;
+    color: #000000;
+}
+
+.page-sub-title {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    color: #000000;
+}
+
+.label-font {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;    
+    color: #3B453A;
+}
+
+.padding-form {
+    padding: 40px 40px 40px 40px;
+}
+
+.save-button {
+    height: 49px;
+    width: 176px;
+    background: #4A56BE;
+}
+
+.button-font {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+}
+
+.padding-bottom-65px {
+    padding-bottom: 65px;
+}
+
+.padding-bottom-60px {
+    padding-bottom: 60px;
+}
+

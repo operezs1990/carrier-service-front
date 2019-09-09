@@ -1,0 +1,72 @@
+<div class="">
+  <table class="mb-0 font-style">
+    <thead>
+      <tr>
+        <th class="width-4pct text-align-center" scope="col">{{'Nº'|translate}}</th>
+        <th class="" scope="col">{{'PRODUCTO'|translate}}</th>
+        <th class="" scope="col">{{'DESTINATARIO'}}</th>
+        <th class="" scope="col">{{'Comuna'}}</th>
+        <th class="" scope="col">{{'REFERENCIA'}}</th>
+        <th class="" scope="col">{{'SEGUIMIENTO'}}</th>
+        <th class="" scope="col">{{'BULTOS'}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let manifest of manifestList; let i = index;">
+        <td class="width-4pct text-align-center">
+          <div class="">
+            {{manifest.number}}
+          </div>
+        </td>
+        <td class="">
+          <div class="">
+            {{manifest.product}}
+          </div>
+        </td>
+        <td class="">
+          <div class="">
+            {{manifest.addressee}}
+          </div>
+        </td>
+        <td class="">
+          <div class="">
+            {{manifest.commune}}
+          </div>
+        </td>
+        <td class="">
+          <div class="">
+            {{manifest.reference}}
+          </div>
+        </td>
+        <td class="">
+          <div class="display-flex align-items-center justify-content-center ">
+            <ngx-barcode [bc-value]="manifest.expNumber" [bc-height]="25" [bc-display-value]="true" [bc-width]=""
+              [bc-font-size]="12">
+            </ngx-barcode>
+          </div>
+        </td>
+        <td class="">
+          <div class="float-right padding-right-15px">
+            {{manifest.packages}}
+          </div>
+        </td>
+      </tr>
+      <tr class=" height-60px" *ngFor="let item of arrayTemp">
+        <td class="width-4pct text-align-center">
+        </td>
+        <td class="">
+        </td>
+        <td class="">
+        </td>
+        <td class="">
+        </td>
+        <td class="">
+        </td>
+        <td class="">
+        </td>
+        <td class="">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

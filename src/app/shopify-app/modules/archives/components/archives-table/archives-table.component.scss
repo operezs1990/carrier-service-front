@@ -1,0 +1,87 @@
+.tooltip-static .tooltip {
+    position: relative;
+    display: block;
+    opacity: 1;
+    z-index: 1;
+
+    .tooltip-inner {
+        max-width: 100%;
+    }
+}
+
+.popover-static .popover {
+    position: relative;
+    display: block;
+    margin: 0;
+    max-width: 100%;
+    z-index: 1;
+}
+
+.title-color-black {
+    color: #000000;
+}
+
+.page-title {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 47px;
+    color: #000000;
+}
+
+.page-sub-title {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    color: #000000;
+}
+
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+
+.custom-day.range,
+.custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+}
+
+.custom-day.faded {
+    background-color: rgba(2, 117, 216, 0.5);
+}
+
+i {
+    font-size: 24px !important;
+}
+
+.add-button {
+    color: #fff;
+    background-color: #D42948;
+    border-color: #D42948;
+}
+
+.button-font {
+  font-weight: 300;
+  font-size: 24px;
+}
+
+.column-title-font {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    color: #555555;
+}
+
+.border-collapse-inherit {
+    border-collapse: inherit !important;
+}
+

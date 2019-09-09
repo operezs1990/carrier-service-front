@@ -1,0 +1,32 @@
+.font-style {
+    font-family: Helvetica;
+    font-size: 10pt !important;
+    color: black !important;
+}
+
+table, tbody, tr, td, th {
+    border: black 1px solid;
+    padding: 0px !important;
+    
+}
+
+tr, td, th {
+    padding-left: 2px !important; 
+}
+
+tr {
+    height: 30px;
+}
+
+th {
+    font-weight: normal !important;
+}
+
+thead {
+    background-color: lightgray;
+}
+
+.width-4pct {
+    width: 4% !important;
+}
+

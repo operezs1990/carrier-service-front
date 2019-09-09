@@ -1,0 +1,35 @@
+<div class="download-position">
+  <div class="d-flex justify-content-start align-items-center">
+    <button type="button" data-toggle="tooltip" data-placement="top" title="{{'Regresar al Manifiesto'|translate}}"
+      class="btn back-button border-radius-0px button-font" [routerLink]="['/manifest']"
+      routerLinkActive="router-link-active">
+      <i class="fa fa-arrow-left ml-2 font-size-20px"></i>
+      {{'Atrás'|translate}}
+    </button>
+    <span class="flex-grow-1"></span>
+    <button type="button" data-toggle="tooltip" data-placement="top"
+      title="{{'Descargar Manifiesto como PDF'|translate}}" class="btn download-button border-radius-0px button-font"
+      (click)="captureScreen()">
+      {{'Descargar'|translate}}
+      <i class="fa fa-download ml-2 font-size-20px"></i>
+    </button>
+  </div>
+</div>
+
+<div class="padding-100px page-style" id="contentToConvert" #content>
+  <div>
+    <div class="display-flex justify-content-center">
+      <h3 class="font-style">MANIFIESTO RESUMEN</h3>
+    </div>
+    <div>
+      <app-manifest-header></app-manifest-header>
+    </div>
+    <div class="padding-top-15px">
+      <app-manifest-rows *ngIf="manifestList" [manifestList]="manifestList">
+      </app-manifest-rows>
+    </div>
+    <div class="padding-top-15px">
+      <app-manifest-footer></app-manifest-footer>
+    </div>
+  </div>
+</div>

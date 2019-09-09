@@ -1,0 +1,32 @@
+.tooltip-static .tooltip {
+    position: relative;
+    display: block;
+    opacity: 1;
+    z-index: 1;
+    .tooltip-inner{
+        max-width: 100%;
+    }
+}
+.popover-static .popover {
+    position: relative;
+    display: block;
+    margin: 0;
+    max-width: 100%;
+    z-index: 1;
+}
+.bs-tooltip-bottom-docs .arrow,
+.bs-tooltip-top-docs .arrow {
+    left: 50%
+}
+.bs-tooltip-left-docs .arrow,
+.bs-tooltip-right-docs .arrow {
+    top: 50%
+}
+.bs-popover-bottom-docs .arrow,
+.bs-popover-top-docs .arrow {
+    left: 50%
+}
+.bs-popover-left-docs .arrow,
+.bs-popover-right-docs .arrow {
+    top: 50%
+}

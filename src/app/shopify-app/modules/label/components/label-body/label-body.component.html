@@ -1,0 +1,10 @@
+<div class="border-1px-solid-black">
+  <div class="padding-top-5px display-flex align-items-center justify-content-center ">
+    <ngx-barcode [bc-value]="label.varCode" [bc-height]="100" [bc-display-value]="false" [bc-width]=""
+      [bc-font-size]="30">
+    </ngx-barcode>
+  </div>
+  <div class="text-align-right font-size-10pt font-weight-bold">
+    {{label.dummyCode}}
+  </div>
+</div>

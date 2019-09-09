@@ -1,0 +1,6 @@
+<app-user-form *ngIf="data && regionList"
+    [data]="data" 
+    [regionList]="regionList"       
+    (accept)="submit($event)"
+    (cancel)="cancel()">
+</app-user-form>

@@ -1,0 +1,157 @@
+<div class=" padding-left-40px">
+  <div class="">
+    <div class="padding-header-data">
+      <div class="width-title">
+        <div class="d-flex align-items-start flex-column title-color-black">
+          <div class="page-title">{{'Contratos con Correo de Chile'|translate}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="download-position">
+    <div class="d-flex justify-content-start align-items-center">
+      <button type="button" data-toggle="tooltip" data-placement="top"
+        title="{{'Descargar Manifiesto como PDF'|translate}}" class="btn add-button border-radius-0px button-font"
+        routerLink="./manifest-doc" >
+        {{'Generar Manifiesto'|translate}}
+        <i class="fa fa-download ml-2 font-size-20px"></i>
+      </button>
+    </div>
+  </div>
+  <div class="user-manage-list padding-top-20px">
+    <div class="chk-block mb-0">
+      <div class="chk-block-content">
+        <div class="table-responsive">
+          <div class="unseen">
+            <table class="table border-collapse-inherit table-hover table-striped table-bordered ">
+              <thead>
+                <tr class="bg-white">
+                    <th class="width-4pct text-align-center">{{'Nº'|translate}}</th>
+                    <th>{{'Producto'|translate}}</th>
+                    <th>{{'Destinatario'}}</th>
+                    <th>{{'Comuna'}}</th>
+                    <th>{{'Referencia'}}</th>
+                    <th>{{'Seguimiento'}}</th>
+                    <th>{{'Bultos'}}</th>
+                    <th>{{'Acciones'}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of manifestList">
+                  <td>
+                    <div class="">
+                      {{item.number}}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="">
+                      {{item.product}}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="">
+                      {{item.addressee}}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="">
+                      {{item.commune}}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="">
+                      {{item.reference}}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="">
+                        <ngx-barcode [bc-value]="item.expNumber" [bc-height]="25" [bc-display-value]="true" [bc-width]=""
+                        [bc-font-size]="12">
+                      </ngx-barcode>
+                    </div>
+                  </td>
+                  <td>
+                      <div class="">
+                        {{item.packages}}
+                      </div>
+                    </td>
+                  <td>
+                    <div class="">
+                      <a data-toggle="tooltip" data-placement="top" title="{{'Ver Etiqueta'|translate}}"
+                        class="mr-3 text-muted" href="javascript:void(0)" routerLink="/label">
+                        <i class="fa fa-eye font-size-24px" aria-hidden="true"></i></a>
+                      <!-- <a data-toggle="tooltip " data-placement="top" title="{{'Aceptar'|translate}}"
+                        class="mr-3 text-muted" href="javascript:void(0)" (click)="onEdit(rowIndex)">
+                        <i class="fa fa-check-circle font-size-24px" aria-hidden="true"></i></a> -->
+                      <!-- <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
+                                  href="javascript:void(0)" (click)="onDelete(rowIndex)">
+                                  <i class="fa fa-times font-size-24px" aria-hidden="true"></i></a> -->
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- <ngx-datatable #CompanySizeTable class="material mrgn-all-md" [headerHeight]="50" [limit]="rowsNumber"
+        [columnMode]="'force'" [footerHeight]="50" [rowHeight]="50" [rows]="manifestList">
+        <ngx-datatable-column prop="number" name="{{'NO'|translate}}">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="column-title-font padding-left-20px">{{'NO'|translate}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="product" name="{{'PRODUCT'|translate}}">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="column-title-font">{{'PRODUCT'|translate}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="addressee" name="{{'DESTINATION'|translate}}">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="column-title-font">{{'DESTINATION'|translate}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="commune" name="{{'COMMUNE'|translate}}">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="column-title-font">{{'COMMUNE'|translate}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="reference" name="{{'REFERENCE'|translate}}">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="column-title-font">{{'REFERENCE'|translate}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="expNumber" name="{{'TRACING'|translate}}">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="column-title-font">{{'TRACING'|translate}}</span>
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <ngx-barcode [bc-value]="value" [bc-display-value]="true"></ngx-barcode>
+            <span>{{value}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="packages" name="{{'PACKAGES'|translate}}">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="column-title-font">{{'PACKAGES'|translate}}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="{{'ACTIONS'|translate}}">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <span class="column-title-font">{{'ACTIONS'|translate}}</span>
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <a data-toggle="tooltip" data-placement="top" title="{{'DETAILS'|translate}}" class="mr-3 text-muted"
+              href="javascript:void(0)" (click)="onDetails(rowIndex)">
+              <i class="fa fa-eye font-size-24px" aria-hidden="true"></i></a>
+            <a data-toggle="tooltip " data-placement="top" title="{{'ACCEPT'|translate}}" class="mr-3 text-muted"
+              href="javascript:void(0)" (click)="onEdit(rowIndex)">
+              <i class="fa fa-edit font-size-24px" aria-hidden="true"></i></a>
+            <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
+              href="javascript:void(0)" (click)="onDelete(rowIndex)">
+              <i class="fa fa-times font-size-24px" aria-hidden="true"></i></a>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable> -->
+    </div>
+  </div>

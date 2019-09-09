@@ -1,0 +1,74 @@
+[
+    {
+        "name": "Company1",
+        "score": 73,
+        "updated": "12/1/29",
+        "size": "big",
+        "sector": "IT",
+        "sectorType": "online",
+        "accountTypeColor": "warning"
+    },
+    {
+        "name": "Company2",
+        "score": 60,
+        "updated": "12/1/29",
+        "size": "medium",
+        "sector": "Consulting",
+        "sectorType": "offline",
+        "accountTypeColor": "primary"
+    },
+    {
+        "name": "Company3",
+        "score": 80,
+        "updated": "12/1/29",
+        "size": "small",
+        "sector": "Consulting",
+        "sectorType": "offline",			
+        "accountTypeColor": "success"
+    },
+    {
+        "name": "Company4",
+        "score": 32,
+        "updated": "12/1/29",
+        "size": "big",
+        "sector": "IT",
+        "sectorType": "online",
+        "accountTypeColor": "warning"
+    },
+    {
+        "name": "Company5",
+        "score": 50,
+        "updated": "12/1/29",
+        "size": "small",
+        "sector": "IT",
+        "sectorType": "online",
+        "accountTypeColor": "success"
+    },
+    {
+        "name": "Company6",
+        "score": 90,
+        "updated": "12/1/29",
+        "size": "small",
+        "sector": "Consulting",
+        "sectorType": "offline",
+        "accountTypeColor": "success"
+    },
+    {
+        "name": "Company7",
+        "score": 12,
+        "updated": "12/1/29",
+        "size": "medium",
+        "sector": "IT",
+        "sectorType": "online",
+        "accountTypeColor": "primary"
+    },
+    {
+        "name": "Company8",
+        "score": 23,
+        "updated": "12/1/29",
+        "size": "big",
+        "sector": "IT",
+        "sectorType": "online",
+        "accountTypeColor": "warning"
+    }
+]

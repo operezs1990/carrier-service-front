@@ -1,0 +1,175 @@
+<div class=" padding-left-40px padding-bottom-60px">
+  <div class="">
+    <div class="padding-header-data">
+      <div class="width-title">
+        <div class="d-flex align-items-start flex-column title-color-black">
+          <div class="page-title">{{'Perfil de Usuario'|translate}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="custom-padding-card">
+  <form [formGroup]="formGroup" novalidate role="form" (ngSubmit)="submitClicked()" autocomplete="off" inputFocus>
+    <div class="chk-block ">
+      <div class="chk-block-content">
+        <div class="display-flex flex-wrap padding-form">
+          <div class="width-col">
+            <div class="form-group padding-bottom-5px">
+              <label class="padding-left-20px label-font" for>
+                {{'Nombre'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['firstName']" formControlName="firstName"
+                required>
+              <small class="chankya-block"
+                *ngIf="formGroup.controls['firstName'].hasError('required') && (formGroup.controls['firstName'].touched ||  wasSubmitted)"
+                class="text-danger">
+                {{'Debe incluir un nombre'|translate}}
+              </small>
+            </div>
+            <div class="form-group padding-bottom-5px">
+              <label class="padding-left-20px label-font" for>
+                {{'Apellidos'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['lastName']" formControlName="lastName">
+            </div>
+            <div class="form-group">
+              <label class="padding-left-20px label-font" for>
+                {{'Teléfono'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['phone']" formControlName="phone"
+                type="text" required>
+              <small class="chankya-block"
+                *ngIf="formGroup.controls['phone'].hasError('required') && (formGroup.controls['phone'].touched ||  wasSubmitted)"
+                class="text-danger">
+                {{'Debe incluir un número de teléfono'|translate}}
+              </small>
+            </div>
+            <div class="form-group">
+              <label class="padding-left-20px label-font" for>
+                {{'Email'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['email']" formControlName="email" required>
+              <small class="chankya-block"
+                *ngIf="formGroup.controls['email'].hasError('required') && (formGroup.controls['email'].touched ||  wasSubmitted)"
+                class="text-danger">
+                {{'Debe incluir un número de teléfono'|translate}}
+              </small>
+            </div>
+          </div>
+          <span class="width-span"></span>
+          <div class="width-col">
+            <div class="form-group padding-bottom-5px">
+              <label class="padding-left-20px label-font" for>
+                {{'Región'|translate}}
+              </label>
+              <select class="form-control" id="formSelect1" formControlName="region" required data-toggle="tooltip"
+                data-placement="right" title="{{'SELECT_OPTION'| translate}}">
+                <option *ngFor="let region of regionList" [value]="region.name">
+                  {{region.name}}
+                </option>
+              </select>
+              <small class="chankya-block"
+                *ngIf="formGroup.controls['region'].hasError('required') && (formGroup.controls['region'].touched ||  wasSubmitted)"
+                class="text-danger">
+                {{'Debe incluir una Región'|translate}}
+              </small>
+            </div>
+            <div class="form-group padding-bottom-5px">
+              <label class="padding-left-20px label-font" for>
+                {{'Comuna'|translate}}
+              </label>
+              <select class="form-control" id="formSelect1" formControlName="comuna" required data-toggle="tooltip"
+                data-placement="right" title="{{'SELECT_OPTION'| translate}}" >
+                <option *ngFor="let comuna of comunaList" [value]="comuna.name">
+                  {{comuna.name}}
+                </option>
+              </select>
+              <small class="chankya-block"
+                *ngIf="formGroup.controls['comuna'].hasError('required') && (formGroup.controls['comuna'].touched ||  wasSubmitted)"
+                class="text-danger">
+                {{'Debe incluir una comuna'|translate}}
+              </small>
+            </div>
+            <div class="form-group padding-bottom-5px">
+              <label class="padding-left-20px label-font" for>
+                {{'Código Postal'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['zip']" formControlName="zip" required>
+              <small class="chankya-block"
+                *ngIf="formGroup.controls['zip'].hasError('required') && (formGroup.controls['zip'].touched ||  wasSubmitted)"
+                class="text-danger">
+                {{'Debe incluir un Código Postal'|translate}}
+              </small>
+            </div>
+            <div class="form-group padding-bottom-5px">
+              <label class="padding-left-20px label-font" for>
+                {{'Dirección'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['address']" formControlName="address"
+                required>
+              <small class="chankya-block"
+                *ngIf="formGroup.controls['address'].hasError('required') && (formGroup.controls['address'].touched ||  wasSubmitted)"
+                class="text-danger">
+                {{'Debe incluir una Dirección postal'|translate}}
+              </small>
+            </div>
+          </div>
+          <span class="width-span"></span>
+          <div class="width-col">
+            <div class="form-group padding-bottom-5px">
+              <label class="padding-left-20px label-font" for>
+                {{'Usuario de Correos de Chile'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['userApiChile']"
+                formControlName="userApiChile" required>
+              <small class="chankya-block"
+                *ngIf="formGroup.controls['userApiChile'].hasError('required') && (formGroup.controls['userApiChile'].touched ||  wasSubmitted)"
+                class="text-danger">
+                {{'Debe incluir un usuario'|translate}}
+              </small>
+            </div>
+            <div class="form-group padding-bottom-5px">
+              <label class="padding-left-20px label-font" for>
+                {{'Contraseña'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['passwordApiChile']"
+                formControlName="passwordApiChile" required>
+              <small class="chankya-block"
+                *ngIf="formGroup.controls['passwordApiChile'].hasError('required') && (formGroup.controls['passwordApiChile'].touched ||  wasSubmitted)"
+                class="text-danger">
+                {{'Debe incluir una Contraseña'|translate}}
+              </small>
+            </div>
+            <div class="form-group padding-bottom-5px">
+              <label class="padding-left-20px label-font" for>
+                {{'Id de usuario de Correos de Chile'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['idApiChile']" formControlName="idApiChile"
+                required>
+              <small class="chankya-block"
+                *ngIf="formGroup.controls['idApiChile'].hasError('required') && (formGroup.controls['idApiChile'].touched ||  wasSubmitted)"
+                class="text-danger">
+                {{'Debe incluir un Id válido'|translate}}
+              </small>
+            </div>
+            <div class="form-group padding-bottom-5px">
+              <label class="padding-left-20px label-font" for>
+                {{'URL de la tienda online'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['shopUrl']" formControlName="shopUrl" readonly>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center padding-bottom-40px">
+          <button type="submit" data-toggle="tooltip" data-placement="top" title="{{'Guardar cambios'|translate}}"
+            class="btn save-button border-radius-0px button-font">
+            {{'Guardar'|translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

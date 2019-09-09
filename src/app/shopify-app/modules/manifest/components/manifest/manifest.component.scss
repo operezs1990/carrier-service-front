@@ -1,0 +1,40 @@
+.font-style {
+    font-family: Helvetica;
+    font-size: 13.5pt;
+    font-weight: bold;
+    color: black;
+}
+
+.download-button {
+    color: #fff;
+    background-color: #D42948;
+    border-color: #D42948;
+}
+
+
+.back-button {
+    color: #fff;
+    border-color: #4A56BE;
+    background-color: #4A56BE;
+}
+
+.button-font {
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.padding-100px {
+    padding: 100px;
+}
+
+.download-position {
+   // display: flex;
+   justify-content: flex-end;
+   padding-bottom: 10px;
+   padding-left: 20px;
+   padding-right: 20px;
+}
+
+.page-style {
+    background-color: white;
+}

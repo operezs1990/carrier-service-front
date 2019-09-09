@@ -1,0 +1,30 @@
+<div class="download-position">
+  <div class="d-flex justify-content-start align-items-center">
+    <button type="button" data-toggle="tooltip" data-placement="top" title="{{'Regresar al Manifiesto'|translate}}"
+      class="btn back-button border-radius-0px button-font" [routerLink]="['/manifest']" routerLinkActive="router-link-active"  >
+      <i class="fa fa-arrow-left ml-2 font-size-20px"></i>
+      {{'Atrás'|translate}}
+    </button>
+    <span class = "flex-grow-1"></span>
+    <button type="button" data-toggle="tooltip" data-placement="top" title="{{'Descargar Etiqueta como PDF'|translate}}"
+      class="btn download-button border-radius-0px button-font" (click)="captureScreen()">
+      {{'Descargar'|translate}}
+      <i class="fa fa-download ml-2 font-size-20px"></i>
+    </button>
+  </div>
+</div>
+
+<div class="padding-top-100px page-style line-height-initial font-style display-flex flex-grow justify-content-center"
+  id="contentToConvert" #content>
+  <div *ngIf="label" class="width-500px border-1px-solid-black">
+    <div class="font-style ">
+      <app-label-header [label]="label"></app-label-header>
+    </div>
+    <div class="">
+      <app-label-body [label]="label"></app-label-body>
+    </div>
+    <div class="">
+      <app-label-footer [label]="label"></app-label-footer>
+    </div>
+  </div>
+</div>
