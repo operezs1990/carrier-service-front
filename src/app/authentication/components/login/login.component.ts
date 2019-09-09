@@ -77,14 +77,11 @@ export class LoginComponent implements OnInit {
         if (this.queryParams.code) {
             this.installFlag = true;
             this.authService.installApp(this.queryParams).subscribe(response => {
-
+                this.loginAuth(this.queryParams.shop);
             });
         } else {
             this.createFormGroup();
         }
-
-        console.log(this.urlTree);
-
     }
 
     createFormGroup() {
@@ -93,27 +90,31 @@ export class LoginComponent implements OnInit {
         });
     }
 
+    loginAuth(shop: string) {
+        this.authService.loginUser(shop, this.queryParams)
+        .subscribe(
+            resp => {
+                // this.rootActions.setState(this.authService.userPreferences);
+                if (this.returnUrl && this.returnUrl.length > 0) {
+                    this.router.navigateByUrl(this.returnUrl);
+                } else {
+                    this.router.navigate(this.authService.afterLoginCommands,
+                        this.authService.afterLoginNavigationExtras);
+                }
+            },
+            error => {
+                this.errorHandlingService.handleUiError(errorKey, error);
+            },
+        );
+    }
+
     login() {
         const shop = this.loginForm.get('shop').value;
         if (this.authService.isAuthenticated) {
             this.router.navigate(this.authService.afterLoginCommands, this.authService.afterLoginNavigationExtras);
         } else {
             if (shop) {
-                this.authService.loginUser(shop, this.queryParams)
-                    .subscribe(
-                        resp => {
-                            // this.rootActions.setState(this.authService.userPreferences);
-                            if (this.returnUrl && this.returnUrl.length > 0) {
-                                this.router.navigateByUrl(this.returnUrl);
-                            } else {
-                                this.router.navigate(this.authService.afterLoginCommands,
-                                    this.authService.afterLoginNavigationExtras);
-                            }
-                        },
-                        error => {
-                            this.errorHandlingService.handleUiError(errorKey, error);
-                        },
-                    );
+                this.loginAuth(shop);
             } else {
                 this.translate.get('EMAIL_PASSWORD_MESSAGE').subscribe((res: string) => {
                     this.toastr.error(res);
