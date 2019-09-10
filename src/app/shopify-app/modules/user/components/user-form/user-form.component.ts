@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -17,7 +17,7 @@ declare var $: any;
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.scss']
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent implements OnInit, OnDestroy {
 
   wasSubmitted = false;
 
@@ -48,7 +48,14 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
     this.createFormGroup();
     this.regionValueChanges = this.formGroup.controls.region.valueChanges.pipe(debounceTime(500))
-                                                .subscribe(change => this.comunaListFilter());
+                                                .subscribe(change => this.comunaListFilter(this.formGroup.value.region));
+    if (this.data.region) {
+      this.comunaListFilter(this.data.region)
+    }
+  }
+
+  ngOnDestroy() {
+    this.regionValueChanges.unsubscribe();
   }
 
   createFormGroup() {
@@ -57,8 +64,8 @@ export class UserFormComponent implements OnInit {
       lastName: [this.data.lastName],
       phone: [this.data.phone],
       email: [this.data.email, Validators.compose([Validators.required, CustomValidators.email])],
-      comuna: [this.data.comuna, Validators.compose([Validators.required])],
       region: [this.data.region, Validators.compose([Validators.required])],
+      comuna: [this.data.comuna, Validators.compose([Validators.required])],
       address: [this.data.address, Validators.compose([Validators.required])],
       zip: [this.data.zip, Validators.compose([Validators.required])],
       userApiChile: [this.data.userApiChile, Validators.compose([Validators.required])],
@@ -71,12 +78,14 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  comunaListFilter() {
-    const index = this.regionList.findIndex(region => {
-      return region.name === this.formGroup.value.region;
+  comunaListFilter(region: string) {
+    const index = this.regionList.findIndex(item => {
+      return item.name === region;
     });
-    this.comunaList = this.regionList[index].comunas;
-    this.formGroup.get ('comuna').enable();
+    if (index) {
+      this.comunaList = this.regionList[index].comunas;
+      this.formGroup.get ('comuna').enable();
+    }
   }
 
   submitClicked() {

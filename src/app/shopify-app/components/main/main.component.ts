@@ -43,16 +43,18 @@ export class MainComponent implements OnInit, OnDestroy {
    _closeOnClickOutside: boolean = false;
    showSettings: boolean = false;
 
-   _mode: string = "push";
+   _mode: string = 'push';
    sidenavMode: string = 'side';
-   themeSkinColor: any = "light";
-   headerSkinColor: any = "light";
+   themeSkinColor: any = 'light';
+   headerSkinColor: any = 'light';
    root: any = 'ltr';
    layout: any = 'ltr';
    header: string;
    url: string;
    public innerWidth: any;
    input: any;
+
+   shopUrl: string;
 
    private _router: Subscription;
    private _mediaSubscription: Subscription;
@@ -112,6 +114,9 @@ export class MainComponent implements OnInit, OnDestroy {
       this.getMenuItems();
       this.initialsConfigurations();
       $('.keepopen').on('click', function (e) { e.stopPropagation(); e.preventDefault(); });
+      this.shopUrl = 'https://' + this.authService.currentUser.shopUrl;
+      console.log(this.shopUrl);
+      
       if (this.authService.currentUser.newUser) {
          this.confirmAccountReady();
       }
@@ -295,9 +300,9 @@ export class MainComponent implements OnInit, OnDestroy {
      */
    changeRTL(isChecked) {
       if (isChecked) {
-         this.layout = "rtl"
+         this.layout = 'rtl'
       } else {
-         this.layout = "ltr"
+         this.layout = 'ltr'
       }
    }
 
@@ -307,12 +312,12 @@ export class MainComponent implements OnInit, OnDestroy {
    toggleSidebar(isChecked) {
       if (isChecked) {
          document.getElementById('showSidebar').classList.remove('icon-sidebar');
-         document.getElementsByClassName('app')[0].classList.remove("icon-sidebar-wrap");
+         document.getElementsByClassName('app')[0].classList.remove('icon-sidebar-wrap');
          document.getElementById('boxed-layout').classList.remove('disabled-checkbox');
       } else {
-         document.getElementById('showSidebar').className += " icon-sidebar";
-         document.getElementsByClassName('app')[0].className += " icon-sidebar-wrap";
-         document.getElementById('boxed-layout').className += " disabled-checkbox";
+         document.getElementById('showSidebar').className += ' icon-sidebar';
+         document.getElementsByClassName('app')[0].className += ' icon-sidebar-wrap';
+         document.getElementById('boxed-layout').className += ' disabled-checkbox';
       }
    }
 
@@ -343,7 +348,7 @@ export class MainComponent implements OnInit, OnDestroy {
    boxedLayout(isChecked) {
       if (isChecked) {
          this.boxed = true;
-         document.getElementById('icon-sidebar').className += " disabled-checkbox";
+         document.getElementById('icon-sidebar').className += ' disabled-checkbox';
       } else {
          this.boxed = false;
          document.getElementById('icon-sidebar').classList.remove('disabled-checkbox');

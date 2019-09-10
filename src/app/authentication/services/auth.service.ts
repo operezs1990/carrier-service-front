@@ -171,27 +171,37 @@ export class AuthService {
         const url: string = this.configService.config.apiUrl + this.configService.config.apiConfigs.install.apiEndpoint;
         let queryParams = '';
         queryParams += '?' + `code=${data.code}` + '&'
-                    + `hmac=${data.hmac}` + '&'
-                    + `shop=${data.shop}` + '&'
-                    + `state=${data.state}` + '&'
-                    + `timestamp=${data.timestamp}` + '&';
+            + `hmac=${data.hmac}` + '&'
+            + `shop=${data.shop}` + '&'
+            + `state=${data.state}` + '&'
+            + `timestamp=${data.timestamp}` + '&';
 
-        return this.http.get<any>(url + queryParams);
+        return this.http.get<any>(url + queryParams).pipe(map((response: LoginUser) => {
+            console.log('install', response);
+            if (response) {
+                const token = response.token;
+                const user = response.user;
+                this.currentUser = user;
+                this.userToken = token;
+            } else {
+                this.userToken = null;
+                this.currentUser = null;
+                //   throw new Error();
+            }
+        }));
     }
 
 
     loginUser(shop: string, queryParams: QueryParams, code?: string): Observable<any> {
         shop = shop.replace('+', '%2B');
-
         const headers = this.getHeaders(false, false, false);
         const credentials = {
             'shop': shop,
             'queryParams': queryParams
         };
-
         const url: string = this.configService.config.apiUrl + this.configService.config.apiConfigs.authentication.loginUser.apiEndpoint;
         return this.http.post<LoginUser>(url, credentials, { headers: headers }).pipe(map((response: LoginUser) => {
-            console.log(response);
+            console.log('after login', response);
             if (response.user.newUser) {
                 window.location.href = response.user.redirect;
             } else if (!response.user.newUser && !response.user.hmac) {
@@ -214,7 +224,7 @@ export class AuthService {
                     this.currentUser = null;
                     throw new Error();
                 }
-            return empty();
+                return empty();
             }
         }));
     }

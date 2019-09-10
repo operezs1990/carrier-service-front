@@ -15,7 +15,7 @@ declare var $: any;
 })
 export class LabelHeaderRightOneComponent implements OnInit {
 
-  @Input() label: Array<PesLabel>;
+  @Input() label: PesLabel;
 
   constructor(public translate: TranslateService) {
   }

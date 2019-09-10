@@ -14,7 +14,7 @@ declare var $: any;
 })
 export class LabelFooterTwoComponent implements OnInit {
 
-  @Input() label: Array<PesLabel>;
+  @Input() label: PesLabel;
 
   constructor(public labelService: LabeltService,
               public translate: TranslateService) {

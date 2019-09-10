@@ -8,6 +8,7 @@ export class LoginUser implements LoginAction {
         lastName: string,
         email: string,
         role: string,
+        shopUrl?: string,
         newUser: boolean,
         hmac?: boolean,
         redirect?: string,

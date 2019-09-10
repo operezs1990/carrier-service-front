@@ -32,14 +32,10 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
 
   filterValueChanges: Subscription;
 
-  ordersList: Array<Order>;
-
+  ordersList: Array<Order> = [];
 
   orders: Array<Order>;
 
-  sizeList: Array<any> = [];
-
-  sectorList: Array<any> = [];
 
 
   constructor(private confirmDialogService: ConfirmDialogService,
@@ -52,7 +48,7 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngOnInit() {
-    this.getStaticOrders();
+    // this.getStaticOrders();
 
     this.filter = this.createFilterFormGroup();
 
@@ -64,7 +60,7 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngAfterViewInit() {
-    this.loadPage();
+    // this.loadPage();
   }
 
   ngOnDestroy() {

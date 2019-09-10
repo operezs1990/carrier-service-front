@@ -1,14 +1,13 @@
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
-import { CustomValidators } from 'ng2-validation';
-
-import { ConfigService } from '../../../config/services/config.service';
-import { AuthService } from '../../services/auth.service';
-import { ErrorHandlingService } from '../../../error-handling/services/error-handling.service';
 import { QueryParams } from 'app/authentication/models/QueryParams';
+import { ToastrService } from 'ngx-toastr';
+import { ConfigService } from '../../../config/services/config.service';
+import { ErrorHandlingService } from '../../../error-handling/services/error-handling.service';
+import { AuthService } from '../../services/auth.service';
+
 
 const errorKey = 'login';
 const requiredUserandPasswordKey = 'Required Username and Password';
@@ -59,7 +58,6 @@ export class LoginComponent implements OnInit {
             this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
             this.authService.loginNavigationExtras = undefined;
         }
-        
     }
 
     getQueryParams() {
@@ -77,7 +75,8 @@ export class LoginComponent implements OnInit {
         if (this.queryParams.code) {
             this.installFlag = true;
             this.authService.installApp(this.queryParams).subscribe(response => {
-                this.loginAuth(this.queryParams.shop);
+                this.toastr.success('Su aplicación ha sido instalada con éxito...!');
+                this.navigateAfterLogin();
             });
         } else {
             this.createFormGroup();
@@ -88,24 +87,6 @@ export class LoginComponent implements OnInit {
         this.loginForm = this.formBuilder.group({
             shop: ['', [Validators.required]],
         });
-    }
-
-    loginAuth(shop: string) {
-        this.authService.loginUser(shop, this.queryParams)
-        .subscribe(
-            resp => {
-                // this.rootActions.setState(this.authService.userPreferences);
-                if (this.returnUrl && this.returnUrl.length > 0) {
-                    this.router.navigateByUrl(this.returnUrl);
-                } else {
-                    this.router.navigate(this.authService.afterLoginCommands,
-                        this.authService.afterLoginNavigationExtras);
-                }
-            },
-            error => {
-                this.errorHandlingService.handleUiError(errorKey, error);
-            },
-        );
     }
 
     login() {
@@ -122,4 +103,27 @@ export class LoginComponent implements OnInit {
             }
         }
     }
+
+    loginAuth(shop: string) {
+        this.authService.loginUser(shop, this.queryParams)
+        .subscribe(
+            resp => {
+                // this.rootActions.setState(this.authService.userPreferences);
+                this.navigateAfterLogin();
+            },
+            error => {
+                this.errorHandlingService.handleUiError(errorKey, error);
+            },
+        );
+    }
+
+    navigateAfterLogin() {
+        if (this.returnUrl && this.returnUrl.length > 0) {
+            this.router.navigateByUrl(this.returnUrl);
+        } else {
+            this.router.navigate(this.authService.afterLoginCommands,
+                this.authService.afterLoginNavigationExtras);
+        }
+    }
+
 }

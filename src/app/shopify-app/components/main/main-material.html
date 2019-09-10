@@ -42,7 +42,7 @@
                               </select>
                             </div>
                           </li> -->
-                          <li><a (click)="goMyProfile()"><i
+                          <li><a [href]="shopUrl" target="_blank"><i
                             class="icon-user icons"></i><span>{{'Ir a la Tienda'|translate}}</span></a></li>
                           <li><a (click)="logOut()"><i
                                 class="icon-logout icons"></i><span>{{'Cerrar seción'|translate}}</span></a></li>
@@ -69,7 +69,7 @@
                           <span>{{ menuitem.name | translate }}</span>{{menuitem.label}}
                         </p>
                       </a>
-                      <a menuToggle [routerLink]="['/', menuitem.state]" routerLinkActive="active-link"
+                      <a menuToggle [routerLink]="['/carrier/', menuitem.state]" routerLinkActive="active-link"
                         class=" "
                         *ngIf="menuitem.type === 'link'">
                         <i class="{{ menuitem.icon }}"></i>
@@ -325,7 +325,7 @@
                             class="align-self-start d-block ">{{'User List'|translate}}</span>
                         </div>
                       </a> -->
-                      <a class="dropdown-item  d-flex pb-2" (click)="logOut()">
+                      <a class="dropdown-item  d-flex pb-2" [href]="shopUrl" target="_blank">
                         <div class="icon-area align-self-start">
                           <i class="fa fa-shopping-cart "></i>
                         </div>
