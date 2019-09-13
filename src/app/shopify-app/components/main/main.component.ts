@@ -84,7 +84,7 @@ export class MainComponent implements OnInit, OnDestroy {
             content: 'Welcome to the Chankya tour!',
             placement: 'below',
             title: 'Welcome to Chankya',
-         },   
+         },
          {
             anchorId: 'tour-search',
             content: 'Enjoying Search box with sugestion and many more things',
@@ -115,25 +115,23 @@ export class MainComponent implements OnInit, OnDestroy {
       this.initialsConfigurations();
       $('.keepopen').on('click', function (e) { e.stopPropagation(); e.preventDefault(); });
       this.shopUrl = 'https://' + this.authService.currentUser.shopUrl;
-      console.log(this.shopUrl);
-      
-      if (this.authService.currentUser.newUser) {
-         this.confirmAccountReady();
-      }
+      this.confirmAccountReady();
    }
 
    confirmAccountReady() {
-      let confirm = 'Usted no a completado su Perfil';
-      let message = 'Para poder usar nuestra Aplicación y servicios de Correos de Chile debe completar su cuenta, por favor no salte este paso. Gracias...!'
-      this.confirmDialogService.confirm(confirm, message)
-          .then((confirmed) => {
-            if (confirmed) {
+      if (this.authService.currentUser.newUser) {
+         let confirm = 'Usted no a completado su Perfil';
+         let message = 'Para poder usar nuestra Aplicación y servicios de Correos de Chile debe completar su cuenta, por favor no salte este paso. Gracias...!'
+         this.confirmDialogService.confirm(confirm, message)
+            .then((confirmed) => {
+               if (confirmed) {
+                  this.router.navigate(['/carrier/user/profile']);
+               }
+            })
+            .catch(() => {
                this.router.navigate(['/carrier/user/profile']);
-            }
-          })
-          .catch(() => {
-            this.router.navigate(['/carrier/user/profile']);
-          });
+            });
+      }
    }
 
    getMenuItems() {

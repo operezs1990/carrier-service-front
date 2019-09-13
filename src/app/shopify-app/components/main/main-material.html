@@ -69,7 +69,7 @@
                           <span>{{ menuitem.name | translate }}</span>{{menuitem.label}}
                         </p>
                       </a>
-                      <a menuToggle [routerLink]="['/carrier/', menuitem.state]" routerLinkActive="active-link"
+                      <a menuToggle (click) = "confirmAccountReady()" [routerLink]="['/carrier/', menuitem.state]" routerLinkActive="active-link"
                         class=" "
                         *ngIf="menuitem.type === 'link'">
                         <i class="{{ menuitem.icon }}"></i>
