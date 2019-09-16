@@ -82,7 +82,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     const index = this.regionList.findIndex(item => {
       return item.name === region;
     });
-    if (index) {
+    if (index !== -1) {
       this.comunaList = this.regionList[index].comunas;
       this.formGroup.get ('comuna').enable();
     }

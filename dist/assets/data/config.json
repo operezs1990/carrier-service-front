@@ -1,0 +1,32 @@
+{
+  "productName": "CCIFrance_Digipilote",
+  "systemName": "Digipilote Systems",
+  "external": false,
+  "apiUrl": "http://localhost:3000/api/v1/",
+  "apiConfigs": {
+    "authentication": {
+      "loginUser": {
+        "apiEndpoint": "auth/login"
+      },
+      "revokeUser": {
+        "apiEndpoint": "revoke-token"
+      },
+      "changePassword": {
+        "apiEndpoint": "passwordchange"
+      },
+      "tokenExpirationTime": {
+        "apiEndpoint": "expirationtime"
+      }
+    },
+    "users": {
+      "apiEndpoint": "users/"
+    },
+    "install": {
+      "apiEndpoint": "carrier-service/callback"
+    },
+
+    "server": {
+      "apiEndpoint": "http://localhost:3000/api/v1/"
+    }
+  }
+}

@@ -323,8 +323,8 @@ export class MainComponent implements OnInit, OnDestroy {
      * logOut method is used to log out the  template.
      */
    logOut() {
-      // this.ngOnDestroy()
-      // this.authService.logOut();
+      this.ngOnDestroy()
+      this.authService.logOut();
    }
 
    /**

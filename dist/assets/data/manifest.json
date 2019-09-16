@@ -1,0 +1,52 @@
+[
+    {
+        "id": "1",
+        "number" : "1",
+        "product": "PAQUETE EXPRES DOMICILIO",
+        "addressee": "CAMILA BROWN",
+        "commune": "LA FLORIDA",
+        "reference": "",
+        "packages": "1",
+        "expNumber": "234355425325"
+    },
+    {
+        "id": "1wwef",
+        "number" : "2",
+        "product": "PAQUETE EXPRES DOMICILIO",
+        "addressee": "JOSE LUIS",
+        "commune": "LA FLORIDA",
+        "reference": "",
+        "packages": "1",
+        "expNumber": "234355425325"
+    },
+    {
+        "id": "1",
+        "number" : "3",
+        "product": "PAQUETE EXPRES DOMICILIO",
+        "addressee": "CARLOS JULIO",
+        "commune": "PUENTE ALTO",
+        "reference": "",
+        "packages": "1",
+        "expNumber": "234355425325"
+    },
+    {
+        "id": "23fwef1",
+        "number" : "4",
+        "product": "PAQUETE EXPRES DOMICILIO",
+        "addressee": "OSCAR MORA",
+        "commune": "LA FLORIDA",
+        "reference": "",
+        "packages": "1",
+        "expNumber": "234355425325"
+    },
+    {
+        "id": "1dwe31312",
+        "number" : "5",
+        "product": "PAQUETE EXPRES DOMICILIO",
+        "addressee": "CAMILA BROWN",
+        "commune": "PROVIDENCIA",
+        "reference": "",
+        "packages": "1",
+        "expNumber": "234355425325"
+    }
+]
