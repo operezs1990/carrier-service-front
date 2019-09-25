@@ -14,6 +14,7 @@ export class User {
     passwordApiChile: string;
     idApiChile: string
     shopUrl: string;
+    profile: boolean;
     createdAt?: Date;
     updatedAt?: Date;
 }

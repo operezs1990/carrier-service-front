@@ -79,6 +79,7 @@ export class UserEditComponent implements AfterViewInit, OnInit {
 
   updateUser(data: User) {
     data.id = this.userId;
+    data.profile = true;
     this.updateUserLocalStorash();
     this.userService.putUser(data).subscribe(response => {
       this.close();

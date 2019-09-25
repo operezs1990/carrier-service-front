@@ -47,7 +47,9 @@ export class LoginComponent implements OnInit {
         private _activatedRoute: ActivatedRoute
     ) {
         const browserLang: string = translate.getBrowserLang();
-        translate.use(browserLang.match(/fr|en/) ? browserLang : 'fr');
+       // translate.use(browserLang.match(/fr|en/) ? browserLang : 'fr');
+       translate.use('es');
+
     }
 
     ngOnInit() {

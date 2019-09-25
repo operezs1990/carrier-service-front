@@ -19,9 +19,13 @@ export class ChankyaAppComponent {
         this.authService.logoutCommands = ['/login'];
 		this.authService.changePasswordCommands = ['/change-password'];
 
-		translate.addLangs(['es', 'en']);
+		// translate.addLangs(['es', 'en']);
+		translate.addLangs(['es']);
+
 		translate.setDefaultLang('es');
 		const browserLang: string = translate.getBrowserLang();
-		translate.use(browserLang.match(/es|en/) ? browserLang : 'es');
+		//translate.use(browserLang.match(/es|en/) ? browserLang : 'es');
+		translate.use('es');
+
 	}
 }

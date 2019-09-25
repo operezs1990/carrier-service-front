@@ -10,6 +10,7 @@ export class LoginUser implements LoginAction {
         role: string,
         shopUrl?: string,
         newUser: boolean,
+        profile: boolean,
         hmac?: boolean,
         redirect?: string,
         createdAt: Date,
@@ -20,7 +21,7 @@ export class LoginUser implements LoginAction {
 
     constructor(user: {
         id: number, firstName: string; lastName: string; email: string;
-        role: string, newUser: boolean, createdAt: Date, updatedAt: Date
+        role: string, newUser: boolean, profile: boolean, createdAt: Date, updatedAt: Date
     },
         token: string, expiresIn: number) {
         this.user = user;

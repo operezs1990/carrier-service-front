@@ -119,7 +119,7 @@ export class MainComponent implements OnInit, OnDestroy {
    }
 
    confirmAccountReady() {
-      if (this.authService.currentUser.newUser) {
+      if (!this.authService.currentUser.profile) {
          let confirm = 'Usted no a completado su Perfil';
          let message = 'Para poder usar nuestra Aplicación y servicios de Correos de Chile debe completar su cuenta, por favor no salte este paso. Gracias...!'
          this.confirmDialogService.confirm(confirm, message)

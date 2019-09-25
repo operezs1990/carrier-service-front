@@ -128,6 +128,7 @@ export class AuthService {
 
     updateCurrentUser(value: any) {
         value.newUser = false;
+        value.profile = true;
         localStorage.setItem('currentUser', value ? JSON.stringify(value) : null);
     }
 
@@ -200,8 +201,8 @@ export class AuthService {
             'queryParams': queryParams
         };
         const url: string = this.configService.config.apiUrl + this.configService.config.apiConfigs.authentication.loginUser.apiEndpoint;
-        return this.http.post<LoginUser>(url, credentials, { headers: headers }).pipe(map((response: LoginUser) => {
-            console.log('after login', response);
+        return this.http.post<LoginUser>(url, credentials, { headers: headers }).pipe(map((response: any) => {
+            console.log('after login', JSON.stringify(response));
             if (response.user.newUser) {
                 window.location.href = response.user.redirect;
             } else if (!response.user.newUser && !response.user.hmac) {
