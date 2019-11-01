@@ -1,0 +1,103 @@
+<div class=" padding-left-40px padding-bottom-60px">
+  <div class="">
+    <div class="padding-header-data">
+      <div class="width-title">
+        <div class="d-flex align-items-start flex-column title-color-black">
+          <div class="page-title">{{'Listado de Retiros'|translate}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<form [formGroup]="filter" autocomplete="off">
+  <div class="chk-block-title px-4">
+    <div class="d-block d-sm-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-start align-items-center mb-sm-0 mb-3">
+        
+      </div>
+      <div class="d-flex justify-content-start align-items-center">
+        <button type="button" data-toggle="tooltip" data-placement="top" title="{{'GO_FORM_COMPANY'|translate}}"
+          class="btn add-button border-radius-0px button-font" [routerLinkActive]="'active'" [routerLink]="['../create']">
+          {{'Nuevo Retiro'|translate}}
+          <i class="fa fa-plus ml-2 font-size-24px"></i>
+        </button>
+       </div>
+    </div>
+  </div>
+
+
+  <div class="user-manage-list">
+    <div class="chk-block mb-0">
+      <!-- <div class="chk-block-title px-4">
+        <div class="d-block d-sm-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-start align-items-center mb-sm-0 mb-3 row padding-left-30px">
+            <div class="form-group form-field mr-3 mb-0 text-nowrap">
+              <input formControlName="name" type="text" class="form-control"
+                placeholder="{{'COMPANY_NAME'|translate}}...">
+            </div>
+            <div class="form-group form-field mr-3 mb-0 text-nowrap">
+              <select class="form-control" formControlName="size">
+                <option [value]="''" selected>{{'ALL_SIZE'|translate}}</option>
+                <option *ngFor="let size of sizeList" [value]="size.id">{{size.name}}</option>
+              </select>
+            </div>
+            <div class="form-group form-field mr-3 mb-0 text-nowrap">
+              <select class="form-control" formControlName="sector">
+                <option [value]="''" selected>{{'ALL_SECTOR'|translate}}</option>
+                <option *ngFor="let sector of sectorList" [value]="sector.id">{{sector.sector}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+
+      <div class="chk-block-content">
+        <div class="table-responsive">
+          <div class="unseen">
+            <table class="table border-collapse-inherit table-hover table-striped table-bordered ">
+              <thead>
+                <tr class="bg-white">
+                  <th >{{'Número de Retiro'|translate}}</th>
+                  <th >{{'Fecha'|translate}}</th>
+                  <th >{{'Hora'}}</th>
+                  <!-- <th >{{'Acciones'}}</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let retiro of retirosList">
+                  <td>
+                    <div class="">
+                      {{retiro.codigoRetiro}}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="">
+                      {{retiro.createdAt}}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="">
+                      {{retiro.createdAt}}
+                    </div>
+                  </td>
+                  <!-- <td>
+                    <div class="">
+                      <a data-toggle="tooltip" data-placement="top" title="{{'Detalles'|translate}}"
+                        class="mr-3 text-muted" href="javascript:void(0)" (click)="onDetails(rowIndex)">
+                        <i class="fa fa-eye font-size-24px" aria-hidden="true"></i></a>
+                      <a data-toggle="tooltip " data-placement="top" title="{{'Aceptar'|translate}}"
+                        class="mr-3 text-muted" href="javascript:void(0)" (click)="onEdit(rowIndex)">
+                        <i class="fa fa-check-circle font-size-24px" aria-hidden="true"></i></a>
+                      <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
+                              href="javascript:void(0)" (click)="onDelete(rowIndex)">
+                              <i class="fa fa-times font-size-24px" aria-hidden="true"></i></a>
+                    </div>
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>

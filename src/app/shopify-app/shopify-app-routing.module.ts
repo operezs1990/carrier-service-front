@@ -28,6 +28,14 @@ const routes: Routes = [
         path: 'user',
         loadChildren: './modules/user/user.module#UserModule'
       },
+      {
+        path: 'retiro',
+        loadChildren: './modules/retiro/retiro.module#RetiroModule'
+      },
+      {
+        path: 'config',
+        loadChildren: './modules/data-config/data-config.module#DataConfigModule'
+      },
     ]
   }
 ];

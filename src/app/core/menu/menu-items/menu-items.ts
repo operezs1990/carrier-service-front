@@ -37,6 +37,12 @@ const MENUITEMS = [
       icon: 'fa fa-calendar-check-o icons',
    },
    {
+      state: 'retiro',
+      name: 'Retiro',
+      type: 'link',
+      icon: 'fa fa-registered icons',
+   },
+   {
       state: 'archives',
       name: 'Archivos',
       type: 'link',

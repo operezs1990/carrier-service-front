@@ -1,7 +1,7 @@
 <!--Login Wrapper-->
 <div class="loginone-wrapper pt-xl-5">
-  <div class="login-content text-center">
-    <div class="login-inner-wrapper-2 shadow-box p-4" *ngIf="!installFlag">
+  <div class="login-content text-center" *ngIf="!installFlag">
+    <div class="login-inner-wrapper-2 shadow-box p-4" >
       <div class=" d-flex justify-content-center mb-4">
         <div class="logo-sign">
           <img src="assets/img/digipilote/correo-chile.png" width = "140">
@@ -64,6 +64,11 @@
     <!-- login form wrapper closed -->
   </div>
   <!-- login-one- wrapper closed -->
+
+  <div class = "display-flex justify-content-center padding-right-60px " *ngIf="installFlag">
+    <h1 class = "font-style">Instalando App, por favor espere....</h1>
+  </div>
+
 </div>
 
 <app-http-request-indicator

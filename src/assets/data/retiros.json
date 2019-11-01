@@ -1,0 +1,33 @@
+[
+	
+	{
+		"id" : "1",
+		"codigoRetiro" : "123",
+		"createdAt" : "2019-10-29 13:13:53"
+	},
+	{
+		"id" : "2",
+		"codigoRetiro" : "342",
+		"createdAt" : "2019-10-29 13:13:53"
+	},
+	{
+		"id" : "3",
+		"codigoRetiro" : "567",
+		"createdAt" : "2019-10-29 13:13:53"
+	},
+	{
+		"id" : "4",
+		"codigoRetiro" : "231",
+		"createdAt" : "2019-10-29 13:13:53"
+	},
+	{
+		"id" : "5",
+		"codigoRetiro" : "879",
+		"createdAt" : "2019-10-29 13:13:53"
+	},
+	{
+		"id" : "6",
+		"codigoRetiro" : "567",
+		"createdAt" : "2019-10-29 13:13:53"
+	}
+]

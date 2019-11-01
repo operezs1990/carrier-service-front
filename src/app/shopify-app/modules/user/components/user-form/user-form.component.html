@@ -34,6 +34,17 @@
               </label>
               <input class="form-control" [formControl]="formGroup.controls['lastName']" formControlName="lastName">
             </div>
+            <div class="form-group padding-bottom-5px">
+              <label class="padding-left-20px label-font" for>
+                {{'Rut'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['rut']" formControlName="rut" required>
+              <small class="chankya-block"
+                *ngIf="formGroup.controls['rut'].hasError('required') && (formGroup.controls['rut'].touched ||  wasSubmitted)"
+                class="text-danger">
+                {{'Debe incluir su rut'|translate}}
+              </small>
+            </div>
             <div class="form-group">
               <label class="padding-left-20px label-font" for>
                 {{'Teléfono'|translate}}

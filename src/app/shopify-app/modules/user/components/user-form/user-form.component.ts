@@ -62,6 +62,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     this.formGroup = this.fb.group({
       firstName: [this.data.firstName, Validators.compose([Validators.required])],
       lastName: [this.data.lastName],
+      rut: [this.data.rut, Validators.compose([Validators.required])],
       phone: [this.data.phone],
       email: [this.data.email, Validators.compose([Validators.required, CustomValidators.email])],
       region: [this.data.region, Validators.compose([Validators.required])],
@@ -92,6 +93,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     if (this.formGroup.valid) {
       this.data.firstName = this.formGroup.value.firstName;
       this.data.lastName = this.formGroup.value.lastName;
+      this.data.rut = this.formGroup.value.rut;
       this.data.phone = this.formGroup.value.phone;
       this.data.email = this.formGroup.value.email;
       this.data.comuna = this.formGroup.value.comuna;

@@ -1,0 +1,287 @@
+
+<!-- <div class="company-details">
+  <div class="padding-top-25px padding-bottom-60px">
+    <div class="padding-header-data">
+      <div class="display-flex flex-wrap">
+        <div class="width-title">
+          <div class="d-flex align-items-start flex-column">
+            <div class="page-title color-black">{{'COMPANY_DETAILS'|translate}}</div>
+            <div class="font-size-24px color-black font-weight-300">{{'HISTORY_ACTIONS'|translate}}</div>
+          </div>
+        </div>
+        <span class="flex-grow-1"></span>
+        <div class="width-button">
+          <div class="d-flex flex-column">
+            <button type="button" type="button" data-toggle="tooltip" data-placement="top"
+              title="{{'VIEW_RESULTS'|translate}}" class="btn btn-company border-radius-0px button-font min-height-50px"
+              (click)="onEditCompany()">
+              {{'EDIT_COMPANY'|translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chk-block mb-0 border-box padding-left-20px padding-right-20px">
+    <div class="row custom-header">
+      <div class="col-xl-6 col-lg-6 col-md-6">
+        {{'COMPANY_CONTACT'|translate}}
+      </div>
+
+      <div class="col-xl-6 col-lg-6 col-md-6">
+        {{'COMPANY_PROFILE'|translate}}
+      </div>
+    </div>
+    <hr>
+    <div class="chk-block-content font-size-18px font-color-custom row" *ngIf="company">
+      <div class="col-xl-4 col-lg-4 col-md-4">
+        <div class="font-weight-bold">
+          {{'COMPANY_NAME'|translate}}:
+          <span class="font-weight-normal">
+            {{company.name}}
+          </span>
+        </div>
+        <div class="padding-top-28px padding-left-5px">
+          <i class="fa fa-phone mr-1 icons-font padding-right-23px"></i>
+          <span class="text-icon-color">
+            {{company.phone}}
+          </span>
+        </div>
+        <div class="padding-top-28px padding-left-5px">
+          <i class="fa fa-at mr-1 mr-1 icons-font padding-right-23px"></i>
+          <span class="text-icon-color">
+            {{company.email}}
+          </span>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          {{'ADDRESS'|translate}}:
+          <span class="font-weight-normal">
+            {{company.address ? company.address : 'N/A'}}
+          </span>
+        </div>
+        <div class="row padding-left-15px padding-top-28px">
+          <div class="font-weight-bold">
+            CP:
+            <span class="font-weight-normal">
+              {{company.zip ? company.zip : 'N/A'}}
+            </span>
+          </div>
+          <span class="width-42px"></span>
+          <div class="font-weight-bold">
+            {{'CITY'|translate}}:
+            <span class="font-weight-normal">
+              {{company.city ? company.city : 'N/A'}}
+            </span>
+          </div>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          {{'SITE'|translate}}:
+          <span class="font-weight-normal link-color-font">
+            {{company.site ? company.site : 'N/A'}}
+          </span>
+        </div>
+        <div class="padding-top-28px padding-left-5px">
+          <i class="fa fa-facebook-f mr-1 icons-font padding-right-23px"></i>
+          <span class="link-color-font">
+            {{company.facebook ? company.facebook : 'N/A'}}
+          </span>
+        </div>
+        <div class="padding-top-28px padding-left-5px">
+          <i class="fa fa-linkedin mr-1 icons-font padding-right-23px"></i>
+          <span class="link-color-font">
+            {{company.linkedin ? company.linkedin : 'N/A'}}
+          </span>
+        </div>
+        <div class="padding-top-28px padding-left-5px">
+          <i class="fa fa-twitter mr-1 icons-font padding-right-23px"></i>
+          <span class="link-color-font">
+            {{company.twitter ? company.twitter : 'N/A'}}
+          </span>
+        </div>
+        <div class="padding-top-28px padding-left-5px">
+          <i class="fa fa-instagram mr-1 icons-font padding-right-23px"></i>
+          <span class="link-color-font">
+            {{company.instagram ? company.instagram : 'N/A'}}
+          </span>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-4">
+        <div class="font-weight-bold">
+          {{'CEO'|translate}}:
+          <span class="font-weight-normal">
+            {{company.ceo ? company.ceo : 'N/A'}}
+          </span>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          {{'SECTOR'|translate}}:
+          <span class="font-weight-normal">
+            {{company.activitySector.sector}}
+          </span>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          {{'NAF'|translate}}:
+          <span class="font-weight-normal">
+            {{company.naf ? company.naf : 'N/A'}}
+          </span>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          {{'SIRET'|translate}}:
+          <span class="font-weight-normal">
+            {{company.siretNumber ? company.siretNumber : 'N/A'}}
+          </span>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          {{'COMPANY_TYPE'|translate}}:
+          <span class="font-weight-normal">
+            {{type.get(company.type)}}
+          </span>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          CA (2018):
+          <span class="font-weight-normal">
+            {{company.grossSales2018 ? company.grossSales2018 : 'N/A'}}
+          </span>
+          <i class="fa fa-eur mr-1 euro-icon-font "></i>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          CA Internet (2018):
+          <span class="font-weight-normal">
+            {{company.internetGrossSales ? company.grossSales2018 : 'N/A'}}
+          </span>
+          <i class="fa fa-eur mr-1 euro-icon-font "></i>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          CA (2019):
+          <span class="font-weight-normal">
+            {{company.grossSales2019 ? company.grossSales2019 : 'N/A'}}
+          </span>
+          <i class="fa fa-eur mr-1 euro-icon-font "></i>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-4 col-md-4">
+        <div class="font-weight-bold">
+          {{'PRECISION'|translate}}:
+          <span class="font-weight-normal">
+            {{company.precision ? company.precision : 'N/A'}}
+          </span>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          {{'COMPANY_SIZE'|translate}}:
+          <span class="font-weight-normal">
+            {{company.companySize.description}}
+          </span>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          {{'CREATION_DATE_COMPANY'|translate}}:
+          <span class="font-weight-normal">
+            {{ company.companyCreation ? (company.companyCreation | date:'dd/MM/yyyy') : 'N/A' }}
+          </span>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          {{'CREATION_DATE_DIGIPILOTE'|translate}}:
+          <span class="font-weight-normal">
+            {{company.createdAt ? (company.createdAt | date:'dd/MM/yyyy') : 'N/A'}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-title padding-left-40px padding-top-60px padding-bottom-40px">
+    <h3 class="text-capitalize title-details">{{'HISTORY_EVALUATIONS'|translate}}</h3>
+  </div>
+
+  <app-instances-table [companyId]="companyId"></app-instances-table>
+
+  <div class="sec-title padding-left-40px padding-top-54px padding-bottom-40px" *ngIf="questionnaires">
+    <h3 class="text-capitalize title-details " *ngIf="questionnaires.length > 0">
+      {{'QT_SUGGESTED'|translate}}</h3>
+  </div>
+
+
+  <div class="course-wrap background-color" *ngIf="questionnaires">
+    <div class="degree-wrap" *ngIf="questionnaires.length > 0">
+      <div class="courses-grid-slider" dir="ltr">
+        <div class="container">
+          <div *ngIf="jsonResponse.courses && jsonResponse.courses.length>0">
+            <ng-container *ngIf="getCoursesByType('trending').length>4 ; else noSlider">
+              <div class="mx-n3">
+                <ngx-slick-carousel [config]="trendingCourseSlideConfig">
+                  <ng-container ngxSlickItem *ngFor="let questionnaire of questionnaires">
+                    <div class="px-3 course-item padding-top-70px padding-bottom-70px">
+                      <a [routerLinkActive]="'active'" [routerLink]="['/instance/create', questionnaire.id]"
+                        [queryParams]="{companyId: companyId}" data-toggle="tooltip" data-placement="right"
+                        title="{{'CREATE_QI'|translate}}">
+                        <div class="card template-card">
+                          <div class="card-header template-header padding-left-28px">
+                            <span class="template-title">{{'TEMPLATE'|translate}}</span>
+                          </div>
+                          <div class="card-body padding-28px">
+                            <div class="sec-content">
+                              <div class="title-font">
+                                Titre
+                              </div>
+                              <div class="data-font padding-top-10px">
+                                {{questionnaire.name}}
+                              </div>
+                              <div class="title-font padding-top-25px">
+                                Description
+                              </div>
+                              <div class="data-font padding-top-10px">
+                                {{questionnaire.description}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </ng-container>
+                </ngx-slick-carousel>
+              </div>
+            </ng-container>
+            <ng-template #noSlider>
+              <div class="row">
+                <ng-container *ngFor="let questionnaire of questionnaires">
+                  <div class="col-12 col-md-3 grid-b-space course-item">
+                    <a [routerLinkActive]="'active'" [routerLink]="['/instance/create', questionnaire.id]"
+                      [queryParams]="{companyId: companyId}" data-toggle="tooltip" data-placement="right"
+                      title="{{'CREATE_QI'|translate}}">
+                      <div class="card template-card">
+                        <div class="card-header template-header padding-left-28px">
+                          <span class="template-title">{{'Template'|translate}}</span>
+                        </div>
+                        <div class="card-body padding-28px">
+                          <div class="sec-content">
+                            <div class="title-font">
+                              {{'TITLE'|translate}}
+                            </div>
+                            <div class="data-font padding-top-10px">
+                              {{questionnaire.name}}
+                            </div>
+                            <div class="title-font padding-top-25px">
+                              {{'DESCRIPTION'|translate}}
+                            </div>
+                            <div class="data-font padding-top-10px">
+                              {{questionnaire.description}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="">
+  <div class="">wefcewfewf</div>
+  <span class=""></span>
+  <div class="">qwefqwefwfq</div>
+</div>
