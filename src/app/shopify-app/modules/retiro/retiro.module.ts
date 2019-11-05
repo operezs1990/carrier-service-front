@@ -12,6 +12,7 @@ import { RetiroTableComponent } from './components/retiro-table/retiro-table.com
 import { RetiroFormComponent } from './components/retiro-form/retiro-form.component';
 import { NewRetiroComponent } from './components/new-retiro/new-retiro.component';
 import { RetiroRoutingModule } from './retiro-routing.module';
+import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { RetiroRoutingModule } from './retiro-routing.module';
     NgbDatepickerModule,
     ArchwizardModule,
     NgxDatatableModule,
+    NgxMyDatePickerModule.forRoot(),
     DateRangePickerModule,
     SlickCarouselModule,
     TranslateModule,

@@ -1,11 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, OnDestroy, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorHandlingService } from 'app/error-handling/services/error-handling.service';
 import 'rxjs/Rx';
-import { PageTitleService } from '../../../../../core/page-title/page-title.service';
-import { RetiroService } from '../../services/retiro.service';
 import { Region } from 'app/shopify-app/models/region';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Comuna } from 'app/shopify-app/models/comuna';
@@ -13,7 +10,9 @@ import { User } from 'app/shopify-app/models/user';
 import { Subscription } from 'rxjs/Rx';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime } from 'rxjs/operators';
-import { CustomValidators } from 'ng2-validation';
+import { Retiro } from 'app/shopify-app/models/retiro';
+
+
 
 declare var $: any;
 
@@ -41,15 +40,13 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
 
    @Output() cancel = new EventEmitter();
 
-   @Input() data: User;
+   @Input() data: Retiro;
 
    @Input() user: User;
 
-   @Output() accept = new EventEmitter<User>();
+   @Output() accept = new EventEmitter<Retiro>();
 
    regionValueChanges: Subscription;
-
-
 
    constructor(public translateService: TranslateService,
       public activatedRoute: ActivatedRoute,
@@ -74,18 +71,17 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
 
    createFormGroup() {
       this.formGroup = this.fb.group({
-         firstName: [this.data.firstName, Validators.compose([Validators.required])],
-         lastName: [this.data.lastName],
-         phone: [this.data.phone],
-         email: [this.data.email, Validators.compose([Validators.required, CustomValidators.email])],
-         region: [this.data.region, Validators.compose([Validators.required])],
-         comuna: [this.data.comuna, Validators.compose([Validators.required])],
+         contact: [this.data.contact, Validators.compose([Validators.required])],
+         contactPhone: [this.data.contactPhone, Validators.compose([Validators.required])],
+         date: ['', Validators.compose([Validators.required])],
+         horaDesde : ['', Validators.compose([Validators.required])],
+         horaHasta: ['', Validators.compose([Validators.required])],
+
+         rut: [this.data.rut, Validators.compose([Validators.required])],
          address: [this.data.address, Validators.compose([Validators.required])],
+         comuna: [this.data.comuna, Validators.compose([Validators.required])],
+         region: [this.data.region, Validators.compose([Validators.required])],
          zip: [this.data.zip, Validators.compose([Validators.required])],
-         userApiChile: [this.data.userApiChile, Validators.compose([Validators.required])],
-         passwordApiChile: [this.data.passwordApiChile, Validators.compose([Validators.required])],
-         idApiChile: [this.data.idApiChile, Validators.compose([Validators.required])],
-         shopUrl: [this.data.shopUrl],
       });
       if (!this.data.region) {
          this.formGroup.get('comuna').disable();
@@ -104,18 +100,16 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
 
    submitClicked() {
       if (this.formGroup.valid) {
-         this.data.firstName = this.formGroup.value.firstName;
-         this.data.lastName = this.formGroup.value.lastName;
-         this.data.phone = this.formGroup.value.phone;
-         this.data.email = this.formGroup.value.email;
+         this.data.contact = this.formGroup.value.contact;
+         this.data.contactPhone = this.formGroup.value.contactPhone;
+         this.data.date = this.formGroup.value.date;
+         this.data.horaHasta = this.formGroup.value.horaHasta;
+         this.data.horaDesde = this.formGroup.value.horaDesde;
+         this.data.rut = this.formGroup.value.rut;
          this.data.comuna = this.formGroup.value.comuna;
          this.data.region = this.formGroup.value.region;
          this.data.address = this.formGroup.value.address;
          this.data.zip = this.formGroup.value.zip;
-         this.data.userApiChile = this.formGroup.value.userApiChile;
-         this.data.passwordApiChile = this.formGroup.value.passwordApiChile;
-         this.data.idApiChile = this.formGroup.value.idApiChile;
-         this.data.shopUrl = this.formGroup.value.shopUrl;
 
          this.accept.emit(this.data);
       } else {

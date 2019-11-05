@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Region } from 'app/shopify-app/models/region';
 import { AuthService } from 'app/authentication/services/auth.service';
 import { HandledError } from 'app/error-handling/models/handled-error';
+import { Retiro } from 'app/shopify-app/models/retiro';
+import { timeDay } from 'd3';
 
 declare var $: any;
 
@@ -26,14 +28,22 @@ const errorKey = 'Error';
    styleUrls: ['./new-retiro.component.scss']
 })
 export class NewRetiroComponent implements OnInit, AfterViewInit {
+   data: Retiro = {
+      contact: '',
+      contactPhone: '',
+      date: new Date,
+      horaDesde: new Date,
+      horaHasta: new Date,
+   };
 
-   data: User;
+   user: User;
    userId: string;
    regionList: Array<Region>;
 
    constructor(
       public activatedRoute: ActivatedRoute,
       public userService: UserService,
+      public retiroService: RetiroService,
       private errorHandlingService: ErrorHandlingService,
       public router: Router,
       public authService: AuthService,
@@ -48,7 +58,7 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
 
    ngAfterViewInit() {
       this.getUser();
-      // this.getRegions();
+      this.getRegions();
    }
 
    getRegions() {
@@ -59,15 +69,24 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
       );
    }
 
-   getUser() {
-      this.userService.getUser(this.userId).subscribe(response => {
-         this.data = response;
-      },
-         (error: HandledError) => this.errorHandlingService.handleUiError(errorKey, error)
-      );
+   setDataUserParams() {
+      this.data.rut = this.user.rut;
+      this.data.zip = this.user.zip;
+      this.data.address = this.user.address;
+      this.data.region = this.user.region;
+      this.data.comuna = this.user.comuna;
    }
 
-   submit(data: User) {
+   getUser() {
+      // this.userService.getUser(this.userId).subscribe(response => {
+      //    this.user = response;
+      //    this.setDataUserParams();
+      // },
+      //    (error: HandledError) => this.errorHandlingService.handleUiError(errorKey, error)
+      // );
+   }
+
+   submit(data: Retiro) {
       this.updateUser(data);
    }
 
@@ -83,18 +102,16 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
       this.authService.updateCurrentUser(this.data);
    }
 
-   updateUser(data: User) {
-      data.id = this.userId;
-      data.profile = true;
-      this.updateUserLocalStorash();
-      this.userService.putUser(data).subscribe(response => {
-         this.close();
-         this.translate.get('SUCCESS_MESSAGE').subscribe((res: string) => {
-            this.toastr.success(res);
-         });
-      },
-         (error: HandledError) => {
-            this.errorHandlingService.handleUiError(errorKey, error);
-         });
+   updateUser(data: Retiro) {
+      // this.updateUserLocalStorash();
+      // this.retiroService.postRetiro(data).subscribe(response => {
+      //    this.close();
+      //    this.translate.get('SUCCESS_MESSAGE').subscribe((res: string) => {
+      //       this.toastr.success(res);
+      //    });
+      // },
+      //    (error: HandledError) => {
+      //       this.errorHandlingService.handleUiError(errorKey, error);
+      //    });
    }
 }

@@ -1,282 +1,189 @@
-
-<!-- <div class="company-details">
-  <div class="padding-top-25px padding-bottom-60px">
-    <div class="padding-header-data">
-      <div class="display-flex flex-wrap">
-        <div class="width-title">
-          <div class="d-flex align-items-start flex-column">
-            <div class="page-title color-black">{{'COMPANY_DETAILS'|translate}}</div>
-            <div class="font-size-24px color-black font-weight-300">{{'HISTORY_ACTIONS'|translate}}</div>
-          </div>
-        </div>
-        <span class="flex-grow-1"></span>
-        <div class="width-button">
-          <div class="d-flex flex-column">
-            <button type="button" type="button" data-toggle="tooltip" data-placement="top"
-              title="{{'VIEW_RESULTS'|translate}}" class="btn btn-company border-radius-0px button-font min-height-50px"
-              (click)="onEditCompany()">
-              {{'EDIT_COMPANY'|translate}}
-            </button>
-          </div>
-        </div>
+<div class="chk-block form-wizard">
+  <div class="chk-block-title">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h3 class="text-capitalize">{{'Nuevo Retiro'|translate}}</h3>
       </div>
     </div>
   </div>
-
-  <div class="chk-block mb-0 border-box padding-left-20px padding-right-20px">
-    <div class="row custom-header">
-      <div class="col-xl-6 col-lg-6 col-md-6">
-        {{'COMPANY_CONTACT'|translate}}
-      </div>
-
-      <div class="col-xl-6 col-lg-6 col-md-6">
-        {{'COMPANY_PROFILE'|translate}}
-      </div>
-    </div>
-    <hr>
-    <div class="chk-block-content font-size-18px font-color-custom row" *ngIf="company">
-      <div class="col-xl-4 col-lg-4 col-md-4">
-        <div class="font-weight-bold">
-          {{'COMPANY_NAME'|translate}}:
-          <span class="font-weight-normal">
-            {{company.name}}
-          </span>
-        </div>
-        <div class="padding-top-28px padding-left-5px">
-          <i class="fa fa-phone mr-1 icons-font padding-right-23px"></i>
-          <span class="text-icon-color">
-            {{company.phone}}
-          </span>
-        </div>
-        <div class="padding-top-28px padding-left-5px">
-          <i class="fa fa-at mr-1 mr-1 icons-font padding-right-23px"></i>
-          <span class="text-icon-color">
-            {{company.email}}
-          </span>
-        </div>
-        <div class="font-weight-bold padding-top-28px">
-          {{'ADDRESS'|translate}}:
-          <span class="font-weight-normal">
-            {{company.address ? company.address : 'N/A'}}
-          </span>
-        </div>
-        <div class="row padding-left-15px padding-top-28px">
-          <div class="font-weight-bold">
-            CP:
-            <span class="font-weight-normal">
-              {{company.zip ? company.zip : 'N/A'}}
-            </span>
+  <div class="chk-block-content">
+    <form [formGroup]="formGroup" novalidate role="form" (ngSubmit)="submitClicked()" autocomplete="off" inputFocus>
+      <div class="display-flex flex-wrap padding-form">
+        <div class="width-col">
+          <div class="form-group">
+            <div class="display-flex">
+              <label class="label-font" for>
+                {{'Contacto'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['contact']" formControlName="contact"
+                required>
+            </div>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['contact'].hasError('required') && (formGroup.controls['contact'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir un nombre de contacto'|translate}}
+            </small>
           </div>
-          <span class="width-42px"></span>
-          <div class="font-weight-bold">
-            {{'CITY'|translate}}:
-            <span class="font-weight-normal">
-              {{company.city ? company.city : 'N/A'}}
-            </span>
+
+          <div class="form-group">
+            <div class="display-flex">
+              <label class=" label-font" for>
+                {{'Teléfono'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['contactPhone']"
+                formControlName="contactPhone" type="text" required>
+            </div>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['contactPhone'].hasError('required') && (formGroup.controls['contactPhone'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir un número de teléfono del contacto'|translate}}
+            </small>
           </div>
-        </div>
-        <div class="font-weight-bold padding-top-28px">
-          {{'SITE'|translate}}:
-          <span class="font-weight-normal link-color-font">
-            {{company.site ? company.site : 'N/A'}}
-          </span>
-        </div>
-        <div class="padding-top-28px padding-left-5px">
-          <i class="fa fa-facebook-f mr-1 icons-font padding-right-23px"></i>
-          <span class="link-color-font">
-            {{company.facebook ? company.facebook : 'N/A'}}
-          </span>
-        </div>
-        <div class="padding-top-28px padding-left-5px">
-          <i class="fa fa-linkedin mr-1 icons-font padding-right-23px"></i>
-          <span class="link-color-font">
-            {{company.linkedin ? company.linkedin : 'N/A'}}
-          </span>
-        </div>
-        <div class="padding-top-28px padding-left-5px">
-          <i class="fa fa-twitter mr-1 icons-font padding-right-23px"></i>
-          <span class="link-color-font">
-            {{company.twitter ? company.twitter : 'N/A'}}
-          </span>
-        </div>
-        <div class="padding-top-28px padding-left-5px">
-          <i class="fa fa-instagram mr-1 icons-font padding-right-23px"></i>
-          <span class="link-color-font">
-            {{company.instagram ? company.instagram : 'N/A'}}
-          </span>
-        </div>
-      </div>
-      <div class="col-xl-4 col-lg-4 col-md-4">
-        <div class="font-weight-bold">
-          {{'CEO'|translate}}:
-          <span class="font-weight-normal">
-            {{company.ceo ? company.ceo : 'N/A'}}
-          </span>
-        </div>
-        <div class="font-weight-bold padding-top-28px">
-          {{'SECTOR'|translate}}:
-          <span class="font-weight-normal">
-            {{company.activitySector.sector}}
-          </span>
-        </div>
-        <div class="font-weight-bold padding-top-28px">
-          {{'NAF'|translate}}:
-          <span class="font-weight-normal">
-            {{company.naf ? company.naf : 'N/A'}}
-          </span>
-        </div>
-        <div class="font-weight-bold padding-top-28px">
-          {{'SIRET'|translate}}:
-          <span class="font-weight-normal">
-            {{company.siretNumber ? company.siretNumber : 'N/A'}}
-          </span>
-        </div>
-        <div class="font-weight-bold padding-top-28px">
-          {{'COMPANY_TYPE'|translate}}:
-          <span class="font-weight-normal">
-            {{type.get(company.type)}}
-          </span>
-        </div>
-        <div class="font-weight-bold padding-top-28px">
-          CA (2018):
-          <span class="font-weight-normal">
-            {{company.grossSales2018 ? company.grossSales2018 : 'N/A'}}
-          </span>
-          <i class="fa fa-eur mr-1 euro-icon-font "></i>
-        </div>
-        <div class="font-weight-bold padding-top-28px">
-          CA Internet (2018):
-          <span class="font-weight-normal">
-            {{company.internetGrossSales ? company.grossSales2018 : 'N/A'}}
-          </span>
-          <i class="fa fa-eur mr-1 euro-icon-font "></i>
-        </div>
-        <div class="font-weight-bold padding-top-28px">
-          CA (2019):
-          <span class="font-weight-normal">
-            {{company.grossSales2019 ? company.grossSales2019 : 'N/A'}}
-          </span>
-          <i class="fa fa-eur mr-1 euro-icon-font "></i>
-        </div>
-      </div>
 
-      <div class="col-xl-4 col-lg-4 col-md-4">
-        <div class="font-weight-bold">
-          {{'PRECISION'|translate}}:
-          <span class="font-weight-normal">
-            {{company.precision ? company.precision : 'N/A'}}
-          </span>
-        </div>
-        <div class="font-weight-bold padding-top-28px">
-          {{'COMPANY_SIZE'|translate}}:
-          <span class="font-weight-normal">
-            {{company.companySize.description}}
-          </span>
-        </div>
-        <div class="font-weight-bold padding-top-28px">
-          {{'CREATION_DATE_COMPANY'|translate}}:
-          <span class="font-weight-normal">
-            {{ company.companyCreation ? (company.companyCreation | date:'dd/MM/yyyy') : 'N/A' }}
-          </span>
-        </div>
-        <div class="font-weight-bold padding-top-28px">
-          {{'CREATION_DATE_DIGIPILOTE'|translate}}:
-          <span class="font-weight-normal">
-            {{company.createdAt ? (company.createdAt | date:'dd/MM/yyyy') : 'N/A'}}
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sec-title padding-left-40px padding-top-60px padding-bottom-40px">
-    <h3 class="text-capitalize title-details">{{'HISTORY_EVALUATIONS'|translate}}</h3>
-  </div>
-
-  <app-instances-table [companyId]="companyId"></app-instances-table>
-
-  <div class="sec-title padding-left-40px padding-top-54px padding-bottom-40px" *ngIf="questionnaires">
-    <h3 class="text-capitalize title-details " *ngIf="questionnaires.length > 0">
-      {{'QT_SUGGESTED'|translate}}</h3>
-  </div>
-
-
-  <div class="course-wrap background-color" *ngIf="questionnaires">
-    <div class="degree-wrap" *ngIf="questionnaires.length > 0">
-      <div class="courses-grid-slider" dir="ltr">
-        <div class="container">
-          <div *ngIf="jsonResponse.courses && jsonResponse.courses.length>0">
-            <ng-container *ngIf="getCoursesByType('trending').length>4 ; else noSlider">
-              <div class="mx-n3">
-                <ngx-slick-carousel [config]="trendingCourseSlideConfig">
-                  <ng-container ngxSlickItem *ngFor="let questionnaire of questionnaires">
-                    <div class="px-3 course-item padding-top-70px padding-bottom-70px">
-                      <a [routerLinkActive]="'active'" [routerLink]="['/instance/create', questionnaire.id]"
-                        [queryParams]="{companyId: companyId}" data-toggle="tooltip" data-placement="right"
-                        title="{{'CREATE_QI'|translate}}">
-                        <div class="card template-card">
-                          <div class="card-header template-header padding-left-28px">
-                            <span class="template-title">{{'TEMPLATE'|translate}}</span>
-                          </div>
-                          <div class="card-body padding-28px">
-                            <div class="sec-content">
-                              <div class="title-font">
-                                Titre
-                              </div>
-                              <div class="data-font padding-top-10px">
-                                {{questionnaire.name}}
-                              </div>
-                              <div class="title-font padding-top-25px">
-                                Description
-                              </div>
-                              <div class="data-font padding-top-10px">
-                                {{questionnaire.description}}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                  </ng-container>
-                </ngx-slick-carousel>
-              </div>
-            </ng-container>
-            <ng-template #noSlider>
-              <div class="row">
-                <ng-container *ngFor="let questionnaire of questionnaires">
-                  <div class="col-12 col-md-3 grid-b-space course-item">
-                    <a [routerLinkActive]="'active'" [routerLink]="['/instance/create', questionnaire.id]"
-                      [queryParams]="{companyId: companyId}" data-toggle="tooltip" data-placement="right"
-                      title="{{'CREATE_QI'|translate}}">
-                      <div class="card template-card">
-                        <div class="card-header template-header padding-left-28px">
-                          <span class="template-title">{{'Template'|translate}}</span>
-                        </div>
-                        <div class="card-body padding-28px">
-                          <div class="sec-content">
-                            <div class="title-font">
-                              {{'TITLE'|translate}}
-                            </div>
-                            <div class="data-font padding-top-10px">
-                              {{questionnaire.name}}
-                            </div>
-                            <div class="title-font padding-top-25px">
-                              {{'DESCRIPTION'|translate}}
-                            </div>
-                            <div class="data-font padding-top-10px">
-                              {{questionnaire.description}}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </ng-container>
-              </div>
-            </ng-template>
+          <div class="form-group">
+            <div class="display-flex">
+              <label class=" label-font" for>
+                {{'Fecha'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['date']" formControlName="date"
+                type="date" id="time-input" required>
+            </div>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['date'].hasError('required') && (formGroup.controls['date'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir una fecha para el retiro'|translate}}
+            </small>
           </div>
+
+          <div class="form-group">
+            <div class="display-flex">
+              <label class=" label-font" for>
+                {{'Hora desde'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['horaDesde']" formControlName="horaDesde"
+                type="time" id="time-input" required>
+             </div>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['horaDesde'].hasError('required') && (formGroup.controls['horaDesde'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir una hora inicial'|translate}}
+            </small>
+          </div>
+
+          <div class="form-group">
+            <div class="display-flex">
+              <label class=" label-font" for>
+                {{'Hora hasta'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['horaHasta']" formControlName="horaDesde"
+                type="time" id="time-input" required>
+            </div>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['horaHasta'].hasError('required') && (formGroup.controls['horaHasta'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir una hora final'|translate}}
+            </small>
+          </div>
+
         </div>
+        <span class="width-span"></span>
+
+        <div class="width-col">
+          <div class="form-group">
+            <div class="display-flex">
+              <label class="label-font" for>
+                {{'Rut'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['rut']" formControlName="rut" required>
+            </div>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['rut'].hasError('required') && (formGroup.controls['rut'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir su rut'|translate}}
+            </small>
+          </div>
+
+          <div class="form-group">
+            <div class="display-flex">
+              <label class=" label-font" for>
+                {{'Dirección'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['address']" formControlName="address"
+                required>
+            </div>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['address'].hasError('required') && (formGroup.controls['address'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir una Dirección postal'|translate}}
+            </small>
+          </div>
+
+          <div class="form-group">
+            <div class="display-flex">
+              <label class=" label-font" for>
+                {{'Región'|translate}}
+              </label>
+              <select class="form-control" id="formSelect1" formControlName="region" required data-toggle="tooltip"
+                data-placement="right" title="{{'SELECT_OPTION'| translate}}">
+                <option *ngFor="let region of regionList" [value]="region.name">
+                  {{region.name}}
+                </option>
+              </select>
+            </div>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['region'].hasError('required') && (formGroup.controls['region'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir una Región'|translate}}
+            </small>
+          </div>
+          <div class="form-group">
+            <div class="display-flex">
+              <label class="label-font" for>
+                {{'Comuna'|translate}}
+              </label>
+              <select class="form-control" id="formSelect1" formControlName="comuna" required data-toggle="tooltip"
+                data-placement="right" title="{{'SELECT_OPTION'| translate}}">
+                <option *ngFor="let comuna of comunaList" [value]="comuna.name">
+                  {{comuna.name}}
+                </option>
+              </select>
+            </div>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['comuna'].hasError('required') && (formGroup.controls['comuna'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir una comuna'|translate}}
+            </small>
+          </div>
+          <div class="form-group">
+            <div class="display-flex">
+              <label class="label-font" for>
+                {{'Código Postal'|translate}}
+              </label>
+              <input class="form-control" [formControl]="formGroup.controls['zip']" formControlName="zip" required>
+            </div>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['zip'].hasError('required') && (formGroup.controls['zip'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir un Código Postal'|translate}}
+            </small>
+          </div>
+
+        </div>
+
       </div>
-    </div>
+
+      <div class="d-flex justify-content-center align-items-center padding-bottom-40px">
+        <button type="submit" data-toggle="tooltip" data-placement="top" title="{{'Guardar cambios'|translate}}"
+          class="btn save-button border-radius-0px button-font">
+          {{'Guardar'|translate}}
+        </button>
+        <span class = "width-50px"></span>
+        <button type="button" data-toggle="tooltip" data-placement="top" title="{{'Regresar a lista de Retiros'|translate}}"
+          class="btn close-button border-radius-0px button-font" [routerLink]="['../']"
+          routerLinkActive="router-link-active">
+          {{'Cancelar'|translate}}
+        </button>
+      </div>
+    </form>
   </div>
-</div> -->
+</div>
