@@ -59,6 +59,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
   }
 
   createFormGroup() {
+    this.data.shopUrl = 'https://fishshop123.myshopify.com';
     this.formGroup = this.fb.group({
       firstName: [this.data.firstName, Validators.compose([Validators.required])],
       lastName: [this.data.lastName],

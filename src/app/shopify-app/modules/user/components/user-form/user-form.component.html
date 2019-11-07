@@ -10,166 +10,245 @@
   </div>
 </div>
 
-<div class="custom-padding-card">
+<div class="">
   <form [formGroup]="formGroup" novalidate role="form" (ngSubmit)="submitClicked()" autocomplete="off" inputFocus>
+
     <div class="chk-block ">
       <div class="chk-block-content">
-        <div class="display-flex flex-wrap padding-form">
-          <div class="width-col">
-            <div class="form-group padding-bottom-5px">
-              <label class="padding-left-20px label-font" for>
-                {{'Nombre'|translate}}
-              </label>
-              <input class="form-control" [formControl]="formGroup.controls['firstName']" formControlName="firstName"
-                required>
-              <small class="chankya-block"
-                *ngIf="formGroup.controls['firstName'].hasError('required') && (formGroup.controls['firstName'].touched ||  wasSubmitted)"
-                class="text-danger">
-                {{'Debe incluir un nombre'|translate}}
-              </small>
+        <div class="padding-form">
+
+            <div class ="display-flex justify-content-center align-items-center">
+                <div class="form-group row">
+                  <div class="url-title display-flex align-items-center padding-right-20px">
+                     {{'URL de la tienda online'|translate}}
+                  </div>
+                  <div class = "width-300px">
+                    <input class="form-control font-size-16px" [formControl]="formGroup.controls['shopUrl']" formControlName="shopUrl"
+                      readonly>
+                  </div>
+                </div>
+              </div>
+
+          <div class="row">
+            <div class="col-md-7 col-lg-7 col-sm-12">
+
+              <div class="card card-white shadow-box">
+                <div class="card-header">{{'Datos de Usuario'|translate}}
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                      <div class="form-group ">
+                        <label class="padding-left-20px label-font" for>
+                          {{'Nombre'|translate}}
+                        </label>
+                        <input class="form-control" [formControl]="formGroup.controls['firstName']"
+                          formControlName="firstName" required>
+                        <small class="chankya-block"
+                          *ngIf="formGroup.controls['firstName'].hasError('required') && (formGroup.controls['firstName'].touched ||  wasSubmitted)"
+                          class="text-danger">
+                          {{'Debe incluir un nombre'|translate}}
+                        </small>
+                      </div>
+                      <div class="form-group ">
+                        <label class="padding-left-20px label-font" for>
+                          {{'Apellidos'|translate}}
+                        </label>
+                        <input class="form-control" [formControl]="formGroup.controls['lastName']"
+                          formControlName="lastName">
+                      </div>
+                      <div class="form-group ">
+                        <label class="padding-left-20px label-font" for>
+                          {{'Rut'|translate}}
+                        </label>
+                        <input class="form-control" [formControl]="formGroup.controls['rut']" formControlName="rut"
+                          required>
+                        <small class="chankya-block"
+                          *ngIf="formGroup.controls['rut'].hasError('required') && (formGroup.controls['rut'].touched ||  wasSubmitted)"
+                          class="text-danger">
+                          {{'Debe incluir su rut'|translate}}
+                        </small>
+                      </div>
+                      <div class="form-group">
+                        <label class="padding-left-20px label-font" for>
+                          {{'Teléfono'|translate}}
+                        </label>
+                        <input class="form-control" [formControl]="formGroup.controls['phone']" formControlName="phone"
+                          type="text" required>
+                        <small class="chankya-block"
+                          *ngIf="formGroup.controls['phone'].hasError('required') && (formGroup.controls['phone'].touched ||  wasSubmitted)"
+                          class="text-danger">
+                          {{'Debe incluir un número de teléfono'|translate}}
+                        </small>
+                      </div>
+                      <div class="form-group">
+                        <label class="padding-left-20px label-font" for>
+                          {{'Email'|translate}}
+                        </label>
+                        <input class="form-control" [formControl]="formGroup.controls['email']" formControlName="email"
+                          required>
+                        <small class="chankya-block"
+                          *ngIf="formGroup.controls['email'].hasError('required') && (formGroup.controls['email'].touched ||  wasSubmitted)"
+                          class="text-danger">
+                          {{'Debe incluir un número de teléfono'|translate}}
+                        </small>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-sm-12">
+                      <div class="form-group ">
+                        <label class="padding-left-20px label-font" for>
+                          {{'Región'|translate}}
+                        </label>
+                        <select class="form-control" id="formSelect1" formControlName="region" required
+                          data-toggle="tooltip" data-placement="right" title="{{'SELECT_OPTION'| translate}}">
+                          <option *ngFor="let region of regionList" [value]="region.name">
+                            {{region.name}}
+                          </option>
+                        </select>
+                        <small class="chankya-block"
+                          *ngIf="formGroup.controls['region'].hasError('required') && (formGroup.controls['region'].touched ||  wasSubmitted)"
+                          class="text-danger">
+                          {{'Debe incluir una Región'|translate}}
+                        </small>
+                      </div>
+                      <div class="form-group ">
+                        <label class="padding-left-20px label-font" for>
+                          {{'Comuna'|translate}}
+                        </label>
+                        <select class="form-control" id="formSelect1" formControlName="comuna" required
+                          data-toggle="tooltip" data-placement="right" title="{{'SELECT_OPTION'| translate}}">
+                          <option *ngFor="let comuna of comunaList" [value]="comuna.name">
+                            {{comuna.name}}
+                          </option>
+                        </select>
+                        <small class="chankya-block"
+                          *ngIf="formGroup.controls['comuna'].hasError('required') && (formGroup.controls['comuna'].touched ||  wasSubmitted)"
+                          class="text-danger">
+                          {{'Debe incluir una comuna'|translate}}
+                        </small>
+                      </div>
+                      <div class="form-group ">
+                        <label class="padding-left-20px label-font" for>
+                          {{'Código Postal'|translate}}
+                        </label>
+                        <input class="form-control" [formControl]="formGroup.controls['zip']" formControlName="zip"
+                          required>
+                        <small class="chankya-block"
+                          *ngIf="formGroup.controls['zip'].hasError('required') && (formGroup.controls['zip'].touched ||  wasSubmitted)"
+                          class="text-danger">
+                          {{'Debe incluir un Código Postal'|translate}}
+                        </small>
+                      </div>
+                      <div class="form-group ">
+                        <label class="padding-left-20px label-font" for>
+                          {{'Dirección'|translate}}
+                        </label>
+                        <textarea class="form-control height-110px" [formControl]="formGroup.controls['address']"
+                          formControlName="address" required>
+                        </textarea>
+                        <small class="chankya-block"
+                          *ngIf="formGroup.controls['address'].hasError('required') && (formGroup.controls['address'].touched ||  wasSubmitted)"
+                          class="text-danger">
+                          {{'Debe incluir una Dirección postal'|translate}}
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="form-group padding-bottom-5px">
-              <label class="padding-left-20px label-font" for>
-                {{'Apellidos'|translate}}
-              </label>
-              <input class="form-control" [formControl]="formGroup.controls['lastName']" formControlName="lastName">
-            </div>
-            <div class="form-group padding-bottom-5px">
-              <label class="padding-left-20px label-font" for>
-                {{'Rut'|translate}}
-              </label>
-              <input class="form-control" [formControl]="formGroup.controls['rut']" formControlName="rut" required>
-              <small class="chankya-block"
-                *ngIf="formGroup.controls['rut'].hasError('required') && (formGroup.controls['rut'].touched ||  wasSubmitted)"
-                class="text-danger">
-                {{'Debe incluir su rut'|translate}}
-              </small>
-            </div>
-            <div class="form-group">
-              <label class="padding-left-20px label-font" for>
-                {{'Teléfono'|translate}}
-              </label>
-              <input class="form-control" [formControl]="formGroup.controls['phone']" formControlName="phone"
-                type="text" required>
-              <small class="chankya-block"
-                *ngIf="formGroup.controls['phone'].hasError('required') && (formGroup.controls['phone'].touched ||  wasSubmitted)"
-                class="text-danger">
-                {{'Debe incluir un número de teléfono'|translate}}
-              </small>
-            </div>
-            <div class="form-group">
-              <label class="padding-left-20px label-font" for>
-                {{'Email'|translate}}
-              </label>
-              <input class="form-control" [formControl]="formGroup.controls['email']" formControlName="email" required>
-              <small class="chankya-block"
-                *ngIf="formGroup.controls['email'].hasError('required') && (formGroup.controls['email'].touched ||  wasSubmitted)"
-                class="text-danger">
-                {{'Debe incluir un número de teléfono'|translate}}
-              </small>
-            </div>
-          </div>
-          <span class="width-span"></span>
-          <div class="width-col">
-            <div class="form-group padding-bottom-5px">
-              <label class="padding-left-20px label-font" for>
-                {{'Región'|translate}}
-              </label>
-              <select class="form-control" id="formSelect1" formControlName="region" required data-toggle="tooltip"
-                data-placement="right" title="{{'SELECT_OPTION'| translate}}">
-                <option *ngFor="let region of regionList" [value]="region.name">
-                  {{region.name}}
-                </option>
-              </select>
-              <small class="chankya-block"
-                *ngIf="formGroup.controls['region'].hasError('required') && (formGroup.controls['region'].touched ||  wasSubmitted)"
-                class="text-danger">
-                {{'Debe incluir una Región'|translate}}
-              </small>
-            </div>
-            <div class="form-group padding-bottom-5px">
-              <label class="padding-left-20px label-font" for>
-                {{'Comuna'|translate}}
-              </label>
-              <select class="form-control" id="formSelect1" formControlName="comuna" required data-toggle="tooltip"
-                data-placement="right" title="{{'SELECT_OPTION'| translate}}" >
-                <option *ngFor="let comuna of comunaList" [value]="comuna.name">
-                  {{comuna.name}}
-                </option>
-              </select>
-              <small class="chankya-block"
-                *ngIf="formGroup.controls['comuna'].hasError('required') && (formGroup.controls['comuna'].touched ||  wasSubmitted)"
-                class="text-danger">
-                {{'Debe incluir una comuna'|translate}}
-              </small>
-            </div>
-            <div class="form-group padding-bottom-5px">
-              <label class="padding-left-20px label-font" for>
-                {{'Código Postal'|translate}}
-              </label>
-              <input class="form-control" [formControl]="formGroup.controls['zip']" formControlName="zip" required>
-              <small class="chankya-block"
-                *ngIf="formGroup.controls['zip'].hasError('required') && (formGroup.controls['zip'].touched ||  wasSubmitted)"
-                class="text-danger">
-                {{'Debe incluir un Código Postal'|translate}}
-              </small>
-            </div>
-            <div class="form-group padding-bottom-5px">
-              <label class="padding-left-20px label-font" for>
-                {{'Dirección'|translate}}
-              </label>
-              <input class="form-control" [formControl]="formGroup.controls['address']" formControlName="address"
-                required>
-              <small class="chankya-block"
-                *ngIf="formGroup.controls['address'].hasError('required') && (formGroup.controls['address'].touched ||  wasSubmitted)"
-                class="text-danger">
-                {{'Debe incluir una Dirección postal'|translate}}
-              </small>
-            </div>
-          </div>
-          <span class="width-span"></span>
-          <div class="width-col">
-            <div class="form-group padding-bottom-5px">
-              <label class="padding-left-20px label-font" for>
-                {{'Usuario de Correos de Chile'|translate}}
-              </label>
-              <input class="form-control" [formControl]="formGroup.controls['userApiChile']"
-                formControlName="userApiChile" required>
-              <small class="chankya-block"
-                *ngIf="formGroup.controls['userApiChile'].hasError('required') && (formGroup.controls['userApiChile'].touched ||  wasSubmitted)"
-                class="text-danger">
-                {{'Debe incluir un usuario'|translate}}
-              </small>
-            </div>
-            <div class="form-group padding-bottom-5px">
-              <label class="padding-left-20px label-font" for>
-                {{'Contraseña'|translate}}
-              </label>
-              <input class="form-control" [formControl]="formGroup.controls['passwordApiChile']"
-                formControlName="passwordApiChile" required>
-              <small class="chankya-block"
-                *ngIf="formGroup.controls['passwordApiChile'].hasError('required') && (formGroup.controls['passwordApiChile'].touched ||  wasSubmitted)"
-                class="text-danger">
-                {{'Debe incluir una Contraseña'|translate}}
-              </small>
-            </div>
-            <div class="form-group padding-bottom-5px">
-              <label class="padding-left-20px label-font" for>
-                {{'Id de usuario de Correos de Chile'|translate}}
-              </label>
-              <input class="form-control" [formControl]="formGroup.controls['idApiChile']" formControlName="idApiChile"
-                required>
-              <small class="chankya-block"
-                *ngIf="formGroup.controls['idApiChile'].hasError('required') && (formGroup.controls['idApiChile'].touched ||  wasSubmitted)"
-                class="text-danger">
-                {{'Debe incluir un Id válido'|translate}}
-              </small>
-            </div>
-            <div class="form-group padding-bottom-5px">
-              <label class="padding-left-20px label-font" for>
-                {{'URL de la tienda online'|translate}}
-              </label>
-              <input class="form-control" [formControl]="formGroup.controls['shopUrl']" formControlName="shopUrl" readonly>
+
+            <div class="col-md-5 col-lg-5 col-sm-12">
+              <div>
+                <div class="card card-white shadow-box">
+                  <div class="card-header">
+                    {{'Datos de Correos de Chile'|translate}}
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group ">
+                      <label class="padding-left-20px label-font" for>
+                        {{'Usuario de Correos de Chile'|translate}}
+                      </label>
+                      <input class="form-control" [formControl]="formGroup.controls['userApiChile']"
+                        formControlName="userApiChile" required>
+                      <small class="chankya-block"
+                        *ngIf="formGroup.controls['userApiChile'].hasError('required') && (formGroup.controls['userApiChile'].touched ||  wasSubmitted)"
+                        class="text-danger">
+                        {{'Debe incluir un usuario'|translate}}
+                      </small>
+                    </div>
+                    <div class="form-group ">
+                      <label class="padding-left-20px label-font" for>
+                        {{'Contraseña'|translate}}
+                      </label>
+                      <input class="form-control" [formControl]="formGroup.controls['passwordApiChile']"
+                        formControlName="passwordApiChile" required>
+                      <small class="chankya-block"
+                        *ngIf="formGroup.controls['passwordApiChile'].hasError('required') && (formGroup.controls['passwordApiChile'].touched ||  wasSubmitted)"
+                        class="text-danger">
+                        {{'Debe incluir una Contraseña'|translate}}
+                      </small>
+                    </div>
+                    <div class="form-group ">
+                      <label class="padding-left-20px label-font" for>
+                        {{'Id de usuario de Correos de Chile'|translate}}
+                      </label>
+                      <input class="form-control" [formControl]="formGroup.controls['idApiChile']"
+                        formControlName="idApiChile" required>
+                      <small class="chankya-block"
+                        *ngIf="formGroup.controls['idApiChile'].hasError('required') && (formGroup.controls['idApiChile'].touched ||  wasSubmitted)"
+                        class="text-danger">
+                        {{'Debe incluir un Id válido'|translate}}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="">
+                <div class="card card-white shadow-box">
+                  <div class="card-header">
+                    {{'Configuración de la App'|translate}}
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-6 col-sm-12">
+                        <div class="form-group ">
+                          <label class="padding-left-20px label-font" for>
+                            {{'Formato de Etiqueta'|translate}}
+                          </label>
+                          <select class="form-control" id="formSelect1" formControlName="region" required
+                            data-toggle="tooltip" data-placement="right" title="{{'SELECT_OPTION'| translate}}">
+                            <option *ngFor="let region of regionList" [value]="region.name">
+                              {{region.name}}
+                            </option>
+                          </select>
+                          <small class="chankya-block"
+                            *ngIf="formGroup.controls['region'].hasError('required') && (formGroup.controls['region'].touched ||  wasSubmitted)"
+                            class="text-danger">
+                            {{'Debe incluir una Región'|translate}}
+                          </small>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-lg-6 col-sm-12">
+                        <div class="form-group ">
+                          <label class="padding-left-20px label-font" for>
+                            {{'Valor Añadido'|translate}}
+                          </label>
+                          <input class="form-control" [formControl]="formGroup.controls['idApiChile']"
+                            formControlName="idApiChile" data-toggle="tooltip" data-placement="right" title="{{'valor añadido a la tarificación'| translate}}" required>
+                          <small class="chankya-block"
+                            *ngIf="formGroup.controls['idApiChile'].hasError('required') && (formGroup.controls['idApiChile'].touched ||  wasSubmitted)"
+                            class="text-danger">
+                            {{'Debe incluir un Id válido'|translate}}
+                          </small>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
