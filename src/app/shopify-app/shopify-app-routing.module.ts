@@ -31,11 +31,7 @@ const routes: Routes = [
       {
         path: 'retiro',
         loadChildren: './modules/retiro/retiro.module#RetiroModule'
-      },
-      {
-        path: 'config',
-        loadChildren: './modules/data-config/data-config.module#DataConfigModule'
-      },
+      }
     ]
   }
 ];
