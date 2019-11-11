@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from '../../../../models/user';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { LabelFormat, LABELFORMAT } from 'app/shopify-app/models/label-format';
 
 declare var $: any;
 
@@ -35,6 +36,8 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   regionValueChanges: Subscription;
 
+  labelFormatList: LabelFormat[] = LABELFORMAT;
+
 
 
   constructor(public translateService: TranslateService,
@@ -59,20 +62,25 @@ export class UserFormComponent implements OnInit, OnDestroy {
   }
 
   createFormGroup() {
-    this.data.shopUrl = 'https://fishshop123.myshopify.com';
     this.formGroup = this.fb.group({
       firstName: [this.data.firstName, Validators.compose([Validators.required])],
       lastName: [this.data.lastName],
       rut: [this.data.rut, Validators.compose([Validators.required])],
       phone: [this.data.phone],
       email: [this.data.email, Validators.compose([Validators.required, CustomValidators.email])],
+
       region: [this.data.region, Validators.compose([Validators.required])],
       comuna: [this.data.comuna, Validators.compose([Validators.required])],
       address: [this.data.address, Validators.compose([Validators.required])],
       zip: [this.data.zip, Validators.compose([Validators.required])],
+
       userApiChile: [this.data.userApiChile, Validators.compose([Validators.required])],
       passwordApiChile: [this.data.passwordApiChile, Validators.compose([Validators.required])],
       idApiChile: [this.data.idApiChile, Validators.compose([Validators.required])],
+
+      labelFormat: [this.data.labelFormat, Validators.compose([Validators.required])],
+      gravamen: [this.data.gravamen, Validators.compose([Validators.required])],
+
       shopUrl: [this.data.shopUrl],
     });
     if (!this.data.region) {

@@ -216,16 +216,16 @@
                           <label class="padding-left-20px label-font" for>
                             {{'Formato de Etiqueta'|translate}}
                           </label>
-                          <select class="form-control" id="formSelect1" formControlName="region" required
+                          <select class="form-control" id="formSelect1" formControlName="labelFormat" required
                             data-toggle="tooltip" data-placement="right" title="{{'SELECT_OPTION'| translate}}">
-                            <option *ngFor="let region of regionList" [value]="region.name">
-                              {{region.name}}
+                            <option *ngFor="let format of labelFormatList" [value]="format.id">
+                              {{format.name}}
                             </option>
                           </select>
                           <small class="chankya-block"
-                            *ngIf="formGroup.controls['region'].hasError('required') && (formGroup.controls['region'].touched ||  wasSubmitted)"
+                            *ngIf="formGroup.controls['labelFormat'].hasError('required') && (formGroup.controls['labelFormat'].touched ||  wasSubmitted)"
                             class="text-danger">
-                            {{'Debe incluir una Región'|translate}}
+                            {{'Debe incluir un Formato para la impresión de la etiqueta'|translate}}
                           </small>
                         </div>
                       </div>
@@ -235,12 +235,12 @@
                           <label class="padding-left-20px label-font" for>
                             {{'Valor Añadido'|translate}}
                           </label>
-                          <input class="form-control" [formControl]="formGroup.controls['idApiChile']"
-                            formControlName="idApiChile" data-toggle="tooltip" data-placement="right" title="{{'valor añadido a la tarificación'| translate}}" required>
+                          <input class="form-control" type = "number" [formControl]="formGroup.controls['gravamen']"
+                            formControlName="gravamen" data-toggle="tooltip" data-placement="right" title="{{'valor añadido a la tarificación'| translate}}" required>
                           <small class="chankya-block"
-                            *ngIf="formGroup.controls['idApiChile'].hasError('required') && (formGroup.controls['idApiChile'].touched ||  wasSubmitted)"
+                            *ngIf="formGroup.controls['gravamen'].hasError('required') && (formGroup.controls['gravamen'].touched ||  wasSubmitted)"
                             class="text-danger">
-                            {{'Debe incluir un Id válido'|translate}}
+                            {{'Debe incluir un Valor Añadido a la Tarificación'|translate}}
                           </small>
                         </div>
                       </div>

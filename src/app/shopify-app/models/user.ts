@@ -5,17 +5,24 @@ export class User {
     rut: string;
     phone?: string;
     email: string;
+
     regionId?: string;
     region: string;
     comunaId?: string;
     comuna: string;
     address: string;
     zip: string;
+
     userApiChile: string;
     passwordApiChile: string;
     idApiChile: string
+
+    labelFormat: string;
+    gravamen: number;
+
     shopUrl: string;
     profile: boolean;
+
     createdAt?: Date;
     updatedAt?: Date;
 }
