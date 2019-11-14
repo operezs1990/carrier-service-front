@@ -3,7 +3,7 @@
     <div class="padding-header-data">
       <div class="width-title">
         <div class="d-flex align-items-start flex-column title-color-black">
-          <div class="page-title">{{'Archivo de Órdenes Completadas'|translate}}</div>
+          <div class="page-title">{{'Ordenes Tramitadas'|translate}}</div>
         </div>
       </div>
     </div>
@@ -58,8 +58,8 @@
             <table class="table border-collapse-inherit table-hover table-striped table-bordered ">
               <thead>
                 <tr class="bg-white">
+                  <th >{{'Codigo de Admisión'|translate}}</th>
                   <th >{{'Productos'|translate}}</th>
-                  <th >{{'Cantidad'|translate}}</th>
                   <th >{{'Importe'}}</th>
                   <th >{{'Destino'}}</th>
                   <th >{{'Acciones'}}</th>
@@ -68,13 +68,11 @@
               <tbody>
                 <tr *ngFor="let order of ordersList">
                   <td>
-                    <div class="" *ngFor="let item of order.rate.items">
-                      {{item.name}}
-                    </div>
+                    1213123
                   </td>
                   <td>
                     <div class="" *ngFor="let item of order.rate.items">
-                      {{item.quantity}}
+                      {{item.name}}
                     </div>
                   </td>
                   <td>
@@ -85,21 +83,18 @@
                   <td>
                     <div class="">
                       <span>
-                        <small>{{order.rate.destination.address1}}</small>,
-                        <small>{{order.rate.destination.city}}</small>,
-                        <small>{{order.rate.destination.province}}</small>,
-                        <small>{{order.rate.destination.postal_code}}</small>
+                        <small>Sucursal</small>
                       </span>
                     </div>
                   </td>
                   <td>
                     <div class="">
-                      <a data-toggle="tooltip" data-placement="top" title="{{'Detalles'|translate}}"
+                      <!-- <a data-toggle="tooltip" data-placement="top" title="{{'Detalles'|translate}}"
                         class="mr-3 text-muted" href="javascript:void(0)" (click)="onDetails(rowIndex)">
-                        <i class="fa fa-eye font-size-24px" aria-hidden="true"></i></a>
-                      <a data-toggle="tooltip " data-placement="top" title="{{'Aceptar'|translate}}"
-                        class="mr-3 text-muted" href="javascript:void(0)" (click)="onEdit(rowIndex)">
-                        <i class="fa fa-check-circle font-size-24px" aria-hidden="true"></i></a>
+                        <i class="fa fa-eye font-size-24px" aria-hidden="true"></i></a> -->
+                      <a data-toggle="tooltip " data-placement="top" title="{{'Generar Etiqueta'|translate}}"
+                        class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="generateLabel(order.id)">
+                        <i class="fa fa-barcode font-size-24px" aria-hidden="true"></i></a>
                       <!-- <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
                               href="javascript:void(0)" (click)="onDelete(rowIndex)">
                               <i class="fa fa-times font-size-24px" aria-hidden="true"></i></a> -->

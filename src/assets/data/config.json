@@ -1,6 +1,6 @@
 {
-  "productName": "CCIFrance_Digipilote",
-  "systemName": "Digipilote Systems",
+  "productName": "Shopify para Correso de Chile",
+  "systemName": "Shopify para Correso de Chile",
   "external": false,
   "apiUrl": "http://localhost:3000/api/v1/",
   "apiConfigs": {

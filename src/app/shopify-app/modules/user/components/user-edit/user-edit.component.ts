@@ -37,7 +37,7 @@ export class UserEditComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    // this.userId = this.authService.currentUser.id;
+    this.userId = this.authService.currentUser.id;
   }
 
   ngAfterViewInit() {
@@ -54,14 +54,14 @@ export class UserEditComponent implements AfterViewInit, OnInit {
   }
 
   getUser() {
-    // this.userService.getUser(this.userId).subscribe(response => {
-    //   this.data = response;
-    // },
-    //   (error: HandledError) => this.errorHandlingService.handleUiError(errorKey, error)
-    // );
-    this.userService.getStaticUser().subscribe(response => {
-         this.data = response;
-       });
+    this.userService.getUser(this.userId).subscribe(response => {
+      this.data = response;
+    },
+      (error: HandledError) => this.errorHandlingService.handleUiError(errorKey, error)
+    );
+    // this.userService.getStaticUser().subscribe(response => {
+    //      this.data = response;
+    //    });
   }
 
   submit(data: User) {

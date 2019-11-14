@@ -17,11 +17,15 @@ const routes: Routes = [
         loadChildren: './modules/manifest/manifest.module#ManifestModule'
       },
       {
+        path: 'admited',
+        loadChildren: './modules/admited/admited.module#AdmitedModule'
+      },
+      {
         path: 'archives',
         loadChildren: './modules/archives/archives.module#ArchivesModule'
       },
       {
-        path: 'label',
+        path: 'label/:id',
         loadChildren: './modules/label/label.module#LabelModule'
       },
       {

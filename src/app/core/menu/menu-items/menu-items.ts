@@ -31,8 +31,8 @@ const MENUITEMS = [
       icon: 'fa fa-shopping-bag icons',
    },
    {
-      state: 'manifest',
-      name: 'Manifiesto',
+      state: 'admited',
+      name: 'Admición',
       type: 'link',
       icon: 'fa fa-calendar-check-o icons',
    },

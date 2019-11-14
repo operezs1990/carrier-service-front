@@ -18,7 +18,7 @@ export class User {
     idApiChile: string
 
     labelFormat: string;
-    gravamen: number;
+    recharge: number;
 
     shopUrl: string;
     profile: boolean;

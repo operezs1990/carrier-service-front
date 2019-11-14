@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ConfigResolveService } from 'app/config/services/config-resolve.service';
 import { LabelComponent } from './components/label/label.component';
+import { IdResolveService } from 'app/routing/services/id-resolve.service';
 
 
 
@@ -11,6 +12,7 @@ const routes: Routes = [
     component: LabelComponent,
     resolve: {
       config: ConfigResolveService,
+      admitedId: IdResolveService,
     },
   },
 ];

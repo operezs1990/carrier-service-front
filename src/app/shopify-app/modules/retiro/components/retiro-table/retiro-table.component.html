@@ -1,4 +1,4 @@
-<div class=" padding-left-40px padding-bottom-60px">
+<div class=" padding-left-40px">
   <div class="">
     <div class="padding-header-data">
       <div class="width-title">
@@ -53,6 +53,7 @@
 
 
       <div class="chk-block-content">
+        
         <div class="table-responsive">
           <div class="unseen">
             <table class="table border-collapse-inherit table-hover table-striped table-bordered ">
@@ -61,7 +62,7 @@
                   <th >{{'Número de Retiro'|translate}}</th>
                   <th >{{'Fecha'|translate}}</th>
                   <th >{{'Hora'}}</th>
-                  <!-- <th >{{'Acciones'}}</th> -->
+                  <th >{{'Acciones'}}</th>
                 </tr>
               </thead>
               <tbody>
@@ -81,19 +82,19 @@
                       {{retiro.createdAt}}
                     </div>
                   </td>
-                  <!-- <td>
+                  <td>
                     <div class="">
-                      <a data-toggle="tooltip" data-placement="top" title="{{'Detalles'|translate}}"
+                      <!-- <a data-toggle="tooltip" data-placement="top" title="{{'Detalles'|translate}}"
                         class="mr-3 text-muted" href="javascript:void(0)" (click)="onDetails(rowIndex)">
-                        <i class="fa fa-eye font-size-24px" aria-hidden="true"></i></a>
-                      <a data-toggle="tooltip " data-placement="top" title="{{'Aceptar'|translate}}"
-                        class="mr-3 text-muted" href="javascript:void(0)" (click)="onEdit(rowIndex)">
-                        <i class="fa fa-check-circle font-size-24px" aria-hidden="true"></i></a>
-                      <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
+                        <i class="fa fa-eye font-size-24px" aria-hidden="true"></i></a> -->
+                      <a data-toggle="tooltip " data-placement="top" title="{{'Generar Manifiesto'|translate}}"
+                        class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="generateManifest(retiro.id)">
+                        <i class="fa fa-edit font-size-24px" aria-hidden="true"></i></a>
+                      <!-- <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
                               href="javascript:void(0)" (click)="onDelete(rowIndex)">
-                              <i class="fa fa-times font-size-24px" aria-hidden="true"></i></a>
+                              <i class="fa fa-times font-size-24px" aria-hidden="true"></i></a> -->
                     </div>
-                  </td> -->
+                  </td>
                 </tr>
               </tbody>
             </table>

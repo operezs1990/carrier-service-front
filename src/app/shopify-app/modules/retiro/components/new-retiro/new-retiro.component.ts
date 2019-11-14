@@ -53,6 +53,7 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
    }
 
    ngOnInit() {
+      // TODO: descoment
       this.userId = this.authService.currentUser.id;
    }
 

@@ -9,7 +9,7 @@ import { ErrorHandlingService } from 'app/error-handling/services/error-handling
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { OrdersService } from '../../services/orders.service';
+import { AdmitedService } from '../../services/orders.service';
 import { Order } from 'app/shopify-app/models/order';
 
 
@@ -17,32 +17,29 @@ const errorKey = 'Error';
 
 declare var $: any;
 @Component({
-  selector: 'app-orders-table',
-  templateUrl: './orders-table.component.html',
-  styleUrls: ['./orders-table.component.scss']
+  selector: 'app-admited-table',
+  templateUrl: './admited-table.component.html',
+  styleUrls: ['./admited-table.component.scss']
 })
-export class OrdersTableComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   dateRange = new DateRange(new Date(''), new Date(''));
 
   checkboxes: any;
   date: Date;
   filter: FormGroup;
+  rowsNumber = 1000;
 
   filterValueChanges: Subscription;
 
-  ordersList: Array<Order>;
-
+  ordersList: Array<Order> = [];
 
   orders: Array<Order>;
 
-  sizeList: Array<any> = [];
-
-  sectorList: Array<any> = [];
 
 
   constructor(private confirmDialogService: ConfirmDialogService,
-    public ordersService: OrdersService,
+    public admitedService: AdmitedService,
     public errorHandlingService: ErrorHandlingService,
     public translate: TranslateService,
     public router: Router,
@@ -59,16 +56,7 @@ export class OrdersTableComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(change => this.onFilter());
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="popover"]').popover();
-  }
 
-  getStaticOrders() {
-    this.ordersService.getStaticOrders().subscribe(res => {
-      this.ordersList = res;
-      console.log(this.ordersList);
-    },
-      err => console.log(err),
-      () => this.ordersList
-    );
   }
 
   ngAfterViewInit() {
@@ -81,6 +69,7 @@ export class OrdersTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   createFilterFormGroup() {
     const group: any = {};
+    group['rowsNumber'] = new FormControl(this.rowsNumber);
     group['rangeDate'] = new FormControl('');
     group['name'] = new FormControl('');
     group['size'] = new FormControl('');
@@ -89,13 +78,12 @@ export class OrdersTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadPage() {
+    this.rowsNumber = this.filter.value.rowsNumber;
     this.getOrders();
   }
 
-  
-
   getOrders() {
-    this.ordersService.getOrders(
+    this.admitedService.getAdmiteds(
       Object.assign({}, this.filter.value))
       .subscribe((response: Order[]) => {
         this.orders = response;
@@ -122,9 +110,8 @@ export class OrdersTableComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.router.navigate(['/company/details', id]);
   }
 
-  generateAdmition(index: number) {
-    // const id = this.companies[index].id;
-    // this.router.navigate(['/company/edit', id]);
+  generateLabel(id: string) {
+      this.router.navigate(['/carrier/label/', id]);
   }
 
   // onDelete(index: number) {
@@ -184,6 +171,14 @@ export class OrdersTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-
+  getStaticOrders() {
+    this.admitedService.getStaticOrders().subscribe(res => {
+      this.ordersList = res;
+      console.log(this.ordersList);
+    },
+      err => console.log(err),
+      () => this.ordersList
+    );
+  }
 
 }

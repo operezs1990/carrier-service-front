@@ -123,9 +123,8 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.router.navigate(['/company/details', id]);
   }
 
-  onEdit(index: number) {
-    // const id = this.companies[index].id;
-    // this.router.navigate(['/company/edit', id]);
+  generateManifest(id: string) {
+    this.router.navigate(['/carrier/manifest/manifest-doc', id]);
   }
 
   // onDelete(index: number) {
