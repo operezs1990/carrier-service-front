@@ -1,6 +1,6 @@
 <app-retiro-form 
+    *ngIf="user"
     [data]="data" 
-    [user]="user" 
     [regionList]="regionList"       
     (accept)="submit($event)"
     (cancel)="cancel()">

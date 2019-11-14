@@ -179,7 +179,6 @@ export class ManifestTableComponent implements OnInit, AfterViewInit, OnDestroy 
   getStaticManifestRecords() {
     this.manifestService.getStaticManifestRecords().subscribe(res => {
       this.manifestList = res;
-      console.log(this.manifestList);
     },
       err => console.log(err),
       () => this.manifestList

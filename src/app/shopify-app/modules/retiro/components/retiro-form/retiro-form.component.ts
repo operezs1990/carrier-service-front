@@ -42,8 +42,6 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
 
    @Input() data: Retiro;
 
-   @Input() user: User;
-
    @Output() accept = new EventEmitter<Retiro>();
 
    regionValueChanges: Subscription;

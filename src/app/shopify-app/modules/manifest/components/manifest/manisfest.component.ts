@@ -35,7 +35,6 @@ export class ManifestComponent implements OnInit {
   getStaticManifest() {
     this.manifestService.getStaticManifestRecords().subscribe(res => {
       this.manifestList = res;
-      console.log(this.manifestList);
     },
       err => console.log(err),
       () => this.manifestList,

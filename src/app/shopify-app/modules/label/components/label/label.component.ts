@@ -35,7 +35,6 @@ export class LabelComponent implements OnInit {
   getStaticMnifest() {
     this.labelService.getStaticLabel().subscribe(res => {
       this.label = res;
-      console.log(this.label);
     },
       err => console.log(err),
       () => this.label,

@@ -71,6 +71,8 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
    }
 
    setDataUserParams() {
+      this.data.contact = this.user.firstName;
+      this.data.contactPhone = this.user.phone;
       this.data.rut = this.user.rut;
       this.data.zip = this.user.zip;
       this.data.address = this.user.address;
@@ -79,16 +81,16 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
    }
 
    getUser() {
-      // this.userService.getUser(this.userId).subscribe(response => {
-      //    this.user = response;
-      //    this.setDataUserParams();
-      // },
-      //    (error: HandledError) => this.errorHandlingService.handleUiError(errorKey, error)
-      // );
+      this.userService.getUser(this.userId).subscribe(response => {
+         this.user = response;
+         this.setDataUserParams();
+      },
+         (error: HandledError) => this.errorHandlingService.handleUiError(errorKey, error)
+      );
    }
 
    submit(data: Retiro) {
-      this.updateUser(data);
+     // this.updateUser(data);
    }
 
    cancel() {
@@ -104,15 +106,15 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
    }
 
    updateUser(data: Retiro) {
-      // this.updateUserLocalStorash();
-      // this.retiroService.postRetiro(data).subscribe(response => {
-      //    this.close();
-      //    this.translate.get('SUCCESS_MESSAGE').subscribe((res: string) => {
-      //       this.toastr.success(res);
-      //    });
-      // },
-      //    (error: HandledError) => {
-      //       this.errorHandlingService.handleUiError(errorKey, error);
-      //    });
+      this.updateUserLocalStorash();
+      this.retiroService.postRetiro(data).subscribe(response => {
+         this.close();
+         this.translate.get('SUCCESS_MESSAGE').subscribe((res: string) => {
+            this.toastr.success(res);
+         });
+      },
+         (error: HandledError) => {
+            this.errorHandlingService.handleUiError(errorKey, error);
+         });
    }
 }

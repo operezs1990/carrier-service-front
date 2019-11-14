@@ -32,7 +32,7 @@ const MENUITEMS = [
    },
    {
       state: 'admited',
-      name: 'Admición',
+      name: 'Admisión',
       type: 'link',
       icon: 'fa fa-calendar-check-o icons',
    },

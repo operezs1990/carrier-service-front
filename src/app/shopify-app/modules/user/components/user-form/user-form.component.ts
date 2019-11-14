@@ -114,6 +114,8 @@ export class UserFormComponent implements OnInit, OnDestroy {
       this.data.passwordApiChile = this.formGroup.value.passwordApiChile;
       this.data.idApiChile = this.formGroup.value.idApiChile;
       this.data.shopUrl = this.formGroup.value.shopUrl;
+      this.data.labelFormat = this.formGroup.value.labelFormat;
+      this.data.recharge = this.formGroup.value.recharge;
 
       this.accept.emit(this.data);
     } else {

@@ -175,7 +175,6 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
   getStaticOrders() {
     this.ordersService.getStaticOrders().subscribe(res => {
       this.ordersList = res;
-      console.log(this.ordersList);
     },
       err => console.log(err),
       () => this.ordersList

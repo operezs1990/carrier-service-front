@@ -174,7 +174,6 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
   getStaticOrders() {
     this.admitedService.getStaticOrders().subscribe(res => {
       this.ordersList = res;
-      console.log(this.ordersList);
     },
       err => console.log(err),
       () => this.ordersList

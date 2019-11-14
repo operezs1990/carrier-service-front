@@ -178,7 +178,6 @@ export class AuthService {
             + `timestamp=${data.timestamp}` + '&';
 
         return this.http.get<any>(url + queryParams).pipe(map((response: LoginUser) => {
-            console.log('install', response);
             if (response) {
                 const token = response.token;
                 const user = response.user;
@@ -202,7 +201,6 @@ export class AuthService {
         };
         const url: string = this.configService.config.apiUrl + this.configService.config.apiConfigs.authentication.loginUser.apiEndpoint;
         return this.http.post<LoginUser>(url, credentials, { headers: headers }).pipe(map((response: any) => {
-            console.log('after login', JSON.stringify(response));
             if (response.user.newUser) {
                 window.location.href = response.user.redirect;
             } else if (!response.user.newUser && !response.user.hmac) {

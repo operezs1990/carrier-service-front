@@ -54,7 +54,7 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   ngOnInit() {
-    this.getStaticResuls();
+    this.getStaticRetiros();
 
     this.filter = this.createFilterFormGroup();
 
@@ -64,10 +64,9 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
     $('[data-toggle="popover"]').popover();
   }
 
-  getStaticResuls() {
+  getStaticRetiros() {
     this.retiroService.getStaticRetiros().subscribe(res => {
       this.retirosList = res;
-      console.log(this.retirosList);
     },
       err => console.log(err),
       () => this.retirosList
