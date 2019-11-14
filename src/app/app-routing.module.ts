@@ -20,7 +20,7 @@ export const AppRoutes: Routes = [
    { // TODO
       path: 'carrier',
       loadChildren: './shopify-app/shopify-app.module#ShopifyAppModule',
-      // canActivate: [AuthGuardService],
+      canActivate: [AuthGuardService],
       resolve: {
          config: ConfigResolveService
       }
