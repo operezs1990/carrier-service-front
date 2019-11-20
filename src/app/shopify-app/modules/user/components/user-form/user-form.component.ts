@@ -80,7 +80,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
       idApiChile: [this.data.idApiChile, Validators.compose([Validators.required])],
 
       labelFormat: [this.data.labelFormat, Validators.compose([Validators.required])],
-      recharge: [this.data.recharge, Validators.compose([Validators.required])],
+      recharge: [this.data.recharge],
 
       shopUrl: [this.data.shopUrl],
     });

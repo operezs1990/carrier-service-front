@@ -2,7 +2,7 @@
   "productName": "Shopify para Correso de Chile",
   "systemName": "Shopify para Correso de Chile",
   "external": false,
-  "apiUrl": "http://54.167.87.144:3000/api/v1//",
+  "apiUrl": "http://54.167.87.144:3000/api/v1/",
   "apiConfigs": {
     "authentication": {
       "loginUser": {

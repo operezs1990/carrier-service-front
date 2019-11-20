@@ -90,7 +90,7 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
    }
 
    submit(data: Retiro) {
-     // this.updateUser(data);
+     this.updateUser(data);
    }
 
    cancel() {

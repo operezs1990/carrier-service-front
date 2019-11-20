@@ -3,6 +3,7 @@
     <div class="d-flex justify-content-between">
       <div>
         <h3 class="text-capitalize">{{'Nuevo Retiro'|translate}}</h3>
+        <span>{{'(Los retiros deben ser agendados de lunes a viernes entre 12:00 y 19:00 horas)'|translate}}</span>
       </div>
     </div>
   </div>
@@ -53,6 +54,11 @@
               class="text-danger">
               {{'Debe incluir una fecha para el retiro'|translate}}
             </small>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['date'].errors?.badDay && (formGroup.controls['date'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir una día entre Lunes y Viernes'|translate}}
+            </small>
           </div>
 
           <div class="form-group">
@@ -68,6 +74,11 @@
               class="text-danger">
               {{'Debe incluir una hora inicial'|translate}}
             </small>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['horaDesde'].errors?.badHourIni && (formGroup.controls['horaDesde'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir una hora inicial luego de las 12:00'|translate}}
+            </small>
           </div>
 
           <div class="form-group">
@@ -82,6 +93,16 @@
               *ngIf="formGroup.controls['horaHasta'].hasError('required') && (formGroup.controls['horaHasta'].touched ||  wasSubmitted)"
               class="text-danger">
               {{'Debe incluir una hora final'|translate}}
+            </small>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['horaHasta'].errors?.badHourEnd && (formGroup.controls['horaHasta'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir una hora final antes de las 19:00'|translate}}
+            </small>
+            <small class="chankya-block"
+              *ngIf="formGroup.hasError('badRange') && (formGroup.controls['horaHasta'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'La hora final deve ser mayor que la hora inicial'|translate}}
             </small>
           </div>
 

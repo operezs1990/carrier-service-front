@@ -11,6 +11,9 @@ import { Subscription } from 'rxjs/Rx';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime } from 'rxjs/operators';
 import { Retiro } from 'app/shopify-app/models/retiro';
+import { retiroDate } from 'app/validation/helpers/retiro-date-validator';
+import { retiroHourEnd } from 'app/validation/helpers/retiro-hourEnd-validator';
+import { retiroHourIni } from 'app/validation/helpers/retiro-hourIni-validator';
 
 
 
@@ -71,20 +74,33 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
       this.formGroup = this.fb.group({
          contact: [this.data.contact, Validators.compose([Validators.required])],
          contactPhone: [this.data.contactPhone, Validators.compose([Validators.required])],
-         date: ['', Validators.compose([Validators.required])],
-         horaDesde : ['', Validators.compose([Validators.required])],
-         horaHasta: ['', Validators.compose([Validators.required])],
+         date: ['', Validators.compose([Validators.required, retiroDate])],
+         horaDesde: ['', Validators.compose([Validators.required, retiroHourIni])],
+         horaHasta: ['', Validators.compose([Validators.required, retiroHourEnd])],
 
          rut: [this.data.rut, Validators.compose([Validators.required])],
          address: [this.data.address, Validators.compose([Validators.required])],
          comuna: [this.data.comuna, Validators.compose([Validators.required])],
          region: [this.data.region, Validators.compose([Validators.required])],
          zip: [this.data.zip, Validators.compose([Validators.required])],
-      });
+      }, { validator: this.hoursRange });
       if (!this.data.region) {
          this.formGroup.get('comuna').disable();
       }
    }
+
+   hoursRange(group: FormGroup) { // here we have the 'passwords' group
+      let retiroHourIni: string = group.controls.horaDesde.value;
+      retiroHourIni = retiroHourIni.replace(/:/g, '');
+      const hourIni = parseInt(retiroHourIni);
+
+      let retiroHourEnd: string = group.controls.horaHasta.value;
+      retiroHourEnd = retiroHourEnd.replace(/:/g, '');
+      const hourEnd = parseInt(retiroHourEnd);
+
+      return hourIni < hourEnd ? null : { badRange: true }
+   }
+
 
    comunaListFilter(region: string) {
       const index = this.regionList.findIndex(item => {

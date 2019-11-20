@@ -34,6 +34,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { NgrxModule } from './ngrx/ngrx.module';
 import { ConfirmDialogModule } from './confirm-dialog/confirm-dialog.module';
 import { ConfirmDialogComponent } from './confirm-dialog/components/confirm-dialog.component';
+import { ValidationModule } from './validation/validation.module';
 
 /********** Custom option for ngx-translate ******/
 export function createTranslateLoader(http: HttpClient) {
@@ -64,6 +65,7 @@ const perfectScrollbarConfig: PerfectScrollbarConfigInterface = {
 		MenuToggleModule,
 		HttpClientModule,
 		OverlayModule,
+		ValidationModule,
 		TranslateModule.forRoot({
 			loader: {
 				provide: TranslateLoader,
