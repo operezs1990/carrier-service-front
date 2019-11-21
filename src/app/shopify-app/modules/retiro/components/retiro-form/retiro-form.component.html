@@ -115,7 +115,7 @@
               <label class="label-font" for>
                 {{'Rut'|translate}}
               </label>
-              <input class="form-control" [formControl]="formGroup.controls['rut']" formControlName="rut" required>
+              <input type="number" class="form-control" [formControl]="formGroup.controls['rut']" formControlName="rut" required>
             </div>
             <small class="chankya-block"
               *ngIf="formGroup.controls['rut'].hasError('required') && (formGroup.controls['rut'].touched ||  wasSubmitted)"
@@ -180,7 +180,7 @@
               <label class="label-font" for>
                 {{'Código Postal'|translate}}
               </label>
-              <input class="form-control" [formControl]="formGroup.controls['zip']" formControlName="zip" required>
+              <input class="form-control" type="number" [formControl]="formGroup.controls['zip']" formControlName="zip" required>
             </div>
             <small class="chankya-block"
               *ngIf="formGroup.controls['zip'].hasError('required') && (formGroup.controls['zip'].touched ||  wasSubmitted)"

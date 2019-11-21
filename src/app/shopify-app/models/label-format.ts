@@ -5,6 +5,6 @@ export class LabelFormat {
 
 export const LABELFORMAT: LabelFormat[] = [
     {id: 'pdf', name: 'PDF'},
-    {id: 'xml', name: 'XML'},
-    {id: 'doc', name: 'DOC'}
+    {id: 'pdfsmall', name: 'PDF Small'},
+    {id: 'base64', name: 'ZT base 64 (Zebra)'}
 ]
