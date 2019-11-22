@@ -24,6 +24,9 @@
     "install": {
       "apiEndpoint": "carrier-service/callback"
     },
+    "orders": {
+      "apiEndpoint": "orders/"
+    },
 
     "server": {
       "apiEndpoint": "http://54.167.87.144:3000/api/v1/"

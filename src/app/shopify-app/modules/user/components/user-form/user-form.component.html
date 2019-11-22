@@ -78,18 +78,34 @@
                               class="text-danger">
                               {{'Debe incluir su rut'|translate}}
                             </small>
+                            <small class="chankya-block"
+                              *ngIf="formGroup.controls['rut'].hasError('maxLength')"
+                              class="text-danger">
+                              {{'Debe contener once dígitos'|translate}}
+                            </small>
+                            <small class="chankya-block"
+                              *ngIf="formGroup.controls['rut'].hasError('minLength')"
+                              class="text-danger">
+                              {{'Debe contener once dígitos'|translate}}
+                            </small>
                           </div>
                           <div class="form-group">
                             <label class="padding-left-20px label-font" for>
                               {{'Teléfono'|translate}}
                             </label>
                             <input class="form-control" [formControl]="formGroup.controls['phone']"
-                              formControlName="phone" type="text" required>
+                              formControlName="phone" type="number" required>
                             <small class="chankya-block"
                               *ngIf="formGroup.controls['phone'].hasError('required') && (formGroup.controls['phone'].touched ||  wasSubmitted)"
                               class="text-danger">
                               {{'Debe incluir un número de teléfono'|translate}}
                             </small>
+                            <small class="chankya-block"
+                              *ngIf="formGroup.controls['phone'].hasError('pattern') && (formGroup.controls['phone'].touched ||  wasSubmitted)"
+                              class="text-danger">
+                              {{'Debe incluir un número de válido'|translate}}
+                            </small>
+                            
                           </div>
                           <div class="form-group">
                             <label class="padding-left-20px label-font" for>
@@ -110,7 +126,7 @@
                               {{'Región'|translate}}
                             </label>
                             <select class="form-control" id="formSelect1" formControlName="region" required
-                              data-toggle="tooltip" data-placement="right" title="{{'SELECT_OPTION'| translate}}">
+                              data-toggle="tooltip" data-placement="right" title="{{'Seleccione una opción'| translate}}">
                               <option *ngFor="let region of regionList" [value]="region.name">
                                 {{region.name}}
                               </option>
@@ -126,7 +142,7 @@
                               {{'Comuna'|translate}}
                             </label>
                             <select class="form-control" id="formSelect1" formControlName="comuna" required
-                              data-toggle="tooltip" data-placement="right" title="{{'SELECT_OPTION'| translate}}">
+                              data-toggle="tooltip" data-placement="right" title="{{'Seleccione una opción'| translate}}">
                               <option *ngFor="let comuna of comunaList" [value]="comuna.name">
                                 {{comuna.name}}
                               </option>
@@ -228,7 +244,7 @@
                                 {{'Formato de Etiqueta'|translate}}
                               </label>
                               <select class="form-control" id="formSelect1" formControlName="labelFormat" required
-                                data-toggle="tooltip" data-placement="right" title="{{'SELECT_OPTION'| translate}}">
+                                data-toggle="tooltip" data-placement="right" title="{{'Seleccione una opción'| translate}}">
                                 <option *ngFor="let format of labelFormatList" [value]="format.id">
                                   {{format.name}}
                                 </option>
@@ -247,7 +263,7 @@
                                 {{'Valor Añadido'|translate}}
                               </label>
                               <input class="form-control" type="number" [formControl]="formGroup.controls['recharge']"
-                                [value]="0" formControlName="recharge" data-toggle="tooltip" data-placement="right"
+                                formControlName="recharge" data-toggle="tooltip" data-placement="right"
                                 title="{{'valor añadido a la tarificación'| translate}}">
                               <small class="chankya-block"
                                 *ngIf="formGroup.controls['recharge'].touched"

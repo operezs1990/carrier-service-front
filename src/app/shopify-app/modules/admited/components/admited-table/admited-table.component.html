@@ -58,34 +58,34 @@
             <table class="table border-collapse-inherit table-hover table-striped table-bordered ">
               <thead>
                 <tr class="bg-white">
-                  <th >{{'Codigo de Admisión'|translate}}</th>
-                  <th >{{'Productos'|translate}}</th>
-                  <th >{{'Importe'}}</th>
-                  <th >{{'Destino'}}</th>
+                  <th >{{'Numero de Orden'|translate}}</th>
+                  <th >{{'Dirección del Cliente'|translate}}</th>
+                  <th >{{'Contact Name'}}</th>
+                  <th >{{'Sub Total'}}</th>
+                  <th >{{'Total'}}</th>
+                  <th >{{'Número de Piezas'}}</th>
                   <th >{{'Acciones'}}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let order of ordersList">
+                <tr *ngFor="let order of orders">
                   <td>
-                    1213123
+                    {{order.orderNumber}}
                   </td>
                   <td>
-                    <div class="" *ngFor="let item of order.rate.items">
-                      {{item.name}}
-                    </div>
+                    {{order.receiverAddress}}        
                   </td>
                   <td>
-                    <div class="">
-
-                    </div>
+                    {{order.receiverContactName}}
                   </td>
                   <td>
-                    <div class="">
-                      <span>
-                        <small>Sucursal</small>
-                      </span>
-                    </div>
+                    {{order.subtotalPrice}}
+                  </td>
+                  <td>
+                    {{order.totalPrice}}
+                  </td>
+                  <td>
+                    {{order.totalPieces}}
                   </td>
                   <td>
                     <div class="">

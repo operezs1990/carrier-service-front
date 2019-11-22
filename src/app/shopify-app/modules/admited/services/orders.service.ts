@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ConfigService } from '../../../../config/services/config.service';
 import { ErrorHandlingHttpService } from '../../../../error-handling/services/error-handling-http.service';
 import { Order } from 'app/shopify-app/models/order';
+import { Admited } from 'app/shopify-app/models/admited';
 
 export const ASCENDING = 'asc';
 
@@ -21,16 +22,16 @@ export class AdmitedService {
     constructor(
         private configService: ConfigService,
         private http: ErrorHandlingHttpService) {
-       // this.apiEndpoint = this.configService.config.apiUrl + this.configService.config.apiConfigs.company.apiEndpoint;
+        this.apiEndpoint = this.configService.config.apiUrl + this.configService.config.apiConfigs.orders.apiEndpoint;
     }
 
-    getAdmiteds(filter: any): Observable<Order[]> {
+    getAdmiteds(filter: any): Observable<Admited[]> {
         const queryParams = this.formatQueryParams(filter);
-        return this.http.get<Order[]>(this.apiEndpoint + queryParams);
+        return this.http.get<Admited[]>(this.apiEndpoint + queryParams);
     }
 
-    getAdmited(id: string): Observable<Order> {
-        return this.http.get<Order>(this.apiEndpoint + id);
+    getAdmited(id: string): Observable<Admited> {
+        return this.http.get<Admited>(this.apiEndpoint + id);
     }
 
     formatQueryParams(filter?: any, sortColumn?: string, sortDirection?: string, pageIndex?: number, pageSize?: number): string {

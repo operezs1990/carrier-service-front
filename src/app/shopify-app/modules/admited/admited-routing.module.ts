@@ -8,20 +8,25 @@ import { AdmitedTableComponent } from './components/admited-table/admited-table.
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'orders',
+    pathMatch: 'full',
+  },
+  {
+    path: 'orders',
     component: AdmitedTableComponent,
     resolve: {
       config: ConfigResolveService,
     },
   },
-  {
-    path: 'admited/:id',
-    component: AdmitedDetailsComponent,
-    resolve: {
-      config: ConfigResolveService,
-      pedidoId: IdResolveService,
-    },
-    data: { closeRouteCommand: ['../'] }
-  },
+  // {
+  //   path: 'admited/:id',
+  //   component: AdmitedDetailsComponent,
+  //   resolve: {
+  //     config: ConfigResolveService,
+  //     pedidoId: IdResolveService,
+  //   },
+  //   data: { closeRouteCommand: ['../'] }
+  // },
 ];
 
 @NgModule({

@@ -24,15 +24,15 @@ const MENUITEMS = [
    //    type: 'link',
    //    icon: 'fa fa-bank icons',
    // },
-   {
-      state: 'orders',
-      name: 'Pedidos',
-      type: 'link',
-      icon: 'fa fa-shopping-bag icons',
-   },
+   // {
+   //    state: 'orders',
+   //    name: 'Pedidos',
+   //    type: 'link',
+   //    icon: 'fa fa-shopping-bag icons',
+   // },
    {
       state: 'admited',
-      name: 'Admisión',
+      name: 'Pedidos',
       type: 'link',
       icon: 'fa fa-calendar-check-o icons',
    },

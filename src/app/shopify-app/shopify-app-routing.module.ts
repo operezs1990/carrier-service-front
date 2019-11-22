@@ -10,16 +10,16 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './modules/orders/orders.module#OrdersModule'
+        loadChildren: './modules/admited/admited.module#AdmitedModule'
       },
       {
         path: 'manifest',
         loadChildren: './modules/manifest/manifest.module#ManifestModule'
       },
-      {
-        path: 'admited',
-        loadChildren: './modules/admited/admited.module#AdmitedModule'
-      },
+      // {
+      //   path: 'admited',
+      //   loadChildren: './modules/admited/admited.module#AdmitedModule'
+      // },
       {
         path: 'archives',
         loadChildren: './modules/archives/archives.module#ArchivesModule'

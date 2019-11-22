@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { AdmitedService } from '../../services/orders.service';
 import { Order } from 'app/shopify-app/models/order';
+import { Admited } from 'app/shopify-app/models/admited';
 
 
 const errorKey = 'Error';
@@ -34,7 +35,7 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ordersList: Array<Order> = [];
 
-  orders: Array<Order>;
+  orders: Array<Admited>;
 
 
 
@@ -48,7 +49,7 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getStaticOrders();
+    // this.getStaticOrders();
 
     this.filter = this.createFilterFormGroup();
 
@@ -60,7 +61,7 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    // this.loadPage();
+    this.loadPage();
   }
 
   ngOnDestroy() {
@@ -85,8 +86,9 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
   getOrders() {
     this.admitedService.getAdmiteds(
       Object.assign({}, this.filter.value))
-      .subscribe((response: Order[]) => {
+      .subscribe((response: Admited[]) => {
         this.orders = response;
+        console.log('this.orders', this.orders);
       },
         (err: HandledError) => {
           this.errorHandlingService.handleUiError(errorKey, err);

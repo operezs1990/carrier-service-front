@@ -63,11 +63,13 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   createFormGroup() {
     // this.data.shopUrl = 'https://fishshop123.myshopify.com';
+    
+
     this.formGroup = this.fb.group({
       firstName: [this.data.firstName, Validators.compose([Validators.required])],
       lastName: [this.data.lastName],
-      rut: [this.data.rut, Validators.compose([Validators.required])],
-      phone: [this.data.phone],
+      rut: [this.data.rut, Validators.compose([Validators.required, Validators.maxLength(11), Validators.minLength(11)])],
+      phone: [this.data.phone, Validators.compose([Validators.required, CustomValidators.phone])],
       email: [this.data.email, Validators.compose([Validators.required, CustomValidators.email])],
 
       region: [this.data.region, Validators.compose([Validators.required])],
@@ -80,7 +82,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
       idApiChile: [this.data.idApiChile, Validators.compose([Validators.required])],
 
       labelFormat: [this.data.labelFormat, Validators.compose([Validators.required])],
-      recharge: [this.data.recharge],
+      recharge: [this.data.recharge ? this.data.recharge : 0],
 
       shopUrl: [this.data.shopUrl],
     });
@@ -103,16 +105,16 @@ export class UserFormComponent implements OnInit, OnDestroy {
     if (this.formGroup.valid) {
       this.data.firstName = this.formGroup.value.firstName;
       this.data.lastName = this.formGroup.value.lastName;
-      this.data.rut = this.formGroup.value.rut;
-      this.data.phone = this.formGroup.value.phone;
+      this.data.rut = this.formGroup.value.rut.toString();
+      this.data.phone = this.formGroup.value.phone.toString();
       this.data.email = this.formGroup.value.email;
       this.data.comuna = this.formGroup.value.comuna;
       this.data.region = this.formGroup.value.region;
       this.data.address = this.formGroup.value.address;
-      this.data.zip = this.formGroup.value.zip;
+      this.data.zip = this.formGroup.value.zip.toString();
       this.data.userApiChile = this.formGroup.value.userApiChile;
       this.data.passwordApiChile = this.formGroup.value.passwordApiChile;
-      this.data.idApiChile = this.formGroup.value.idApiChile;
+      this.data.idApiChile = this.formGroup.value.idApiChile.toString();
       this.data.shopUrl = this.formGroup.value.shopUrl;
       this.data.labelFormat = this.formGroup.value.labelFormat;
       this.data.recharge = this.formGroup.value.recharge;
