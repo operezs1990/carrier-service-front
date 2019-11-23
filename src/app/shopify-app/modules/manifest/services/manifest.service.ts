@@ -7,6 +7,7 @@ import { ConfigService } from '../../../../config/services/config.service';
 import { ErrorHandlingHttpService } from '../../../../error-handling/services/error-handling-http.service';
 import { Manifest } from 'app/shopify-app/models/manifest';
 import { ManifestRecord } from 'app/shopify-app/models/manifest-rows';
+import { map } from 'rxjs/operators';
 
 
 export const ASCENDING = 'asc';
@@ -60,7 +61,7 @@ export class ManifestService {
     }
 
     getStaticManifestRecords(): Observable<ManifestRecord[]> {
-        return this.http.get<ManifestRecord[]>('assets/data/manifest.json').map(response => response);
+        return this.http.get<ManifestRecord[]>('assets/data/manifest.json').pipe(map(response => response));
     }
 
     // getAllcompanies(): Observable<Order[]> {

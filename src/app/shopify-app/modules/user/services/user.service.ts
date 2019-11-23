@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { User } from 'app/shopify-app/models/user';
 import { Comuna } from 'app/shopify-app/models/comuna';
 import { Region } from 'app/shopify-app/models/region';
+import { map } from 'rxjs/operators';
 
 
 export const ASCENDING = 'asc';
@@ -51,11 +52,11 @@ export class UserService {
     }
 
     getStaticRegions(): Observable<Region[]> {
-        return this.http.get<Region[]>('assets/data/regiones-comunas.json').map(response => response);
+        return this.http.get<Region[]>('assets/data/regiones-comunas.json').pipe(map(response => response))
     }
 
     getStaticUser(): Observable<User> {
-        return this.http.get<User>('assets/data/user.json').map(response => response);
+        return this.http.get<User>('assets/data/user.json').pipe(map(response => response));
     }
 
 }

@@ -38,11 +38,11 @@ export class UserEditComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.userId = this.authService.currentUser.id;
+    this.getRegions();
   }
 
   ngAfterViewInit() {
     this.getUser();
-    this.getRegions();
   }
 
   getRegions() {
@@ -59,9 +59,6 @@ export class UserEditComponent implements AfterViewInit, OnInit {
     },
       (error: HandledError) => this.errorHandlingService.handleUiError(errorKey, error)
     );
-    // this.userService.getStaticUser().subscribe(response => {
-    //      this.data = response;
-    //    });
   }
 
   submit(data: User) {
@@ -73,7 +70,6 @@ export class UserEditComponent implements AfterViewInit, OnInit {
   }
 
   close() {
-  //  this.router.navigate(this.activatedRoute.snapshot.data.closeRouteCommand, {relativeTo: this.activatedRoute});
   }
 
   updateUserLocalStorash() {

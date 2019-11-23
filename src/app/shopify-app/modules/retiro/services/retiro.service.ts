@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ConfigService } from '../../../../config/services/config.service';
 import { ErrorHandlingHttpService } from '../../../../error-handling/services/error-handling-http.service';
 import { Retiro } from 'app/shopify-app/models/retiro';
+import { map } from 'rxjs/operators';
 
 export const ASCENDING = 'asc';
 
@@ -62,23 +63,16 @@ export class RetiroService {
     }
 
     getStaticRetiros(): Observable<Retiro[]> {
-        return this.http.get<Retiro[]>('assets/data/retiros.json').map(response => response);
+        return this.http.get<Retiro[]>('assets/data/retiros.json').pipe(map(response => response));
     }
 
     getStaticRegionsComunas(): Observable<any[]> {
-        return this.http.get<any[]>('assets/data/regiones-comunas.json').map(response => response);
+        return this.http.get<any[]>('assets/data/regiones-comunas.json').pipe(map(response => response));
     }
 
     getStaticSucursales(): Observable<any[]> {
-        return this.http.get<any[]>('assets/data/sucursales.json').map(response => response);
+        return this.http.get<any[]>('assets/data/sucursales.json').pipe(map(response => response));
     }
-
-    // getAllcompanies(): Observable<Retiro[]> {
-    //     return this.http.get<{ data: Retiro[] }>(this.apiEndpoint)
-    //         .pipe(map(response => {
-    //             return response.data;
-    //         }));
-    // }
 
 }
 

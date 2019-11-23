@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ConfigService } from '../../../../config/services/config.service';
 import { ErrorHandlingHttpService } from '../../../../error-handling/services/error-handling-http.service';
 import { Order } from 'app/shopify-app/models/order';
+import { map } from 'rxjs/operators';
 
 export const ASCENDING = 'asc';
 
@@ -58,7 +59,7 @@ export class OrdersService {
     }
 
     getStaticOrders(): Observable<Order[]> {
-        return this.http.get<Order[]>('assets/data/orders.json').map(response => response);
+        return this.http.get<Order[]>('assets/data/orders.json').pipe(map(response => response));
     }
 
     // getAllcompanies(): Observable<Order[]> {
