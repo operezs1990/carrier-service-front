@@ -1,3 +1,4 @@
+import { Admission } from "./admission";
 
 export class Admited {
   kg: number;
@@ -8,4 +9,5 @@ export class Admited {
   subtotalPrice: string;
   totalPieces: number;
   totalPrice: string;
+  admission: Admission;
 }

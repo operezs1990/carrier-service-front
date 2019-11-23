@@ -58,12 +58,16 @@
             <table class="table border-collapse-inherit table-hover table-striped table-bordered ">
               <thead>
                 <tr class="bg-white">
-                  <th >{{'Numero de Orden'|translate}}</th>
-                  <th >{{'Dirección del Cliente'|translate}}</th>
-                  <th >{{'Contact Name'}}</th>
+                  <th >{{'No. Orden'|translate}}</th>
+                  <th >{{'No. Envío'|translate}}</th>
+                  <th >{{'Servicio'|translate}}</th>
+                  <th >{{'Nombre Cliente'}}</th>
+                  <th >{{'Comuna'|translate}}</th>
+                  <th >{{'Dirección'|translate}}</th>
                   <th >{{'Sub Total'}}</th>
                   <th >{{'Total'}}</th>
-                  <th >{{'Número de Piezas'}}</th>
+                  <th >{{'Piezas'}}</th>
+                  <th >{{'Fecha'}}</th>
                   <th >{{'Acciones'}}</th>
                 </tr>
               </thead>
@@ -73,10 +77,19 @@
                     {{order.orderNumber}}
                   </td>
                   <td>
-                    {{order.receiverAddress}}        
+                    {{order.admission.numeroEnvio}}
+                  </td>
+                  <td>
+                    {{order.admission.abreviaturaServicio}}
                   </td>
                   <td>
                     {{order.receiverContactName}}
+                  </td>
+                  <td>
+                    {{order.admission.comunaDestino}}
+                  </td>
+                  <td>
+                    {{order.admission.direccionDestino}}
                   </td>
                   <td>
                     {{order.subtotalPrice}}
@@ -86,6 +99,9 @@
                   </td>
                   <td>
                     {{order.totalPieces}}
+                  </td>
+                  <td>
+                    {{order.admission.createdAt | date:'short'}}
                   </td>
                   <td>
                     <div class="">
