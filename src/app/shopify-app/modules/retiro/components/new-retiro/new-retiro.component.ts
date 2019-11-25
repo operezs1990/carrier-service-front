@@ -90,7 +90,7 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
    }
 
    submit(data: Retiro) {
-     this.updateUser(data);
+     this.submitRetiro(data);
    }
 
    cancel() {
@@ -101,13 +101,10 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
       //  this.router.navigate(this.activatedRoute.snapshot.data.closeRouteCommand, {relativeTo: this.activatedRoute});
    }
 
-   updateUserLocalStorash() {
-      this.authService.updateCurrentUser(this.data);
-   }
-
-   updateUser(data: Retiro) {
-      this.updateUserLocalStorash();
+   submitRetiro(data: Retiro) {
       this.retiroService.postRetiro(data).subscribe(response => {
+         console.log('postRetiro', response);
+
          this.close();
          this.translate.get('SUCCESS_MESSAGE').subscribe((res: string) => {
             this.toastr.success(res);

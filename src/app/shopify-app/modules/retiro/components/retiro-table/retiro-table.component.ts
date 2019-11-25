@@ -74,7 +74,7 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    // this.loadPage();
+    this.loadPage();
   }
 
   ngOnDestroy() {
@@ -91,14 +91,15 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadPage() {
-    this.getOrders();
+    this.getRetiros();
   }
 
-  getOrders() {
+  getRetiros() {
     this.retiroService.getRetiros(
       Object.assign({}, this.filter.value))
       .subscribe((response: Retiro[]) => {
         this.retiros = response;
+        console.log('this.retiros', this.retiros);
       },
         (err: HandledError) => {
           this.errorHandlingService.handleUiError(errorKey, err);

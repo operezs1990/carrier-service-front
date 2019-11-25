@@ -7,6 +7,11 @@ import * as jsPDF from 'jspdf';
 
 import html2canvas from 'html2canvas';
 import { ManifestRecord } from 'app/shopify-app/models/manifest-rows';
+import { Route, ActivatedRoute } from '@angular/router';
+import { RetiroService } from 'app/shopify-app/modules/retiro/services/retiro.service';
+import { Retiro } from 'app/shopify-app/models/retiro';
+import { HandledError } from 'app/error-handling/models/handled-error';
+import { ErrorHandlingService } from 'app/error-handling/services/error-handling.service';
 
 
 const errorKey = 'Error';
@@ -17,19 +22,45 @@ declare var $: any;
   templateUrl: './manifest.component.html',
   styleUrls: ['./manifest.component.scss']
 })
-export class ManifestComponent implements OnInit {
+export class ManifestComponent implements OnInit, AfterViewInit {
 
   manifestList: Array<ManifestRecord>;
 
   @ViewChild('content') content: ElementRef;
 
+  retiroId: string;
 
+  retiro: Retiro;
+  
   constructor(public manifestService: ManifestService,
-    public translate: TranslateService) {
+    public retiroService: RetiroService,
+    public translate: TranslateService,
+    public route: Route,
+    public activatedRoute: ActivatedRoute,
+    public errorHandlingService: ErrorHandlingService) {
   }
 
   ngOnInit() {
     this.getStaticManifest();
+    this.retiroId = this.activatedRoute.snapshot.data.retiroId;
+  }
+
+  ngAfterViewInit() {
+    this.loadPage();
+  }
+
+  loadPage() {
+    this.getRetiro();
+  }
+
+  getRetiro() {
+    this.retiroService.getRetiro(this.retiroId).subscribe((response: Retiro) => {
+        this.retiro = response;
+        console.log('this.retiro', this.retiro);
+      },
+        (err: HandledError) => {
+          this.errorHandlingService.handleUiError(errorKey, err);
+        });
   }
 
   getStaticManifest() {
