@@ -22,7 +22,7 @@ export class RetiroService {
     constructor(
         private configService: ConfigService,
         private http: ErrorHandlingHttpService) {
-       // this.apiEndpoint = this.configService.config.apiUrl + this.configService.config.apiConfigs.company.apiEndpoint;
+        this.apiEndpoint = this.configService.config.apiUrl + this.configService.config.apiConfigs.withdrawal.apiEndpoint;
     }
 
     getRetiros(filter: any): Observable<Retiro[]> {

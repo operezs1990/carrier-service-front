@@ -28,6 +28,10 @@
       "apiEndpoint": "orders/"
     },
 
+    "withdrawal": {
+      "apiEndpoint": "withdrawal/"
+    },
+
     "server": {
       "apiEndpoint": "http://54.167.87.144:3000/api/v1/"
     }
