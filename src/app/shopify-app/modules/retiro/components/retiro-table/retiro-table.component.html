@@ -1,4 +1,4 @@
-<div class=" padding-left-40px">
+<div class=" padding-left-40px" *ngIf="retiros">
   <div class="">
     <div class="padding-header-data">
       <div class="width-title">
@@ -61,25 +61,31 @@
                 <tr class="bg-white">
                   <th >{{'Número de Retiro'|translate}}</th>
                   <th >{{'Fecha'|translate}}</th>
-                  <th >{{'Hora'}}</th>
+                  <th >{{'Hora Desde'}}</th>
+                  <th >{{'Hora Hasta'}}</th>
                   <th >{{'Acciones'}}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let retiro of retirosList">
+                <tr *ngFor="let retiro of retiros">
                   <td>
                     <div class="">
-                      {{retiro.codigoRetiro}}
+                      {{retiro.withdrawalCode}}
                     </div>
                   </td>
                   <td>
                     <div class="">
-                      {{retiro.createdAt}}
+                      {{retiro.date | date:'shortDate'}}
                     </div>
                   </td>
                   <td>
                     <div class="">
-                      {{retiro.createdAt}}
+                      {{retiro.horaDesde}}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="">
+                      {{retiro.horaHasta}}
                     </div>
                   </td>
                   <td>

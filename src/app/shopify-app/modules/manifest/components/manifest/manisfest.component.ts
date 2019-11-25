@@ -43,10 +43,11 @@ export class ManifestComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.getStaticManifest();
     this.retiroId = this.activatedRoute.snapshot.data.retiroId;
+    console.log('this.retiroId', this.retiroId);
   }
 
   ngAfterViewInit() {
-    this.loadPage();
+   // this.loadPage();
   }
 
   loadPage() {

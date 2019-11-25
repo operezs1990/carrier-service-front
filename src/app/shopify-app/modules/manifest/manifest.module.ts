@@ -15,6 +15,7 @@ import { ManifestHeaderComponent } from './components/manifest-header/manifest-h
 import { ManifestRowsComponent } from './components/manifest-rows/manifest-rows.component';
 import { ManifestComponent } from './components/manifest/manisfest.component';
 import { ManifestFooterComponent } from './components/manifest-footer/manifest-footer.component';
+import { RetiroModule } from '../retiro/retiro.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ManifestFooterComponent } from './components/manifest-footer/manifest-f
     DateRangePickerModule,
     SlickCarouselModule,
     TranslateModule,
-    NgxBarcodeModule
+    NgxBarcodeModule,
+    RetiroModule,
   ],
   declarations: [
     ManifestComponent,

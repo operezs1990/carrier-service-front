@@ -1,8 +1,9 @@
+import { Admited } from "./admited";
 
 export class Retiro {
   id?: string;
   codigoAdmision?: string;
-  codigoRetiro?: string;
+  withdrawalCode?: string;
 
   contact: String;
   contactPhone: string;
@@ -16,6 +17,8 @@ export class Retiro {
   comuna?: string;
   region?: string;
   zip?: string;
+
+  orders?: Admited[];
 
   createdAt?: Date;
   updatedAt?: Date;

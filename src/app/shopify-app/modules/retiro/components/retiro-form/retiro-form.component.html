@@ -165,7 +165,7 @@
               <select class="form-control" id="formSelect1" formControlName="comuna" required data-toggle="tooltip"
                 data-placement="right" title="{{'SELECT_OPTION'| translate}}">
                 <option *ngFor="let comuna of comunaList" [value]="comuna.name">
-                  {{comuna.name}}
+                  {{comuna.name | titlecase}}
                 </option>
               </select>
             </div>

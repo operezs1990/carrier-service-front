@@ -9,5 +9,5 @@ export class Admited {
   subtotalPrice: string;
   totalPieces: number;
   totalPrice: string;
-  admission: Admission;
+  admission?: Admission;
 }

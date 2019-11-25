@@ -144,7 +144,7 @@
                             <select class="form-control" id="formSelect2" formControlName="comuna" required
                               data-toggle="tooltip" data-placement="right" title="{{'Seleccione una opción'| translate}}">
                               <option *ngFor="let comuna of comunaList" [value]="comuna.name">
-                                {{comuna.name}}
+                                {{comuna.name | titlecase}}
                               </option>
                             </select>
                             <small class="chankya-block"

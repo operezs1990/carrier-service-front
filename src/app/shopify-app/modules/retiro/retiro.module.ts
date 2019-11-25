@@ -33,6 +33,8 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
     RetiroTableComponent,
     RetiroFormComponent,
     NewRetiroComponent
-  ]
+  ],
+  exports: [
+  ],
 })
 export class RetiroModule { }

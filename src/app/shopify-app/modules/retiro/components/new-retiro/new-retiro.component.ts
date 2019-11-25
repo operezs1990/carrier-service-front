@@ -104,7 +104,9 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
    submitRetiro(data: Retiro) {
       this.retiroService.postRetiro(data).subscribe(response => {
          console.log('postRetiro', response);
-
+         if (!response) {
+            this.toastr.error('No hay Órdenes pendientes para realizar Retiro');
+         }
          this.close();
          this.translate.get('SUCCESS_MESSAGE').subscribe((res: string) => {
             this.toastr.success(res);
