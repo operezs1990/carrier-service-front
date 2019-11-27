@@ -34,7 +34,6 @@ export class OrdersDetailsComponent implements OnInit {
 
 
    onEditPedido() {
-      // this.router.navigate(['/company/edit', this.companyId]);
    }
 
 

@@ -17,12 +17,9 @@ export class OrdersService {
 
     apiEndpoint: string;
 
-    // public companyList = new BehaviorSubject<Company[]>();
-
     constructor(
         private configService: ConfigService,
         private http: ErrorHandlingHttpService) {
-       // this.apiEndpoint = this.configService.config.apiUrl + this.configService.config.apiConfigs.company.apiEndpoint;
     }
 
     getOrders(filter: any): Observable<Order[]> {
@@ -53,13 +50,6 @@ export class OrdersService {
     getStaticOrders(): Observable<Order[]> {
         return this.http.get<Order[]>('assets/data/orders.json').pipe(map(response => response));
     }
-
-    // getAllcompanies(): Observable<Order[]> {
-    //     return this.http.get<{ data: Order[] }>(this.apiEndpoint)
-    //         .pipe(map(response => {
-    //             return response.data;
-    //         }));
-    // }
 
 }
 

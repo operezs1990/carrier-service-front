@@ -19,12 +19,9 @@ export class ManifestService {
 
     apiEndpoint: string;
 
-    // public companyList = new BehaviorSubject<Company[]>();
-
     constructor(
         private configService: ConfigService,
         private http: ErrorHandlingHttpService) {
-      //  this.apiEndpoint = this.configService.config.apiUrl + this.configService.config.apiConfigs.company.apiEndpoint;
     }
 
     getManifestRecords(filter: any): Observable<ManifestRecord[]> {
@@ -55,13 +52,6 @@ export class ManifestService {
     getStaticManifestRecords(): Observable<ManifestRecord[]> {
         return this.http.get<ManifestRecord[]>('assets/data/manifest.json').pipe(map(response => response));
     }
-
-    // getAllcompanies(): Observable<Order[]> {
-    //     return this.http.get<{ data: Order[] }>(this.apiEndpoint)
-    //         .pipe(map(response => {
-    //             return response.data;
-    //         }));
-    // }
 
 }
 

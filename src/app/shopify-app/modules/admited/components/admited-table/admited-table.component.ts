@@ -126,54 +126,14 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onDetails(index: number) {
-    // const id = this.companies[index].id;
-    // this.router.navigate(['/company/details', id]);
   }
 
   generateLabel(order: Admited) {
     this.admitedService.getLabel(order, this.user.labelFormat);
   }
 
-  // onDelete(index: number) {
-  // 	const id = this.companies[index].id;
-  // 	this.companyService.deleteCompany(id).subscribe(response => {
-  // 		this.translate.get('DELETE_MESSAGE').subscribe((res: string) => {
-  // 			this.toastr.success(res);
-  // 		});
-  // 		this.loadPage();
-  // 	});
-  // }
-
-  deleteCompany(index: number) {
-    // const id = this.companies[index].id;
-    // this.companyService.deleteCompany(id).subscribe(response => {
-    // 	this.translate.get('DELETE_MESSAGE').subscribe((res: string) => {
-    // 		this.toastr.success(res);
-    // 	});
-    // 	this.loadPage();
-    // }, (error: HandledError) => {
-    // 	this.errorHandlingService.handleUiError(errorKey, error, 'regions');
-    // });
-  }
 
   onDelete(index: number) {
-    let confirm: string;
-    let message: string;
-    this.translate.get('CONFIRM_TEXT').subscribe((res: string) => {
-      confirm = res;
-    });
-    this.translate.get('CONFIRM_DELETE_COMPANY_MESSAGE').subscribe((res: string) => {
-      message = res;
-    });
-    this.confirmDialogService.confirm(confirm, message)
-      .then((confirmed) => {
-        if (confirmed) {
-          this.deleteCompany(index);
-        }
-      })
-      .catch(() => {
-        console.log('User dismissed the dialog')
-      });
   }
 
   clearDate() {

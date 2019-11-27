@@ -11,6 +11,9 @@ import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { OrdersService } from '../../services/orders.service';
 import { Order } from 'app/shopify-app/models/order';
+import { Retiro } from 'app/shopify-app/models/retiro';
+import { RetiroService } from 'app/shopify-app/modules/retiro/services/retiro.service';
+import { Admited } from 'app/shopify-app/models/admited';
 
 
 const errorKey = 'Error';
@@ -25,31 +28,30 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
 
   dateRange = new DateRange(new Date(''), new Date(''));
 
-  checkboxes: any;
-  date: Date;
   filter: FormGroup;
+
   rowsNumber = 1000;
 
   filterValueChanges: Subscription;
 
-  ordersList: Array<Order> = [];
+  retiros: Array<Retiro>;
 
-  orders: Array<Order>;
+  orders: Array<Admited> = [];
+
+  retiroMap = new Map();
 
 
 
   constructor(private confirmDialogService: ConfirmDialogService,
-    public ordersService: OrdersService,
     public errorHandlingService: ErrorHandlingService,
     public translate: TranslateService,
     public router: Router,
+    public retiroService: RetiroService,
     public activatedRoute: ActivatedRoute,
     private toastr: ToastrService) {
   }
 
   ngOnInit() {
-    // this.getStaticOrders();
-
     this.filter = this.createFilterFormGroup();
 
     this.filterValueChanges = this.filter.valueChanges.pipe(debounceTime(500))
@@ -60,7 +62,7 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngAfterViewInit() {
-    // this.loadPage();
+    this.loadPage();
   }
 
   ngOnDestroy() {
@@ -77,18 +79,29 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
 
   loadPage() {
     this.rowsNumber = this.filter.value.rowsNumber;
-    this.getOrders();
+    this.getRetiros();
   }
 
-  getOrders() {
-    this.ordersService.getOrders(
+  getRetiros() {
+    this.retiroService.getRetiros(
       Object.assign({}, this.filter.value))
-      .subscribe((response: Order[]) => {
-        this.orders = response;
+      .subscribe((response: Retiro[]) => {
+        this.retiros = response;
+        console.log('this.retiros', this.retiros);
+        this.getOrderRetired();
       },
         (err: HandledError) => {
           this.errorHandlingService.handleUiError(errorKey, err);
         });
+  }
+
+  getOrderRetired() {
+    this.retiros.forEach((retiro, index) => {
+      this.orders = this.orders.concat(retiro.orders);
+      retiro.orders.forEach( order => {
+        this.retiroMap.set(order.id, index);
+      })
+    });
   }
 
   onFilter() {
@@ -104,63 +117,15 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   onDetails(index: number) {
-    // const id = this.companies[index].id;
-    // this.router.navigate(['/company/details', id]);
   }
 
   onEdit(index: number) {
-    // const id = this.companies[index].id;
-    // this.router.navigate(['/company/edit', id]);
   }
 
-  // onDelete(index: number) {
-  // 	const id = this.companies[index].id;
-  // 	this.companyService.deleteCompany(id).subscribe(response => {
-  // 		this.translate.get('DELETE_MESSAGE').subscribe((res: string) => {
-  // 			this.toastr.success(res);
-  // 		});
-  // 		this.loadPage();
-  // 	});
-  // }
-
-  deleteCompany(index: number) {
-    // const id = this.companies[index].id;
-    // this.companyService.deleteCompany(id).subscribe(response => {
-    // 	this.translate.get('DELETE_MESSAGE').subscribe((res: string) => {
-    // 		this.toastr.success(res);
-    // 	});
-    // 	this.loadPage();
-    // }, (error: HandledError) => {
-    // 	this.errorHandlingService.handleUiError(errorKey, error, 'regions');
-    // });
-  }
 
   onDelete(index: number) {
-    let confirm: string;
-    let message: string;
-    this.translate.get('CONFIRM_TEXT').subscribe((res: string) => {
-      confirm = res;
-    });
-    this.translate.get('CONFIRM_DELETE_COMPANY_MESSAGE').subscribe((res: string) => {
-      message = res;
-    });
-    this.confirmDialogService.confirm(confirm, message)
-      .then((confirmed) => {
-        if (confirmed) {
-          this.deleteCompany(index);
-        }
-      })
-      .catch(() => {
-        console.log('User dismissed the dialog')
-      });
   }
 
-  clearDate() {
-    this.dateRange = new DateRange(new Date(''), new Date(''));
-    this.filter.value.rangeDate = false;
-    this.loadPage();
-
-  }
 
   filterDate() {
     if (this.dateRange.end.toDateString() !== 'Invalid Date') {
@@ -170,13 +135,5 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
 
   }
 
-  getStaticOrders() {
-    this.ordersService.getStaticOrders().subscribe(res => {
-      this.ordersList = res;
-    },
-      err => console.log(err),
-      () => this.ordersList
-    );
-  }
 
 }

@@ -19,12 +19,9 @@ export class LabeltService {
 
     apiEndpoint: string;
 
-    // public companyList = new BehaviorSubject<Company[]>();
-
     constructor(
         private configService: ConfigService,
         private http: ErrorHandlingHttpService) {
-       // this.apiEndpoint = this.configService.config.apiUrl + this.configService.config.apiConfigs.company.apiEndpoint;
     }
 
     getLabels(filter: any): Observable<PesLabel[]> {
@@ -55,13 +52,6 @@ export class LabeltService {
     getStaticLabel(): Observable<PesLabel> {
         return this.http.get<PesLabel>('assets/data/labels.json').pipe(map(response => response));
     }
-
-    // getAllcompanies(): Observable<Order[]> {
-    //     return this.http.get<{ data: Order[] }>(this.apiEndpoint)
-    //         .pipe(map(response => {
-    //             return response.data;
-    //         }));
-    // }
 
 }
 

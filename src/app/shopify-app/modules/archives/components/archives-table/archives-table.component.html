@@ -18,41 +18,44 @@
             <table class="table border-collapse-inherit table-hover table-striped table-bordered ">
               <thead>
                 <tr class="bg-white">
-                  <th >{{'Productos'|translate}}</th>
-                  <th >{{'Cantidad'|translate}}</th>
-                  <th >{{'Importe'}}</th>
-                  <th >{{'Destino'}}</th>
-                  <th >{{'Acciones'}}</th>
+                  <th>{{'No'|translate}}</th>
+                  <th>{{'No Orden'}}</th>
+                  <th>{{'Envío'}}</th>
+                  <th>{{'Código Retiro'|translate}}</th>
+                  <th>{{'Fecha Retiro'|translate}}</th>
+                  <th>{{'Cliente'}}</th>
+                  <th>{{'Teléfono Cliente'}}</th>
+                  <th>{{'Correo Cliente'}}</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let order of ordersList">
+                <tr *ngFor="let order of orders, let i = index">
                   <td>
-                    <div class="" *ngFor="let item of order.rate.items">
-                      {{item.name}}
-                    </div>
+                    {{ i + 1 }}
                   </td>
                   <td>
-                    <div class="" *ngFor="let item of order.rate.items">
-                      {{item.quantity}}
-                    </div>
+                    {{order.orderNumber}}
                   </td>
                   <td>
-                    <div class="">
+                    {{(order.serviceCode === '07') ? 'DOMICILIO' : 'SUCURSAL'}}
+                  </td>
+                  <td>
+                    {{retiros[retiroMap.get(order.id)].withdrawalCode}}
+                  </td>
+                  <td>
+                    {{retiros[retiroMap.get(order.id)].date | date : 'dd/MM/yy'}}
+                  </td>
+                  <td>
+                    {{order.receiverName}}
+                  </td>
+                  <td>
+                    {{order.receiverContactPhone}}
+                  </td>
+                  <td>
+                    {{order.email}}
+                  </td>
 
-                    </div>
-                  </td>
-                  <td>
-                    <div class="">
-                      <span>
-                        <small>{{order.rate.destination.address1}}</small>,
-                        <small>{{order.rate.destination.city}}</small>,
-                        <small>{{order.rate.destination.province}}</small>,
-                        <small>{{order.rate.destination.postal_code}}</small>
-                      </span>
-                    </div>
-                  </td>
-                  <td>
+                  <!-- <td>
                     <div class="">
                       <a data-toggle="tooltip" data-placement="top" title="{{'Detalles'|translate}}"
                         class="mr-3 text-muted" href="javascript:void(0)" (click)="onDetails(rowIndex)">
@@ -60,11 +63,11 @@
                       <a data-toggle="tooltip " data-placement="top" title="{{'Aceptar'|translate}}"
                         class="mr-3 text-muted" href="javascript:void(0)" (click)="onEdit(rowIndex)">
                         <i class="fa fa-check-circle font-size-24px" aria-hidden="true"></i></a>
-                      <!-- <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
+                      <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
                               href="javascript:void(0)" (click)="onDelete(rowIndex)">
-                              <i class="fa fa-times font-size-24px" aria-hidden="true"></i></a> -->
+                              <i class="fa fa-times font-size-24px" aria-hidden="true"></i></a>
                     </div>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>

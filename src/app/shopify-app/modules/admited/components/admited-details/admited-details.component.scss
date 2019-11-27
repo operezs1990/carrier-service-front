@@ -17,11 +17,6 @@
         padding: 0px 0px 0px;
     }
 
-    .company-details{
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-    }
-
     .button-font {
         font-weight: 300;
         font-size: 20px;
@@ -50,12 +45,6 @@
     .width-button {
         width: 35%;
     }
-
-    .company-details{
-        padding-left: 30px !important;
-        padding-right: 50px !important;
-    }
-
     .button-font {
         font-weight: 300;
         font-size: 24px;
@@ -174,11 +163,6 @@
     border-radius: 0px !important;
 }
 
-.btn-company {
-    color: #fff;
-    background-color: #D42948;
-    border-color: #D42948;
-}
 
 // ::ng-deep datatable-header-cell{
 //     padding-left: 20px !important;

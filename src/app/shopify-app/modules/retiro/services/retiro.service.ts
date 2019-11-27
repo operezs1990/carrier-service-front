@@ -17,8 +17,6 @@ export class RetiroService {
 
     apiEndpoint: string;
 
-    // public companyList = new BehaviorSubject<Company[]>();
-
     constructor(
         private configService: ConfigService,
         private http: ErrorHandlingHttpService) {
