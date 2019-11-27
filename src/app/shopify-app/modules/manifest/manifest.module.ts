@@ -8,7 +8,6 @@ import { DateRangePickerModule } from '@uiowa/date-range-picker';
 import { ArchwizardModule } from 'ng2-archwizard';
 
 import { SlickCarouselModule } from 'ngx-slick-carousel'
-import { ManifestTableComponent } from './components/manifest-table/manisfest-table.component';
 import { ManifestRoutingModule } from './manifest-routing.module';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { ManifestHeaderComponent } from './components/manifest-header/manifest-header.component';
@@ -35,7 +34,6 @@ import { RetiroModule } from '../retiro/retiro.module';
   ],
   declarations: [
     ManifestComponent,
-    ManifestTableComponent,
     ManifestHeaderComponent,
     ManifestRowsComponent,
     ManifestFooterComponent

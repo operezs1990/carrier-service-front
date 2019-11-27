@@ -4,6 +4,7 @@ import { ConfigResolveService } from 'app/config/services/config-resolve.service
 import { IdResolveService } from 'app/routing/services/id-resolve.service';
 import { RetiroTableComponent } from './components/retiro-table/retiro-table.component';
 import { NewRetiroComponent } from './components/new-retiro/new-retiro.component';
+import { RetiroDetailsComponent } from './components/retiro-details/retiro-details.component';
 
 const routes: Routes = [
   {
@@ -25,15 +26,15 @@ const routes: Routes = [
       config: ConfigResolveService,
     },
   },
-  // {
-  //   path: 'details/:id',
-  //   component: OrdersDetailsComponent,
-  //   resolve: {
-  //     config: ConfigResolveService,
-  //     pedidoId: IdResolveService,
-  //   },
-  //   data: { closeRouteCommand: ['../'] }
-  // },
+  {
+    path: 'details/:id',
+    component: RetiroDetailsComponent,
+    resolve: {
+      config: ConfigResolveService,
+      retiroId: IdResolveService,
+    },
+    data: { closeRouteCommand: ['../'] }
+  },
 ];
 
 @NgModule({

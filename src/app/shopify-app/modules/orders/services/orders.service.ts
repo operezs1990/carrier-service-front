@@ -41,14 +41,6 @@ export class OrdersService {
             queryParams += queryParams.length > 0 ? '&' : '?';
             queryParams += `name=${filter.name}`;
         }
-        if (filter.size && filter.size !== '') {
-            queryParams += queryParams.length > 0 ? '&' : '?';
-            queryParams += `companySizeId=${filter.size}`;
-        }
-        if (filter.sector && filter.sector !== '') {
-            queryParams += queryParams.length > 0 ? '&' : '?';
-            queryParams += `activitySectorId=${filter.sector}`;
-        }
         if (filter.rangeDate) {
             queryParams += queryParams.length > 0 ? '&' : '?';
             queryParams += `startDate=${new Date(filter.rangeDate.start).toISOString() }` + '&';

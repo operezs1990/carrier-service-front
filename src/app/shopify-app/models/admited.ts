@@ -1,6 +1,7 @@
 import { Admission } from "./admission";
 
 export class Admited {
+  id?: string;
   kg: number;
   orderNumber: number;
   receiverAddress: string;

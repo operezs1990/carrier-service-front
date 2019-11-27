@@ -1,4 +1,4 @@
-<div class="">
+<div class="" *ngIf="retiro">
   <table class="mb-0 font-style">
     <thead>
       <tr>
@@ -12,42 +12,42 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let manifest of manifestList; let i = index;">
+      <tr *ngFor="let order of retiro.orders; let i = index;">
         <td class="width-4pct text-align-center">
           <div class="">
-            {{manifest.number}}
+            {{i + 1}}
           </div>
         </td>
         <td class="">
           <div class="">
-            {{manifest.product}}
+            {{(order.serviceCode === '07') ? 'PAQUETE EXPRES DOMICILIO' : 'PAQUETE EXPRES SUCURSAL'}}
           </div>
         </td>
         <td class="">
           <div class="">
-            {{manifest.addressee}}
+            {{order.receiverContactName}}
           </div>
         </td>
         <td class="">
           <div class="">
-            {{manifest.commune}}
+            {{order.admission.comunaDestino}}
           </div>
         </td>
         <td class="">
           <div class="">
-            {{manifest.reference}}
+            {{order.admission.numeroEnvio}}
           </div>
         </td>
         <td class="">
           <div class="display-flex align-items-center justify-content-center ">
-            <ngx-barcode [bc-value]="manifest.expNumber" [bc-height]="25" [bc-display-value]="true" [bc-width]=""
+            <ngx-barcode [bc-value]="order.admission.codigoEncaminamiento" [bc-height]="25" [bc-display-value]="true" [bc-width]=""
               [bc-font-size]="12">
             </ngx-barcode>
           </div>
         </td>
         <td class="">
           <div class="float-right padding-right-15px">
-            {{manifest.packages}}
+            1
           </div>
         </td>
       </tr>

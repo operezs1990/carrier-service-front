@@ -98,19 +98,19 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
    }
 
    close() {
-      //  this.router.navigate(this.activatedRoute.snapshot.data.closeRouteCommand, {relativeTo: this.activatedRoute});
+      this.router.navigate(['./']);
    }
 
    submitRetiro(data: Retiro) {
       this.retiroService.postRetiro(data).subscribe(response => {
-         console.log('postRetiro', response);
          if (!response) {
             this.toastr.error('No hay Órdenes pendientes para realizar Retiro');
+         } else {
+            this.translate.get('SUCCESS_MESSAGE').subscribe((res: string) => {
+               this.toastr.success(res);
+            });
          }
          this.close();
-         this.translate.get('SUCCESS_MESSAGE').subscribe((res: string) => {
-            this.toastr.success(res);
-         });
       },
          (error: HandledError) => {
             this.errorHandlingService.handleUiError(errorKey, error);

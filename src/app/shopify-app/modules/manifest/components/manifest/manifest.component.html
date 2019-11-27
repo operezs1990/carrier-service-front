@@ -17,15 +17,15 @@
 </div>
 
 <div class="padding-100px page-style" id="contentToConvert" #content>
-  <div>
+  <div *ngIf="retiro && user">
     <div class="display-flex justify-content-center">
       <h3 class="font-style">MANIFIESTO RESUMEN</h3>
     </div>
     <div>
-      <app-manifest-header></app-manifest-header>
+      <app-manifest-header [retiro] = "retiro" [user] = "user"></app-manifest-header>
     </div>
     <div class="padding-top-15px">
-      <app-manifest-rows *ngIf="manifestList" [manifestList]="manifestList">
+      <app-manifest-rows [retiro] = "retiro">
       </app-manifest-rows>
     </div>
     <div class="padding-top-15px">

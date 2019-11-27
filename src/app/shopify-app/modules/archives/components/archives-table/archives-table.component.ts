@@ -72,8 +72,6 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
     group['rowsNumber'] = new FormControl(this.rowsNumber);
     group['rangeDate'] = new FormControl('');
     group['name'] = new FormControl('');
-    group['size'] = new FormControl('');
-    group['sector'] = new FormControl('');
     return new FormGroup(group);
   }
 

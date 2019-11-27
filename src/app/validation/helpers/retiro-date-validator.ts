@@ -2,8 +2,10 @@ import { AbstractControl } from '@angular/forms';
 
 export function retiroDate(control: AbstractControl) {
         const inputValue = new Date(control.value);
-        const dayOfWeek = inputValue.getDay();
-        if (dayOfWeek > 4) {
+        const valueInput = inputValue.getTime();
+        const date = new Date();
+        const valueDate = date.getTime();
+        if (valueInput <= valueDate) {
             return { badDay: true };
         }
         return null;

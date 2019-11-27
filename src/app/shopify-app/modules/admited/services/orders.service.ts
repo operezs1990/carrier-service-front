@@ -1,13 +1,16 @@
 
 import { Injectable } from '@angular/core';
 //
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 //
 import { ConfigService } from '../../../../config/services/config.service';
 import { ErrorHandlingHttpService } from '../../../../error-handling/services/error-handling-http.service';
 import { Order } from 'app/shopify-app/models/order';
 import { Admited } from 'app/shopify-app/models/admited';
 import { map } from 'rxjs/operators';
+
+import { saveAs } from 'file-saver';
+import { HttpClient } from '@angular/common/http';
 
 export const ASCENDING = 'asc';
 
@@ -18,12 +21,14 @@ export class AdmitedService {
 
     apiEndpoint: string;
 
-    // public companyList = new BehaviorSubject<Company[]>();
+    apiEndpointLabel: string
 
     constructor(
         private configService: ConfigService,
-        private http: ErrorHandlingHttpService) {
+        private http: ErrorHandlingHttpService,
+        private httpClient: HttpClient) {
         this.apiEndpoint = this.configService.config.apiUrl + this.configService.config.apiConfigs.orders.apiEndpoint;
+        this.apiEndpointLabel = this.configService.config.apiUrl + this.configService.config.apiConfigs.label.apiEndpoint;
     }
 
     getAdmiteds(filter: any): Observable<Admited[]> {
@@ -35,6 +40,19 @@ export class AdmitedService {
         return this.http.get<Admited>(this.apiEndpoint + id);
     }
 
+    getLabel(order: Admited, labelFormat: string) {
+        const myUrl = this.apiEndpointLabel + '?orderId=' + order.id;
+        const mediaType = 'application/pdf';
+        this.httpClient.post(myUrl, { location: `${order.orderNumber}` + '.' + labelFormat }, { responseType: 'blob'}).subscribe(
+            (response) => {
+                const blob = new Blob([response], { type: mediaType });
+                saveAs(blob, `${order.orderNumber}` + '.' + labelFormat);
+            },
+            e => { throwError(e); }
+        );
+
+    }
+
     formatQueryParams(filter?: any, sortColumn?: string, sortDirection?: string, pageIndex?: number, pageSize?: number): string {
         let queryParams = '';
 
@@ -42,17 +60,9 @@ export class AdmitedService {
             queryParams += queryParams.length > 0 ? '&' : '?';
             queryParams += `name=${filter.name}`;
         }
-        if (filter.size && filter.size !== '') {
-            queryParams += queryParams.length > 0 ? '&' : '?';
-            queryParams += `companySizeId=${filter.size}`;
-        }
-        if (filter.sector && filter.sector !== '') {
-            queryParams += queryParams.length > 0 ? '&' : '?';
-            queryParams += `activitySectorId=${filter.sector}`;
-        }
         if (filter.rangeDate) {
             queryParams += queryParams.length > 0 ? '&' : '?';
-            queryParams += `startDate=${new Date(filter.rangeDate.start).toISOString() }` + '&';
+            queryParams += `startDate=${new Date(filter.rangeDate.start).toISOString()}` + '&';
             queryParams += `endDate=${new Date(filter.rangeDate.end).toISOString()}`;
         }
 

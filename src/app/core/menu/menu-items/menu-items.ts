@@ -49,44 +49,7 @@ const MENUITEMS = [
       icon: 'fa fa-archive icons',
    },
    // {
-   //    state: 'label',
-   //    name: 'Label',
-   //    type: 'link',
-   //    icon: 'fa fa-calendar-check-o icons',
-   // },
-   // {
-   //    state: 'company',
-   //    name: 'COMPANIES',
-   //    type: 'link',
-   //    icon: 'fa fa-bank icons',
-   // },
-   // {
-   //    state: 'questionnaire',
-   //    name: 'QUESTIONNAIRES',
-   //    type: 'link',
-   //    icon: 'fa fa-calendar-check-o icons',
-   // },
-   
-   // {
-   //    state: 'library',
-   //    name: 'LIBRARY',
-   //    type: 'link',
-   //    icon: 'fa fa-archive icons',
-   // },
-   // {
-   //    state: 'statistics',
-   //    name: 'Stastistiques',
-   //    type: 'link',
-   //    icon: 'fa fa-pie-chart icons',
-   // },
-   // {
-   //    state: 'knowledge',
-   //    name: 'KNOWLEDGE',
-   //    type: 'link',
-   //    icon: 'fa fa-graduation-cap icons',
-   // },
-   // {
-   //    state: 'https://digipilotebackoffice.z28.web.core.windows.net/login',
+   //    state: '',
    //    name: 'Backoffice',
    //    type: 'external_link',
    //    icon: 'fa fa-cogs icons',

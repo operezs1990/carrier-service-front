@@ -1,7 +1,7 @@
 <div class="border-1px height-130px">
   <div class="display-flex flex-grow height-100pct">
     <div class="display-flex justify-content-center align-items-center width-25pct">
-      <img src="assets/img/digipilote/Logo_Correos_Chile.jpg" width="225">
+      <img src="assets/img/shopify/Logo_Correos_Chile.jpg" width="225">
     </div>
     <div class="width-30pct font-style">
       <div class="display-flex flex-grow">
@@ -21,13 +21,13 @@
         </div>
         <div class="padding-left-30px">
           <div class="padding-top-10px">
-            RUT_CLIENTE
+            {{retiro.rut}}
           </div>
           <div class="padding-top-10px">
-            NOMBRE_CLIENTE
+            {{retiro.contact }}
           </div>
           <div class="padding-top-10px">
-            CODIGO_SAP
+            {{user.idApiChile}}
           </div>
           <div class="padding-top-10px">
             WEB SERVICE
@@ -50,13 +50,13 @@
         </div>
         <div class="padding-left-30px">
           <div class="padding-top-10px">
-            YYDDHHNNSNSM23
+            {{manifestNumber}}
           </div>
           <div class="padding-top-10px">
-            10/27/2016
+            {{date | date:'dd/MM/yyyy'}}
           </div>
           <div class="padding-top-10px">
-            SANTIAGO
+            {{retiro.comuna}}
           </div>
         </div>
       </div>

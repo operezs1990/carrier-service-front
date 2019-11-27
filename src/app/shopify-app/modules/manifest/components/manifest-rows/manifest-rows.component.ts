@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Manifest } from 'app/shopify-app/models/manifest';
+import { Retiro } from 'app/shopify-app/models/retiro';
 
 
 
@@ -13,7 +14,7 @@ declare var $: any;
 })
 export class ManifestRowsComponent implements OnInit {
 
-  @Input() manifestList: Array<Manifest>;
+  @Input() retiro: Retiro;
 
   arrayTemp: any[] = [];
 
@@ -21,8 +22,8 @@ export class ManifestRowsComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.manifestList.length < 16) {
-      for (let i = this.manifestList.length; i < 16; i++) {
+    if (this.retiro.orders.length < 16) {
+      for (let i = this.retiro.orders.length; i < 16; i++) {
         this.arrayTemp.push('i');
       }
     }

@@ -34,14 +34,7 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   retirosList: Array<Retiro>;
 
-
   retiros: Array<Retiro>;
-
-  sizeList: Array<any> = [];
-
-  sectorList: Array<any> = [];
-
-
 
   constructor(private confirmDialogService: ConfirmDialogService,
     public retiroService: RetiroService,
@@ -85,8 +78,6 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
     const group: any = {};
     group['rangeDate'] = new FormControl('');
     group['name'] = new FormControl('');
-    group['size'] = new FormControl('');
-    group['sector'] = new FormControl('');
     return new FormGroup(group);
   }
 
@@ -99,7 +90,6 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
       Object.assign({}, this.filter.value))
       .subscribe((response: Retiro[]) => {
         this.retiros = response;
-        console.log('this.retiros', this.retiros);
       },
         (err: HandledError) => {
           this.errorHandlingService.handleUiError(errorKey, err);
@@ -118,13 +108,12 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.loadPage();
   }
 
-  onDetails(index: number) {
-    // const id = this.companies[index].id;
-    // this.router.navigate(['/company/details', id]);
+  onDetails(id: number) {
+    this.router.navigate(['/carrier/retiro/details', id]);
   }
 
   generateManifest(id: string) {
-    this.router.navigate(['/carrier/manifest/manifest-doc', id]);
+   this.router.navigate(['/carrier/manifest', id]);
   }
 
   // onDelete(index: number) {

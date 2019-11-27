@@ -14,6 +14,7 @@ import { Retiro } from 'app/shopify-app/models/retiro';
 import { retiroDate } from 'app/validation/helpers/retiro-date-validator';
 import { retiroHourEnd } from 'app/validation/helpers/retiro-hourEnd-validator';
 import { retiroHourIni } from 'app/validation/helpers/retiro-hourIni-validator';
+import { retiroDateRange } from 'app/validation/helpers/retiro-date-range-validator';
 
 
 
@@ -74,7 +75,7 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
       this.formGroup = this.fb.group({
          contact: [this.data.contact, Validators.compose([Validators.required])],
          contactPhone: [this.data.contactPhone, Validators.compose([Validators.required])],
-         date: ['', Validators.compose([Validators.required, retiroDate])],
+         date: ['', Validators.compose([Validators.required, retiroDate, retiroDateRange])],
          horaDesde: ['', Validators.compose([Validators.required, retiroHourIni])],
          horaHasta: ['', Validators.compose([Validators.required, retiroHourEnd])],
 

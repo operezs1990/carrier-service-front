@@ -55,9 +55,14 @@
               {{'Debe incluir una fecha para el retiro'|translate}}
             </small>
             <small class="chankya-block"
-              *ngIf="formGroup.controls['date'].errors?.badDay && (formGroup.controls['date'].touched ||  wasSubmitted)"
+              *ngIf="formGroup.controls['date'].errors?.badDayRange && (formGroup.controls['date'].touched ||  wasSubmitted)"
               class="text-danger">
               {{'Debe incluir una día entre Lunes y Viernes'|translate}}
+            </small>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['date'].errors?.badDay && (formGroup.controls['date'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir una fecha posterior al día actual'|translate}}
             </small>
           </div>
 

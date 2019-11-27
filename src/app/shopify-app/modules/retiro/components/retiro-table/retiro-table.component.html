@@ -28,30 +28,6 @@
 
   <div class="user-manage-list">
     <div class="chk-block mb-0">
-      <!-- <div class="chk-block-title px-4">
-        <div class="d-block d-sm-flex justify-content-between align-items-center">
-          <div class="d-flex justify-content-start align-items-center mb-sm-0 mb-3 row padding-left-30px">
-            <div class="form-group form-field mr-3 mb-0 text-nowrap">
-              <input formControlName="name" type="text" class="form-control"
-                placeholder="{{'COMPANY_NAME'|translate}}...">
-            </div>
-            <div class="form-group form-field mr-3 mb-0 text-nowrap">
-              <select class="form-control" formControlName="size">
-                <option [value]="''" selected>{{'ALL_SIZE'|translate}}</option>
-                <option *ngFor="let size of sizeList" [value]="size.id">{{size.name}}</option>
-              </select>
-            </div>
-            <div class="form-group form-field mr-3 mb-0 text-nowrap">
-              <select class="form-control" formControlName="sector">
-                <option [value]="''" selected>{{'ALL_SECTOR'|translate}}</option>
-                <option *ngFor="let sector of sectorList" [value]="sector.id">{{sector.sector}}</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-
       <div class="chk-block-content">
         
         <div class="table-responsive">
@@ -90,11 +66,11 @@
                   </td>
                   <td>
                     <div class="">
-                      <!-- <a data-toggle="tooltip" data-placement="top" title="{{'Detalles'|translate}}"
-                        class="mr-3 text-muted" href="javascript:void(0)" (click)="onDetails(rowIndex)">
-                        <i class="fa fa-eye font-size-24px" aria-hidden="true"></i></a> -->
+                      <a data-toggle="tooltip" data-placement="top" title="{{'Detalles'|translate}}"
+                        class="mr-3 text-muted" href="javascript:void(0)" (click)="onDetails(retiro.id)">
+                        <i class="fa fa-eye font-size-24px" aria-hidden="true"></i></a>
                       <a data-toggle="tooltip " data-placement="top" title="{{'Generar Manifiesto'|translate}}"
-                        class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="generateManifest(retiro.id)">
+                        class="mr-3 text-muted padding-left-30px"  (click)="generateManifest(retiro.id)">
                         <i class="fa fa-edit font-size-24px" aria-hidden="true"></i></a>
                       <!-- <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
                               href="javascript:void(0)" (click)="onDelete(rowIndex)">

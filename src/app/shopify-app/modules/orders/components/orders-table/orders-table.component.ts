@@ -33,13 +33,7 @@ export class OrdersTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ordersList: Array<Order>;
 
-
   orders: Array<Order>;
-
-  sizeList: Array<any> = [];
-
-  sectorList: Array<any> = [];
-
 
   constructor(private confirmDialogService: ConfirmDialogService,
     public ordersService: OrdersService,
@@ -64,7 +58,6 @@ export class OrdersTableComponent implements OnInit, AfterViewInit, OnDestroy {
   getStaticOrders() {
     this.ordersService.getStaticOrders().subscribe(res => {
       this.ordersList = res;
-      console.log(this.ordersList);
     },
       err => console.log(err),
       () => this.ordersList
@@ -83,16 +76,12 @@ export class OrdersTableComponent implements OnInit, AfterViewInit, OnDestroy {
     const group: any = {};
     group['rangeDate'] = new FormControl('');
     group['name'] = new FormControl('');
-    group['size'] = new FormControl('');
-    group['sector'] = new FormControl('');
     return new FormGroup(group);
   }
 
   loadPage() {
     this.getOrders();
   }
-
-  
 
   getOrders() {
     this.ordersService.getOrders(

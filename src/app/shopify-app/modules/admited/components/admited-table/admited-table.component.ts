@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,6 +12,10 @@ import { debounceTime } from 'rxjs/operators';
 import { AdmitedService } from '../../services/orders.service';
 import { Order } from 'app/shopify-app/models/order';
 import { Admited } from 'app/shopify-app/models/admited';
+import { Retiro } from 'app/shopify-app/models/retiro';
+import { UserService } from 'app/shopify-app/modules/user/services/user.service';
+import { AuthService } from 'app/authentication/services/auth.service';
+import { User } from 'app/shopify-app/models/user';
 
 
 const errorKey = 'Error';
@@ -35,8 +39,12 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ordersList: Array<Order> = [];
 
-  orders: Array<Admited>;
+  orders: Array<Admited> = [];
 
+  @Input() retiro: Retiro;
+
+  user: User;
+  userId: string;
 
 
   constructor(private confirmDialogService: ConfirmDialogService,
@@ -44,24 +52,38 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
     public errorHandlingService: ErrorHandlingService,
     public translate: TranslateService,
     public router: Router,
+    public authService: AuthService,
+    public userService: UserService,
     public activatedRoute: ActivatedRoute,
     private toastr: ToastrService) {
   }
 
   ngOnInit() {
     // this.getStaticOrders();
-
+    this.userId = this.authService.currentUser.id;
     this.filter = this.createFilterFormGroup();
 
     this.filterValueChanges = this.filter.valueChanges.pipe(debounceTime(500))
       .subscribe(change => this.onFilter());
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="popover"]').popover();
+    this.getUser();
 
   }
 
+  getUser() {
+    this.userService.getUser(this.userId).subscribe(response => {
+       this.user = response;
+    },
+       (error: HandledError) => this.errorHandlingService.handleUiError(errorKey, error)
+    );
+ }
+
   ngAfterViewInit() {
-    this.loadPage();
+    this.rowsNumber = this.filter.value.rowsNumber;
+    if (!this.retiro) {
+      this.loadPage();
+    }
   }
 
   ngOnDestroy() {
@@ -73,13 +95,10 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
     group['rowsNumber'] = new FormControl(this.rowsNumber);
     group['rangeDate'] = new FormControl('');
     group['name'] = new FormControl('');
-    group['size'] = new FormControl('');
-    group['sector'] = new FormControl('');
     return new FormGroup(group);
   }
 
   loadPage() {
-    this.rowsNumber = this.filter.value.rowsNumber;
     this.getOrders();
   }
 
@@ -88,7 +107,6 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
       Object.assign({}, this.filter.value))
       .subscribe((response: Admited[]) => {
         this.orders = response;
-        console.log('this.orders', this.orders);
       },
         (err: HandledError) => {
           this.errorHandlingService.handleUiError(errorKey, err);
@@ -112,8 +130,8 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.router.navigate(['/company/details', id]);
   }
 
-  generateLabel(id: string) {
-      this.router.navigate(['/carrier/label/', id]);
+  generateLabel(order: Admited) {
+    this.admitedService.getLabel(order, this.user.labelFormat);
   }
 
   // onDelete(index: number) {

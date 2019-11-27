@@ -29,6 +29,9 @@ import { AdmitedDetailsComponent } from './components/admited-details/admited-de
   declarations: [
     AdmitedTableComponent,
     AdmitedDetailsComponent,
+  ],
+  exports: [
+    AdmitedTableComponent,
   ]
 })
 export class AdmitedModule { }

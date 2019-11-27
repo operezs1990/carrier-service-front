@@ -13,7 +13,7 @@ const routes: Routes = [
         loadChildren: './modules/admited/admited.module#AdmitedModule'
       },
       {
-        path: 'manifest',
+        path: 'manifest/:id',
         loadChildren: './modules/manifest/manifest.module#ManifestModule'
       },
       // {

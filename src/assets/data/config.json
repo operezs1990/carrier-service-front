@@ -27,9 +27,11 @@
     "orders": {
       "apiEndpoint": "orders/"
     },
-
     "withdrawal": {
       "apiEndpoint": "withdrawal/"
+    },
+    "label": {
+      "apiEndpoint": "label/"
     },
 
     "server": {

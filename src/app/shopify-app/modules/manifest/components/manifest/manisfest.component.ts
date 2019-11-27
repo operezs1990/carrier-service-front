@@ -7,11 +7,14 @@ import * as jsPDF from 'jspdf';
 
 import html2canvas from 'html2canvas';
 import { ManifestRecord } from 'app/shopify-app/models/manifest-rows';
-import { Route, ActivatedRoute } from '@angular/router';
+import { Route, ActivatedRoute, Router } from '@angular/router';
 import { RetiroService } from 'app/shopify-app/modules/retiro/services/retiro.service';
 import { Retiro } from 'app/shopify-app/models/retiro';
 import { HandledError } from 'app/error-handling/models/handled-error';
 import { ErrorHandlingService } from 'app/error-handling/services/error-handling.service';
+import { UserService } from 'app/shopify-app/modules/user/services/user.service';
+import { AuthService } from 'app/authentication/services/auth.service';
+import { User } from 'app/shopify-app/models/user';
 
 
 const errorKey = 'Error';
@@ -31,11 +34,17 @@ export class ManifestComponent implements OnInit, AfterViewInit {
   retiroId: string;
 
   retiro: Retiro;
+
+  userId: string;
+
+  user: User;
   
   constructor(public manifestService: ManifestService,
+    public userService: UserService,
     public retiroService: RetiroService,
     public translate: TranslateService,
-    public route: Route,
+    public authService: AuthService,
+    public router: Router,
     public activatedRoute: ActivatedRoute,
     public errorHandlingService: ErrorHandlingService) {
   }
@@ -43,11 +52,11 @@ export class ManifestComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.getStaticManifest();
     this.retiroId = this.activatedRoute.snapshot.data.retiroId;
-    console.log('this.retiroId', this.retiroId);
+    this.userId = this.authService.currentUser.id;
   }
 
   ngAfterViewInit() {
-   // this.loadPage();
+    this.loadPage();
   }
 
   loadPage() {
@@ -57,12 +66,20 @@ export class ManifestComponent implements OnInit, AfterViewInit {
   getRetiro() {
     this.retiroService.getRetiro(this.retiroId).subscribe((response: Retiro) => {
         this.retiro = response;
-        console.log('this.retiro', this.retiro);
+        this.getUser();
       },
         (err: HandledError) => {
           this.errorHandlingService.handleUiError(errorKey, err);
         });
   }
+
+  getUser() {
+    this.userService.getUser(this.userId).subscribe(response => {
+       this.user = response;
+    },
+       (error: HandledError) => this.errorHandlingService.handleUiError(errorKey, error)
+    );
+ }
 
   getStaticManifest() {
     this.manifestService.getStaticManifestRecords().subscribe(res => {

@@ -1,0 +1,119 @@
+<div class="retiro-details" *ngIf="retiro">
+  <div class="padding-top-25px padding-bottom-60px">
+    <div class="padding-header-data">
+      <div class="display-flex flex-wrap">
+        <div class="width-title">
+          <div class="d-flex align-items-start flex-column">
+            <div class="page-title color-black">{{'Detalles del Retiro'|translate}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chk-block mb-0 border-box padding-left-20px padding-right-20px">
+    <div class="row custom-header">
+      <div class="col-xl-6 col-lg-6 col-md-6">
+        {{'Retiro'|translate}}
+      </div>
+    </div>
+    <hr>
+    <div class="chk-block-content font-size-18px font-color-custom row" *ngIf="retiro">
+      <div class="col-xl-4 col-lg-4 col-md-4">
+        <div class="font-weight-bold">
+          {{'Contacto'|translate}}:
+          <span class="font-weight-normal">
+            {{retiro.contact}}
+          </span>
+        </div>
+        <div class="padding-top-28px padding-left-5px">
+          <i class="fa fa-phone mr-1 icons-font padding-right-23px"></i>
+          <span class="text-icon-color">
+            {{retiro.contactPhone}}
+          </span>
+        </div>
+        <div class="font-weight-bold padding-top-28px padding-left-5px">
+          {{'Rut'|translate}}:
+          <span class="text-icon-color">
+            {{retiro.rut}}
+          </span>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-4">
+        <div class="font-weight-bold">
+          {{'Dirección'|translate}}:
+          <span class="font-weight-normal">
+            {{retiro.address ? retiro.address : 'N/A'}}
+          </span>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          {{'Región'|translate}}:
+          <span class="font-weight-normal">
+            {{retiro.region ? retiro.region : 'N/A'}}
+          </span>
+        </div>
+        <div class="font-weight-bold padding-top-28px">
+          {{'Comuna'|translate}}:
+          <span class="font-weight-normal">
+            {{retiro.comuna ? retiro.comuna : 'N/A'}}
+          </span>
+        </div>
+
+        <div class="font-weight-bold padding-top-28px">
+          {{'CP'|translate}}:
+          <span class="font-weight-normal">
+            {{retiro.zip ? retiro.zip : 'N/A'}}
+          </span>
+        </div>
+
+      </div>
+
+      <div class="col-xl-4 col-lg-4 col-md-4">
+        <div class="font-weight-bold">
+          {{'Código de Retiro'|translate}}:
+          <span class="font-weight-normal">
+            {{retiro.withdrawalCode}}
+          </span>
+        </div>
+
+        <div class="font-weight-bold padding-top-28px">
+          {{'Código de Admisión'|translate}}:
+          <span class="font-weight-normal">
+            {{retiro.admissionCode}}
+          </span>
+        </div>
+
+        <div class="font-weight-bold padding-top-28px">
+          {{'Fecha de Retiro'|translate}}:
+          <span class="font-weight-normal">
+            {{retiro.date | date:'dd/MM/yyyy'}}
+          </span>
+        </div>
+
+        <div class="row padding-left-15px">
+          <div class="font-weight-bold">
+            {{'Desde'|translate}}:
+            <span class="font-weight-normal">
+              {{retiro.horaDesde}}
+            </span>
+          </div>
+          <span class="width-42px"></span>
+          <div class="font-weight-bold">
+            {{'Hasta'|translate}}:
+            <span class="font-weight-normal">
+              {{retiro.horaHasta}}
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-title padding-left-40px padding-top-60px padding-bottom-40px">
+    <h3 class="text-capitalize title-details">{{'Órdenes del Retiro'|translate}}</h3>
+  </div>
+
+  <app-admited-table [retiro]="retiro"></app-admited-table>
+
+</div>
