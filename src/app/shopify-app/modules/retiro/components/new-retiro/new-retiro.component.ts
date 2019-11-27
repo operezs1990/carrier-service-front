@@ -98,7 +98,7 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
    }
 
    close() {
-      this.router.navigate(['./']);
+      this.router.navigate(['/carrier/retiro']);
    }
 
    submitRetiro(data: Retiro) {

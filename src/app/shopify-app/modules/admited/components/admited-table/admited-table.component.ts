@@ -28,6 +28,11 @@ declare var $: any;
 })
 export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  // sorting
+  key = 'name'; // set default
+  reverse = false;
+  p = 1;
+
   dateRange = new DateRange(new Date(''), new Date(''));
 
   checkboxes: any;
@@ -71,13 +76,18 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+  sort(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+
   getUser() {
     this.userService.getUser(this.userId).subscribe(response => {
-       this.user = response;
+      this.user = response;
     },
-       (error: HandledError) => this.errorHandlingService.handleUiError(errorKey, error)
+      (error: HandledError) => this.errorHandlingService.handleUiError(errorKey, error)
     );
- }
+  }
 
   ngAfterViewInit() {
     this.rowsNumber = this.filter.value.rowsNumber;

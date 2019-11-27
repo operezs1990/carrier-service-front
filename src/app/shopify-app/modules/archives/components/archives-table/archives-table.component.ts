@@ -26,6 +26,11 @@ declare var $: any;
 })
 export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  // sorting
+  key = 'name'; // set default
+  reverse = false;
+  p = 1;
+
   dateRange = new DateRange(new Date(''), new Date(''));
 
   filter: FormGroup;
@@ -65,6 +70,11 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
     this.loadPage();
   }
 
+  sort(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+
   ngOnDestroy() {
     this.filterValueChanges.unsubscribe();
   }
@@ -87,7 +97,6 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
       Object.assign({}, this.filter.value))
       .subscribe((response: Retiro[]) => {
         this.retiros = response;
-        console.log('this.retiros', this.retiros);
         this.getOrderRetired();
       },
         (err: HandledError) => {
@@ -98,7 +107,7 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
   getOrderRetired() {
     this.retiros.forEach((retiro, index) => {
       this.orders = this.orders.concat(retiro.orders);
-      retiro.orders.forEach( order => {
+      retiro.orders.forEach(order => {
         this.retiroMap.set(order.id, index);
       })
     });

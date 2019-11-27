@@ -11,6 +11,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel'
 import { ArchivesRoutingModule } from './archives-routing.module';
 import { ArchivesTableComponent } from './components/archives-table/archives-table.component';
 import { ArchivesDetailsComponent } from './components/archives-details/archives-details.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ArchivesDetailsComponent } from './components/archives-details/archives
     DateRangePickerModule,
     SlickCarouselModule,
     TranslateModule,
+    NgxPaginationModule,
   ],
   declarations: [
     ArchivesTableComponent,

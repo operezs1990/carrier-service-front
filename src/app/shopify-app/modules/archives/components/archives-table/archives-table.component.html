@@ -29,7 +29,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let order of orders, let i = index">
+                <tr *ngFor="let order of orders | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                   <td>
                     {{ i + 1 }}
                   </td>
@@ -71,6 +71,7 @@
                 </tr>
               </tbody>
             </table>
+            <pagination-controls class = "paginator-position" (pageChange)="p = $event"></pagination-controls>
           </div>
         </div>
       </div>

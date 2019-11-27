@@ -15,6 +15,7 @@ import { RetiroRoutingModule } from './retiro-routing.module';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { AdmitedModule } from '../admited/admited.module';
 import { RetiroDetailsComponent } from './components/retiro-details/retiro-details.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { RetiroDetailsComponent } from './components/retiro-details/retiro-detai
     SlickCarouselModule,
     TranslateModule,
     AdmitedModule,
+    NgxPaginationModule,
   ],
   declarations: [
     RetiroTableComponent,

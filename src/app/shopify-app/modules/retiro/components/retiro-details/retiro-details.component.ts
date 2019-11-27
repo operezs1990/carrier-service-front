@@ -39,11 +39,11 @@ export class RetiroDetailsComponent implements OnInit {
 
    getRetiro() {
       this.retiroService.getRetiro(this.retiroId).subscribe((response: Retiro) => {
-          this.retiro = response;
-        },
-          (err: HandledError) => {
+         this.retiro = response;
+      },
+         (err: HandledError) => {
             this.errorHandlingService.handleUiError(errorKey, err);
-          });
-    }
+         });
+   }
 
 }

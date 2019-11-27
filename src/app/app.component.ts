@@ -15,7 +15,7 @@ export class ChankyaAppComponent {
 
 		translate.setDefaultLang('es');
 		this.authService.loginCommands = ['/login'];
-		this.authService.afterLoginCommands = ['/carrier'];
+		this.authService.afterLoginCommands = ['/carrier/admited'];
 		this.authService.logoutCommands = ['/login'];
 		this.authService.changePasswordCommands = ['/change-password'];
 

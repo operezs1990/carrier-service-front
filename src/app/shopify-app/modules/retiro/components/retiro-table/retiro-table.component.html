@@ -43,7 +43,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let retiro of retiros">
+                <tr *ngFor="let retiro of retiros | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                   <td>
                     <div class="">
                       {{retiro.withdrawalCode}}
@@ -51,17 +51,17 @@
                   </td>
                   <td>
                     <div class="">
-                      {{retiro.date | date:'shortDate'}}
+                      {{retiro.date | date:'dd/MM/yy'}}
                     </div>
                   </td>
                   <td>
                     <div class="">
-                      {{retiro.horaDesde}}
+                      {{retiro.horaDesde.toString().slice(0, 5)}}
                     </div>
                   </td>
                   <td>
                     <div class="">
-                      {{retiro.horaHasta}}
+                      {{retiro.horaHasta.toString().slice(0, 5)}}
                     </div>
                   </td>
                   <td>
@@ -80,6 +80,7 @@
                 </tr>
               </tbody>
             </table>
+            <pagination-controls class = "paginator-position" (pageChange)="p = $event"></pagination-controls>
           </div>
         </div>
       </div>

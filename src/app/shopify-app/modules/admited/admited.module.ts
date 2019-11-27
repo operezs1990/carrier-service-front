@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import {NgxPaginationModule} from 'ngx-pagination';
 import { DateRangePickerModule } from '@uiowa/date-range-picker';
 import { ArchwizardModule } from 'ng2-archwizard';
 
@@ -25,6 +26,7 @@ import { AdmitedDetailsComponent } from './components/admited-details/admited-de
     DateRangePickerModule,
     SlickCarouselModule,
     TranslateModule,
+    NgxPaginationModule,
   ],
   declarations: [
     AdmitedTableComponent,

@@ -9,7 +9,7 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
-        path: '',
+        path: 'admited',
         loadChildren: './modules/admited/admited.module#AdmitedModule'
       },
       {

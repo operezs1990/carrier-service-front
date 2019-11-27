@@ -24,6 +24,12 @@ declare var $: any;
 })
 export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
+
+   // sorting
+   key = 'name'; // set default
+   reverse = false;
+   p = 1;
+
   dateRange = new DateRange(new Date(''), new Date(''));
 
   checkboxes: any;
@@ -55,6 +61,12 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(change => this.onFilter());
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="popover"]').popover();
+
+  }
+
+  sort(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 
   getStaticRetiros() {
