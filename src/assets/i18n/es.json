@@ -31,5 +31,7 @@
    "LOGOUT_MESSAGE" : " Usted a cerrado su sesión de forma correcta!",
    "BAD_REQUEST_MESSAGE" : "Solicitod erronea!",
    "SERVER_ERROR_MESSAGE" : "Se ha detectado un error interno en el servidor!",
-   "SERVER_DOWN_MESSAGE" : "El servidor se encuentra inaccesilble en este momento, por favor intente más tarde!"
+   "SERVER_DOWN_MESSAGE" : "El servidor se encuentra inaccesilble en este momento, por favor intente más tarde!",
+
+   "URL_MESSAGE" : "Debe introducir una url válida"
  }

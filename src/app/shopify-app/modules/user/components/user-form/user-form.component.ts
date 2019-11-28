@@ -62,9 +62,6 @@ export class UserFormComponent implements OnInit, OnDestroy {
   }
 
   createFormGroup() {
-    // this.data.shopUrl = 'https://fishshop123.myshopify.com';
-    
-
     this.formGroup = this.fb.group({
       firstName: [this.data.firstName, Validators.compose([Validators.required])],
       lastName: [this.data.lastName],
@@ -73,7 +70,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
       email: [this.data.email, Validators.compose([Validators.required, CustomValidators.email])],
 
       region: [this.data.region, Validators.compose([Validators.required])],
-      comuna: [this.data.comuna.toUpperCase(), Validators.compose([Validators.required])],
+      comuna: [this.data.comuna ? this.data.comuna.toUpperCase() : '', Validators.compose([Validators.required])],
       address: [this.data.address, Validators.compose([Validators.required])],
       zip: [this.data.zip, Validators.compose([Validators.required])],
 

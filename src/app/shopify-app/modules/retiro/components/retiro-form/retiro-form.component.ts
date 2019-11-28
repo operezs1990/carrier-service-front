@@ -81,7 +81,7 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
 
          rut: [this.data.rut, Validators.compose([Validators.required])],
          address: [this.data.address, Validators.compose([Validators.required])],
-         comuna: [this.data.comuna.toUpperCase(), Validators.compose([Validators.required])],
+         comuna: [, Validators.compose([Validators.required])],
          region: [this.data.region, Validators.compose([Validators.required])],
          zip: [this.data.zip, Validators.compose([Validators.required])],
       }, { validator: this.hoursRange });

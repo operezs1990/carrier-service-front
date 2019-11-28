@@ -86,20 +86,29 @@ export class LoginComponent implements OnInit {
     }
 
     createFormGroup() {
+        const urlPattern = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
         this.loginForm = this.formBuilder.group({
-            shop: ['', [Validators.required]],
+            shop: ['', [Validators.required, Validators.pattern(urlPattern)]],
         });
     }
 
     login() {
-        const shop = this.loginForm.get('shop').value;
         if (this.authService.isAuthenticated) {
             this.router.navigate(this.authService.afterLoginCommands, this.authService.afterLoginNavigationExtras);
         } else {
-            if (shop) {
+            if (this.loginForm.valid) {
+                let shop: string = this.loginForm.get('shop').value;
+                if (shop.indexOf('https://') > -1) {
+                    shop = shop.slice(8, shop.length);
+                } else if (shop.indexOf('http://') > -1) {
+                    shop = shop.slice(7, shop.length);
+                }
+                if (shop.indexOf('/') > -1) {
+                    shop = shop.slice(0, shop.indexOf('/'));
+                }
                 this.loginAuth(shop);
             } else {
-                this.translate.get('EMAIL_PASSWORD_MESSAGE').subscribe((res: string) => {
+                this.translate.get('URL_MESSAGE').subscribe((res: string) => {
                     this.toastr.error(res);
                 });
             }
@@ -110,7 +119,6 @@ export class LoginComponent implements OnInit {
         this.authService.loginUser(shop, this.queryParams)
         .subscribe(
             resp => {
-                // this.rootActions.setState(this.authService.userPreferences);
                 this.navigateAfterLogin();
             },
             error => {
