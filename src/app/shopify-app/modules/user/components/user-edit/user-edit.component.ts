@@ -81,11 +81,10 @@ export class UserEditComponent implements AfterViewInit, OnInit {
     data.profile = true;
     this.updateUserLocalStorash();
     this.userService.putUser(data).subscribe(response => {
-      this.close();
       this.translate.get('SUCCESS_MESSAGE').subscribe((res: string) => {
         this.toastr.success(res);
       });
-      this.router.navigate(['/orders', data.id]);
+      this.router.navigate(['/carrier/admited/', data.id]);
     },
       (error: HandledError) => {
         this.errorHandlingService.handleUiError(errorKey, error);

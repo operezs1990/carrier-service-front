@@ -19,21 +19,22 @@
             <table class="table border-collapse-inherit table-hover table-striped table-bordered ">
               <thead>
                 <tr class="bg-white">
-                  <th >{{'No. Orden'|translate}}</th>
-                  <th >{{'No. Envío'|translate}}</th>
-                  <th >{{'Servicio'|translate}}</th>
-                  <th >{{'Nombre Cliente'}}</th>
-                  <th >{{'Comuna'|translate}}</th>
-                  <th >{{'Dirección'|translate}}</th>
-                  <th >{{'Sub Total'}}</th>
-                  <th >{{'Total'}}</th>
-                  <th >{{'Piezas'}}</th>
-                  <th >{{'Fecha'}}</th>
-                  <th >{{'Acciones'}}</th>
+                  <th>{{'No. Orden'|translate}}</th>
+                  <th>{{'No. Envío'|translate}}</th>
+                  <th>{{'Servicio'|translate}}</th>
+                  <th>{{'Nombre Cliente'}}</th>
+                  <th>{{'Comuna'|translate}}</th>
+                  <th>{{'Dirección'|translate}}</th>
+                  <th>{{'Sub Total'}}</th>
+                  <th>{{'Total'}}</th>
+                  <th>{{'Piezas'}}</th>
+                  <th>{{'Fecha'}}</th>
+                  <th>{{'Acciones'}}</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr *ngFor="let order of (retiro ? retiro.orders : orders) | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+              <tbody *ngIf="orders.length > 0 || retiro">
+                <tr
+                  *ngFor="let order of (retiro ? retiro.orders : orders) | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                   <td>
                     {{order.orderNumber}}
                   </td>
@@ -70,7 +71,8 @@
                         class="mr-3 text-muted" href="javascript:void(0)" (click)="onDetails(rowIndex)">
                         <i class="fa fa-eye font-size-24px" aria-hidden="true"></i></a> -->
                       <a data-toggle="tooltip " data-placement="top" title="{{'Generar Etiqueta'|translate}}"
-                        class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="generateLabel(order)">
+                        class="mr-3 text-muted padding-left-30px" href="javascript:void(0)"
+                        (click)="generateLabel(order)">
                         <i class="fa fa-barcode font-size-24px" aria-hidden="true"></i></a>
                       <!-- <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
                               href="javascript:void(0)" (click)="onDelete(rowIndex)">
@@ -80,8 +82,10 @@
                 </tr>
               </tbody>
             </table>
-            <pagination-controls class = "paginator-position" (pageChange)="p = $event"></pagination-controls>
+            <pagination-controls class="paginator-position" (pageChange)="p = $event"></pagination-controls>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</form>

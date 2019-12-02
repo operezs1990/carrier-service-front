@@ -15,6 +15,9 @@ import { retiroDate } from 'app/validation/helpers/retiro-date-validator';
 import { retiroHourEnd } from 'app/validation/helpers/retiro-hourEnd-validator';
 import { retiroHourIni } from 'app/validation/helpers/retiro-hourIni-validator';
 import { retiroDateRange } from 'app/validation/helpers/retiro-date-range-validator';
+import { Admited } from 'app/shopify-app/models/admited';
+import { numberValidator } from 'app/validation/helpers/number-validator';
+import { alphanumericValidator } from 'app/validation/helpers/alphanumeric-validator';
 
 
 
@@ -46,9 +49,16 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
 
    @Input() data: Retiro;
 
+   @Input() orders: Array<Admited>;
+
    @Output() accept = new EventEmitter<Retiro>();
 
    regionValueChanges: Subscription;
+
+   checkboxes: any;
+
+   ordersToRetiro: Array<string> = [];
+
 
    constructor(public translateService: TranslateService,
       public activatedRoute: ActivatedRoute,
@@ -73,17 +83,19 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
 
    createFormGroup() {
       this.formGroup = this.fb.group({
-         contact: [this.data.contact, Validators.compose([Validators.required])],
-         contactPhone: [this.data.contactPhone, Validators.compose([Validators.required])],
+         contact: [this.data.contact, Validators.compose([Validators.required, alphanumericValidator])],
+         contactPhone: [this.data.contactPhone, Validators.compose([Validators.required, numberValidator])],
          date: ['', Validators.compose([Validators.required, retiroDate, retiroDateRange])],
          horaDesde: ['', Validators.compose([Validators.required, retiroHourIni])],
          horaHasta: ['', Validators.compose([Validators.required, retiroHourEnd])],
 
-         rut: [this.data.rut, Validators.compose([Validators.required])],
+         rut: [this.data.rut, Validators.compose([Validators.required, Validators.maxLength(11),
+                                                   Validators.minLength(11), numberValidator])],
+
          address: [this.data.address, Validators.compose([Validators.required])],
          comuna: [, Validators.compose([Validators.required])],
          region: [this.data.region, Validators.compose([Validators.required])],
-         zip: [this.data.zip, Validators.compose([Validators.required])],
+         zip: [this.data.zip, Validators.compose([Validators.required, numberValidator])],
       }, { validator: this.hoursRange });
       if (!this.data.region) {
          this.formGroup.get('comuna').disable();
@@ -114,18 +126,10 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
    }
 
    submitClicked() {
-      if (this.formGroup.valid) {
-         this.data.contact = this.formGroup.value.contact;
-         this.data.contactPhone = this.formGroup.value.contactPhone;
-         this.data.date = this.formGroup.value.date;
-         this.data.horaHasta = this.formGroup.value.horaHasta;
-         this.data.horaDesde = this.formGroup.value.horaDesde;
-         this.data.rut = this.formGroup.value.rut;
-         this.data.comuna = this.formGroup.value.comuna;
-         this.data.region = this.formGroup.value.region;
-         this.data.address = this.formGroup.value.address;
-         this.data.zip = this.formGroup.value.zip;
-
+      this.getCheckboxesOrders()
+      if (this.formGroup.valid && this.ordersToRetiro.length > 0) {
+         this.data = this.formGroup.value;
+         this.data.orderIds = this.ordersToRetiro;
          this.accept.emit(this.data);
       } else {
          this.wasSubmitted = true;
@@ -133,6 +137,24 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
             this.toastr.error(res);
          });
          console.log('error');
+      }
+   }
+
+   getCheckboxesOrders() {
+      this.checkboxes = document.getElementsByName('checkboxes');
+      console.log(this.checkboxes);
+      for (let i = 0, n = this.checkboxes.length; i < n; i++) {
+         if (this.checkboxes[i].checked) {
+            this.ordersToRetiro.push(this.orders[i].id);
+         }
+      }
+   }
+
+
+   selectall(source) {
+      this.checkboxes = document.getElementsByName('checkboxes');
+      for (let i = 0, n = this.checkboxes.length; i < n; i++) {
+         this.checkboxes[i].checked = source.target.checked;
       }
    }
 

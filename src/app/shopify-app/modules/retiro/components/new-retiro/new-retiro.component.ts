@@ -14,6 +14,9 @@ import { AuthService } from 'app/authentication/services/auth.service';
 import { HandledError } from 'app/error-handling/models/handled-error';
 import { Retiro } from 'app/shopify-app/models/retiro';
 import { timeDay } from 'd3';
+import { Admited } from 'app/shopify-app/models/admited';
+import { AdmitedService } from 'app/shopify-app/modules/admited/services/orders.service';
+import { FormGroup } from '@angular/forms';
 
 declare var $: any;
 
@@ -34,11 +37,18 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
       date: new Date,
       horaDesde: new Date,
       horaHasta: new Date,
+      orderIds: [],
+
    };
 
+   filter: FormGroup;
+   
    user: User;
+
    userId: string;
    regionList: Array<Region>;
+
+   orders: Array<Admited>;
 
    constructor(
       public activatedRoute: ActivatedRoute,
@@ -48,7 +58,8 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
       public router: Router,
       public authService: AuthService,
       private translate: TranslateService,
-      private toastr: ToastrService) {
+      private toastr: ToastrService,
+      private admitedService: AdmitedService) {
       // setTranslations(this.translate, TRANSLATIONS);
    }
 
@@ -60,7 +71,18 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
    ngAfterViewInit() {
       this.getUser();
       this.getRegions();
+      this.getOrders();
    }
+
+   getOrders() {
+      this.admitedService.getAdmiteds()
+        .subscribe((response: Admited[]) => {
+          this.orders = response;
+        },
+          (err: HandledError) => {
+            this.errorHandlingService.handleUiError(errorKey, err);
+          });
+    }
 
    getRegions() {
       this.userService.getStaticRegions().subscribe(response => {

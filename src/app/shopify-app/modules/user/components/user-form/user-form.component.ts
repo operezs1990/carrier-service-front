@@ -10,6 +10,8 @@ import { User } from '../../../../models/user';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { LabelFormat, LABELFORMAT } from 'app/shopify-app/models/label-format';
+import { numberValidator } from 'app/validation/helpers/number-validator';
+import { alphanumericValidator } from 'app/validation/helpers/alphanumeric-validator';
 
 declare var $: any;
 
@@ -63,20 +65,20 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   createFormGroup() {
     this.formGroup = this.fb.group({
-      firstName: [this.data.firstName, Validators.compose([Validators.required])],
+      firstName: [this.data.firstName, Validators.compose([Validators.required, alphanumericValidator])],
       lastName: [this.data.lastName],
-      rut: [this.data.rut, Validators.compose([Validators.required, Validators.maxLength(11), Validators.minLength(11)])],
-      phone: [this.data.phone, Validators.compose([Validators.required, CustomValidators.phone])],
-      email: [this.data.email, Validators.compose([Validators.required, CustomValidators.email])],
+      rut: [this.data.rut, Validators.compose([Validators.required, Validators.maxLength(11), Validators.minLength(11), numberValidator])],
+      phone: [this.data.phone, Validators.compose([Validators.required, numberValidator])],
+      email: [this.data.email, Validators.compose([Validators.required, Validators.email])],
 
       region: [this.data.region, Validators.compose([Validators.required])],
       comuna: [this.data.comuna ? this.data.comuna.toUpperCase() : '', Validators.compose([Validators.required])],
       address: [this.data.address, Validators.compose([Validators.required])],
-      zip: [this.data.zip, Validators.compose([Validators.required])],
+      zip: [this.data.zip, Validators.compose([Validators.required, numberValidator])],
 
-      userApiChile: [this.data.userApiChile, Validators.compose([Validators.required])],
+      userApiChile: [this.data.userApiChile, Validators.compose([Validators.required, alphanumericValidator])],
       passwordApiChile: [this.data.passwordApiChile, Validators.compose([Validators.required])],
-      idApiChile: [this.data.idApiChile, Validators.compose([Validators.required])],
+      idApiChile: [this.data.idApiChile, Validators.compose([Validators.required, alphanumericValidator])],
 
       labelFormat: [this.data.labelFormat, Validators.compose([Validators.required])],
       recharge: [this.data.recharge ? this.data.recharge : 0],

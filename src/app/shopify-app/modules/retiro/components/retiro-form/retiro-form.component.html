@@ -24,6 +24,11 @@
               class="text-danger">
               {{'Debe incluir un nombre de contacto'|translate}}
             </small>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['contact'].hasError('badAlphanumeric') && (formGroup.controls['contact'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir un nombre de contacto válido'|translate}}
+            </small>
           </div>
 
           <div class="form-group">
@@ -39,6 +44,11 @@
               class="text-danger">
               {{'Debe incluir un número de teléfono del contacto'|translate}}
             </small>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['contactPhone'].hasError('badNumber') && (formGroup.controls['contactPhone'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir un número de teléfono válido'|translate}}
+            </small>
           </div>
 
           <div class="form-group">
@@ -46,8 +56,8 @@
               <label class=" label-font" for>
                 {{'Fecha'|translate}}
               </label>
-              <input class="form-control" [formControl]="formGroup.controls['date']" formControlName="date"
-                type="date" id="time-input" required>
+              <input class="form-control" [formControl]="formGroup.controls['date']" formControlName="date" type="date"
+                id="time-input" required>
             </div>
             <small class="chankya-block"
               *ngIf="formGroup.controls['date'].hasError('required') && (formGroup.controls['date'].touched ||  wasSubmitted)"
@@ -73,7 +83,7 @@
               </label>
               <input class="form-control" [formControl]="formGroup.controls['horaDesde']" formControlName="horaDesde"
                 type="time" id="time-input" required>
-             </div>
+            </div>
             <small class="chankya-block"
               *ngIf="formGroup.controls['horaDesde'].hasError('required') && (formGroup.controls['horaDesde'].touched ||  wasSubmitted)"
               class="text-danger">
@@ -120,12 +130,23 @@
               <label class="label-font" for>
                 {{'Rut'|translate}}
               </label>
-              <input type="number" class="form-control" [formControl]="formGroup.controls['rut']" formControlName="rut" required>
+              <input type="text" class="form-control" [formControl]="formGroup.controls['rut']" formControlName="rut"
+                required>
             </div>
             <small class="chankya-block"
               *ngIf="formGroup.controls['rut'].hasError('required') && (formGroup.controls['rut'].touched ||  wasSubmitted)"
               class="text-danger">
               {{'Debe incluir su rut'|translate}}
+            </small>
+            <small class="chankya-block"
+              *ngIf="(formGroup.controls['rut'].hasError('maxlength') || formGroup.controls['rut'].hasError('minlength')) && (formGroup.controls['rut'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe contener once dígitos'|translate}}
+            </small>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['rut'].hasError('badNumber') && (formGroup.controls['rut'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe contener solo dígitos'|translate}}
             </small>
           </div>
 
@@ -185,12 +206,18 @@
               <label class="label-font" for>
                 {{'Código Postal'|translate}}
               </label>
-              <input class="form-control" type="number" [formControl]="formGroup.controls['zip']" formControlName="zip" required>
+              <input class="form-control" type="number" [formControl]="formGroup.controls['zip']" formControlName="zip"
+                required>
             </div>
             <small class="chankya-block"
               *ngIf="formGroup.controls['zip'].hasError('required') && (formGroup.controls['zip'].touched ||  wasSubmitted)"
               class="text-danger">
               {{'Debe incluir un Código Postal'|translate}}
+            </small>
+            <small class="chankya-block"
+              *ngIf="formGroup.controls['zip'].hasError('badNumber') && (formGroup.controls['zip'].touched ||  wasSubmitted)"
+              class="text-danger">
+              {{'Debe incluir un Código Postal válido'|translate}}
             </small>
           </div>
 
@@ -198,15 +225,94 @@
 
       </div>
 
+      <div class="user-manage-list">
+        <div class="chk-block mb-0">
+          <div class="chk-block-content">
+            <div class="table-responsive">
+              <div class="unseen">
+                <table class="table border-collapse-inherit table-hover table-striped table-bordered ">
+                  <thead>
+                    <tr class="bg-white">
+                      <th scope="row">
+                        <div class="custom-control custom-checkbox user-grid-chkbox"><label class="text-relative"><input
+                              class="custom-control-input ng-untouched ng-pristine ng-valid" type="checkbox"
+                              (change)="selectall($event)"><span class="custom-control-label p-cursor"></span></label>
+                        </div>
+                      </th>
+                      <th>{{'No. Orden'|translate}}</th>
+                      <th>{{'No. Envío'|translate}}</th>
+                      <th>{{'Servicio'|translate}}</th>
+                      <th>{{'Nombre Cliente'}}</th>
+                      <th>{{'Comuna'|translate}}</th>
+                      <th>{{'Dirección'|translate}}</th>
+                      <th>{{'Sub Total'}}</th>
+                      <th>{{'Total'}}</th>
+                      <th>{{'Piezas'}}</th>
+                      <th>{{'Fecha'}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let order of (retiro ? retiro.orders : orders) | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                      <td scope="row">
+                        <div class="custom-control custom-checkbox user-grid-chkbox">
+                          <label class="text-relative">
+                            <input class="custom-control-input ng-untouched ng-pristine ng-valid" type="checkbox"
+                              name="checkboxes">
+                            <span class="custom-control-label p-cursor">
+                            </span>
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        {{order.orderNumber}}
+                      </td>
+                      <td>
+                        {{order.admission.numeroEnvio}}
+                      </td>
+                      <td>
+                        {{order.admission.abreviaturaServicio}}
+                      </td>
+                      <td>
+                        {{order.receiverContactName}}
+                      </td>
+                      <td>
+                        {{order.admission.comunaDestino}}
+                      </td>
+                      <td>
+                        {{order.admission.direccionDestino}}
+                      </td>
+                      <td>
+                        {{order.subtotalPrice}}
+                      </td>
+                      <td>
+                        {{order.totalPrice}}
+                      </td>
+                      <td>
+                        {{order.totalPieces}}
+                      </td>
+                      <td>
+                        {{order.admission.createdAt | date:'short'}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <pagination-controls class="paginator-position" (pageChange)="p = $event"></pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="d-flex justify-content-center align-items-center padding-bottom-40px">
-        <button type="submit" data-toggle="tooltip" data-placement="top" title="{{'Guardar cambios'|translate}}"
-          class="btn save-button border-radius-0px button-font">
+        <button *ngIf="orders" type="submit" data-toggle="tooltip" data-placement="top"
+          title="{{'Guardar cambios'|translate}}" class="btn save-button border-radius-0px button-font">
           {{'Generar'|translate}}
         </button>
-        <span class = "width-50px"></span>
-        <button type="button" data-toggle="tooltip" data-placement="top" title="{{'Regresar a lista de Retiros'|translate}}"
-          class="btn close-button border-radius-0px button-font" [routerLink]="['../']"
-          routerLinkActive="router-link-active">
+        <span class="width-50px"></span>
+        <button type="button" data-toggle="tooltip" data-placement="top"
+          title="{{'Regresar a lista de Retiros'|translate}}" class="btn close-button border-radius-0px button-font"
+          [routerLink]="['../']" routerLinkActive="router-link-active">
           {{'Cancelar'|translate}}
         </button>
       </div>

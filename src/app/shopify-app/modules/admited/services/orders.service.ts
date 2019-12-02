@@ -31,9 +31,11 @@ export class AdmitedService {
         this.apiEndpointLabel = this.configService.config.apiUrl + this.configService.config.apiConfigs.label.apiEndpoint;
     }
 
-    getAdmiteds(filter: any): Observable<Admited[]> {
-        const queryParams = this.formatQueryParams(filter);
-        return this.http.get<Admited[]>(this.apiEndpoint + queryParams);
+    getAdmiteds(filter?: any): Observable<Admited[]> {
+     //   const queryParams = this.formatQueryParams(filter);
+    //    return this.http.get<Admited[]>(this.apiEndpoint + queryParams);
+        return this.http.get<Admited[]>(this.apiEndpoint);
+
     }
 
     getAdmited(id: string): Observable<Admited> {

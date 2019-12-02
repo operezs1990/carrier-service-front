@@ -11,6 +11,8 @@ import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { RetiroService } from '../../services/retiro.service';
 import { Retiro } from 'app/shopify-app/models/retiro';
+import { Admited } from 'app/shopify-app/models/admited';
+import { AdmitedService } from 'app/shopify-app/modules/admited/services/orders.service';
 
 
 
@@ -42,21 +44,22 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   retiros: Array<Retiro>;
 
+  orders: Array<Admited> = [];
+
   constructor(private confirmDialogService: ConfirmDialogService,
     public retiroService: RetiroService,
     public errorHandlingService: ErrorHandlingService,
     public translate: TranslateService,
     public router: Router,
     public activatedRoute: ActivatedRoute,
+    public admitedService: AdmitedService,
     private toastr: ToastrService) {
   }
 
 
   ngOnInit() {
-    this.getStaticRetiros();
-
     this.filter = this.createFilterFormGroup();
-
+    this.getOrders();
     this.filterValueChanges = this.filter.valueChanges.pipe(debounceTime(500))
       .subscribe(change => this.onFilter());
     $('[data-toggle="tooltip"]').tooltip();
@@ -64,18 +67,19 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+  getOrders() {
+    this.admitedService.getAdmiteds()
+      .subscribe((response: Admited[]) => {
+        this.orders = response;
+      },
+        (err: HandledError) => {
+          this.errorHandlingService.handleUiError(errorKey, err);
+        });
+  }
+
   sort(key) {
     this.key = key;
     this.reverse = !this.reverse;
-  }
-
-  getStaticRetiros() {
-    this.retiroService.getStaticRetiros().subscribe(res => {
-      this.retirosList = res;
-    },
-      err => console.log(err),
-      () => this.retirosList
-    );
   }
 
   ngAfterViewInit() {
@@ -122,6 +126,17 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onDetails(id: number) {
     this.router.navigate(['/carrier/retiro/details', id]);
+  }
+
+  onCreate() {
+    if (this.orders.length === 0) {
+      this.translate.get('No hay órdenes pendiente por retiro').subscribe((res: string) => {
+         this.toastr.error(res);
+      });
+    } else {
+      this.router.navigate(['/carrier/retiro/create']);
+    }
+
   }
 
   generateManifest(id: string) {

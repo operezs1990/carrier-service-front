@@ -18,7 +18,10 @@ export class Retiro {
   region?: string;
   zip?: string;
 
-  orders?: Admited[];
+  orders?: Array<Admited>;
+  orderIds: Array<string>;
+
+
 
   createdAt?: Date;
   updatedAt?: Date;
