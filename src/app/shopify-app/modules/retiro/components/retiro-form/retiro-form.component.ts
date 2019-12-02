@@ -35,6 +35,11 @@ const errorKey = 'Error';
 })
 export class RetiroFormComponent implements OnInit, OnDestroy {
 
+   // sorting
+   key = 'name'; // set default
+   reverse = false;
+   p = 1;
+
    wasSubmitted = false;
 
    @Input() regionList: Array<Region>;
@@ -90,7 +95,7 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
          horaHasta: ['', Validators.compose([Validators.required, retiroHourEnd])],
 
          rut: [this.data.rut, Validators.compose([Validators.required, Validators.maxLength(11),
-                                                   Validators.minLength(11), numberValidator])],
+         Validators.minLength(11), numberValidator])],
 
          address: [this.data.address, Validators.compose([Validators.required])],
          comuna: [, Validators.compose([Validators.required])],
@@ -142,7 +147,6 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
 
    getCheckboxesOrders() {
       this.checkboxes = document.getElementsByName('checkboxes');
-      console.log(this.checkboxes);
       for (let i = 0, n = this.checkboxes.length; i < n; i++) {
          if (this.checkboxes[i].checked) {
             this.ordersToRetiro.push(this.orders[i].id);
