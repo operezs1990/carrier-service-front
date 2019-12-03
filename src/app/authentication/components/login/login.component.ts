@@ -80,8 +80,11 @@ export class LoginComponent implements OnInit {
                 this.toastr.success('Su aplicación ha sido instalada con éxito...!');
                 this.navigateAfterLogin();
             });
+
+        } else if (this.queryParams.shop) {
+           this.loginAuth(this.queryParams.shop)
         } else {
-            this.createFormGroup();
+           this.createFormGroup();
         }
     }
 

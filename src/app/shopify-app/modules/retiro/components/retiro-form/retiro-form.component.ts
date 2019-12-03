@@ -98,7 +98,7 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
          Validators.minLength(11), numberValidator])],
 
          address: [this.data.address, Validators.compose([Validators.required])],
-         comuna: [, Validators.compose([Validators.required])],
+         comuna: [this.data.comuna.toUpperCase(), Validators.compose([Validators.required])],
          region: [this.data.region, Validators.compose([Validators.required])],
          zip: [this.data.zip, Validators.compose([Validators.required, numberValidator])],
       }, { validator: this.hoursRange });
