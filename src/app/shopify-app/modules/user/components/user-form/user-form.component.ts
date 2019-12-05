@@ -12,6 +12,7 @@ import { debounceTime } from 'rxjs/operators';
 import { LabelFormat, LABELFORMAT } from 'app/shopify-app/models/label-format';
 import { numberValidator } from 'app/validation/helpers/number-validator';
 import { alphanumericValidator } from 'app/validation/helpers/alphanumeric-validator';
+import { RutValidator } from 'ng2-rut';
 
 declare var $: any;
 
@@ -46,6 +47,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     public activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
     public router: Router,
+    public rutValidator: RutValidator,
     private fb: FormBuilder,
     public translate: TranslateService
   ) { }
@@ -66,8 +68,8 @@ export class UserFormComponent implements OnInit, OnDestroy {
   createFormGroup() {
     this.formGroup = this.fb.group({
       firstName: [this.data.firstName, Validators.compose([Validators.required, alphanumericValidator])],
-      lastName: [this.data.lastName],
-      rut: [this.data.rut, Validators.compose([Validators.required, Validators.maxLength(11), Validators.minLength(11), numberValidator])],
+      lastName: [this.data.lastName, Validators.compose([alphanumericValidator])],
+      rut: [this.data.rut, [Validators.required, this.rutValidator]],
       phone: [this.data.phone, Validators.compose([Validators.required, numberValidator])],
       email: [this.data.email, Validators.compose([Validators.required, Validators.email])],
 
@@ -80,7 +82,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
       passwordApiChile: [this.data.passwordApiChile, Validators.compose([Validators.required])],
       idApiChile: [this.data.idApiChile, Validators.compose([Validators.required, alphanumericValidator])],
 
-      labelFormat: [this.data.labelFormat, Validators.compose([Validators.required])],
+      labelFormat: [this.data.labelFormat ? this.data.labelFormat : 'pdf', Validators.compose([Validators.required])],
       recharge: [this.data.recharge ? this.data.recharge : 0],
 
       shopUrl: [this.data.shopUrl],

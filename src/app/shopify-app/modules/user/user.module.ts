@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { Ng2Rut } from 'ng2-rut';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { UserFormComponent } from './components/user-form/user-form.component';
     UserRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    Ng2Rut,
     TranslateModule,
   ],
   declarations: [

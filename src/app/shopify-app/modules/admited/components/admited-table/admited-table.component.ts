@@ -161,6 +161,10 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+  getService(code: string): string {
+    return (code === '07') ? 'PES' : 'PED';
+  }
+
   getStaticOrders() {
     this.admitedService.getStaticOrders().subscribe(res => {
       this.ordersList = res;
@@ -169,5 +173,7 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
       () => this.ordersList
     );
   }
+
+  
 
 }

@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
         if (this.authService.isAuthenticated) {
             this.router.navigate(this.authService.afterLoginCommands, this.authService.afterLoginNavigationExtras);
         } else {
+            localStorage.setItem('currentUser', null);
             this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
             this.authService.loginNavigationExtras = undefined;
         }

@@ -139,14 +139,9 @@
               {{'Debe incluir su rut'|translate}}
             </small>
             <small class="chankya-block"
-              *ngIf="(formGroup.controls['rut'].hasError('maxlength') || formGroup.controls['rut'].hasError('minlength')) && (formGroup.controls['rut'].touched ||  wasSubmitted)"
+              *ngIf="formGroup.controls['rut'].hasError('validateRut') && (formGroup.controls['rut'].touched ||  wasSubmitted)"
               class="text-danger">
-              {{'Debe contener once dígitos'|translate}}
-            </small>
-            <small class="chankya-block"
-              *ngIf="formGroup.controls['rut'].hasError('badNumber') && (formGroup.controls['rut'].touched ||  wasSubmitted)"
-              class="text-danger">
-              {{'Debe contener solo dígitos'|translate}}
+              {{'Debe incluir un rut válido'|translate}}
             </small>
           </div>
 
@@ -271,7 +266,7 @@
                         {{order.admission.numeroEnvio}}
                       </td>
                       <td>
-                        {{order.admission.abreviaturaServicio}}
+                        {{getService(order.serviceCode)}}
                       </td>
                       <td>
                         {{order.receiverContactName}}

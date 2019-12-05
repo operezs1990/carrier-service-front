@@ -18,6 +18,7 @@ import { retiroDateRange } from 'app/validation/helpers/retiro-date-range-valida
 import { Admited } from 'app/shopify-app/models/admited';
 import { numberValidator } from 'app/validation/helpers/number-validator';
 import { alphanumericValidator } from 'app/validation/helpers/alphanumeric-validator';
+import { RutValidator } from 'ng2-rut';
 
 
 
@@ -70,7 +71,8 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
       private toastr: ToastrService,
       public router: Router,
       private fb: FormBuilder,
-      public translate: TranslateService
+      public translate: TranslateService,
+      public rutValidator: RutValidator
    ) { }
 
    ngOnInit() {
@@ -94,8 +96,7 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
          horaDesde: ['', Validators.compose([Validators.required, retiroHourIni])],
          horaHasta: ['', Validators.compose([Validators.required, retiroHourEnd])],
 
-         rut: [this.data.rut, Validators.compose([Validators.required, Validators.maxLength(11),
-         Validators.minLength(11), numberValidator])],
+         rut: [this.data.rut, [Validators.required, this.rutValidator]],
 
          address: [this.data.address, Validators.compose([Validators.required])],
          comuna: [this.data.comuna.toUpperCase(), Validators.compose([Validators.required])],
@@ -152,6 +153,10 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
             this.ordersToRetiro.push(this.orders[i].id);
          }
       }
+   }
+
+   getService(code: string): string {
+      return (code === '07') ? 'PES' : 'PED';
    }
 
 
