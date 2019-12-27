@@ -20,7 +20,7 @@
         </td>
         <td class="">
           <div class="">
-            {{(order.serviceCode === '07') ? 'PAQUETE EXPRES DOMICILIO' : 'PAQUETE EXPRES SUCURSAL'}}
+            {{getService(order.serviceCode)}}
           </div>
         </td>
         <td class="">

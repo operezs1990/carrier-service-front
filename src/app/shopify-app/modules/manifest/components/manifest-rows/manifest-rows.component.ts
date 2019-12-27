@@ -28,4 +28,9 @@ export class ManifestRowsComponent implements OnInit {
       }
     }
   }
+
+  getService(code: string): string {
+    return (code === '07') ? 'PAQUETE EXPRES SUCURSAL' : 'PAQUETE EXPRES DOMICILIO';
+  }
+
 }

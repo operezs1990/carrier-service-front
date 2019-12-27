@@ -144,5 +144,9 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
 
   }
 
+  getService(code: string): string {
+    return (code === '07') ? 'SUCURSAL' : 'DOMICILIO';
+ }
+
 
 }

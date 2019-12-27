@@ -37,7 +37,7 @@
                     {{order.orderNumber}}
                   </td>
                   <td>
-                    {{(order.serviceCode === '07') ? 'DOMICILIO' : 'SUCURSAL'}}
+                    {{getService(order.serviceCode)}}
                   </td>
                   <td>
                     {{retiros[retiroMap.get(order.id)].withdrawalCode}}
