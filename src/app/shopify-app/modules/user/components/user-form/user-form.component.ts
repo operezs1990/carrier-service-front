@@ -53,9 +53,12 @@ export class UserFormComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.regionList.sort(function (a, b) {
+      return ((a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
+    });
     this.createFormGroup();
     this.regionValueChanges = this.formGroup.controls.region.valueChanges.pipe(debounceTime(500))
-                                                .subscribe(change => this.comunaListFilter(this.formGroup.value.region));
+      .subscribe(change => this.comunaListFilter(this.formGroup.value.region));
     if (this.data.region) {
       this.comunaListFilter(this.data.region)
     }
@@ -88,7 +91,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
       shopUrl: [this.data.shopUrl],
     });
     if (!this.data.region) {
-      this.formGroup.get ('comuna').disable();
+      this.formGroup.get('comuna').disable();
     }
   }
 
@@ -98,7 +101,10 @@ export class UserFormComponent implements OnInit, OnDestroy {
     });
     if (index !== -1) {
       this.comunaList = this.regionList[index].comunas;
-      this.formGroup.get ('comuna').enable();
+      this.comunaList.sort(function (a, b) {
+        return ((a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
+      });
+      this.formGroup.get('comuna').enable();
     }
   }
 

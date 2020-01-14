@@ -76,6 +76,9 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
    ) { }
 
    ngOnInit() {
+      this.regionList.sort(function (a, b) {
+         return ((a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
+       });
       this.createFormGroup();
       this.regionValueChanges = this.formGroup.controls.region.valueChanges.pipe(debounceTime(500))
          .subscribe(change => this.comunaListFilter(this.formGroup.value.region));
@@ -127,6 +130,9 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
       });
       if (index !== -1) {
          this.comunaList = this.regionList[index].comunas;
+         this.comunaList.sort(function (a, b) {
+            return ((a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
+          });
          this.formGroup.get('comuna').enable();
       }
    }
