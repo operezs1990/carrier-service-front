@@ -127,10 +127,10 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
       this.retiroService.postRetiro(data).subscribe(response => {
          if (!response) {
             this.toastr.error('No hay Órdenes pendientes para realizar Retiro');
+         } else if (response.statusCode === 422) {
+            this.toastr.warning('Se realizó el Retiro, detectando que una o varias Órdenes fueron previamente preparadas en su panel de Shopify');
          } else {
-            this.translate.get('SUCCESS_MESSAGE').subscribe((res: string) => {
-               this.toastr.success(res);
-            });
+            this.toastr.success('Se realizó el Retiro de forma correcta');
          }
          this.close();
       },

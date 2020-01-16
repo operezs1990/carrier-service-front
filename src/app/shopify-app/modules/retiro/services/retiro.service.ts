@@ -28,8 +28,8 @@ export class RetiroService {
         return this.http.get<Retiro[]>(this.apiEndpoint + queryParams);
     }
 
-    postRetiro(data: Retiro): Observable<Retiro> {
-        return this.http.post<Retiro>(this.apiEndpoint, JSON.stringify(data));
+    postRetiro(data: Retiro): Observable<any> {
+        return this.http.post<any>(this.apiEndpoint, JSON.stringify(data));
     }
 
     getRetiro(id: string): Observable<Retiro> {
