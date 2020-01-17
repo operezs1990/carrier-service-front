@@ -42,7 +42,8 @@ export class AdmitedService {
         return this.http.get<Admited>(this.apiEndpoint + id);
     }
 
-    getLabel(order: Admited, labelFormat: string) {
+    getLabel(order: Admited, labelForm: string) {
+        const labelFormat = labelForm === 'pdf' || labelForm === 'pdfs' ? 'pdf' : labelForm;
         const myUrl = this.apiEndpointLabel + '?orderId=' + order.id;
         const mediaType = 'application/pdf';
         this.httpClient.post(myUrl, { location: `${order.orderNumber}` + '.' + labelFormat }, { responseType: 'blob'}).subscribe(
