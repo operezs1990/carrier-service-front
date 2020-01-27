@@ -77,11 +77,15 @@ export class NewRetiroComponent implements OnInit, AfterViewInit {
    getOrders() {
       this.admitedService.getAdmiteds()
         .subscribe((response: Admited[]) => {
-          this.orders = response;
+            this.filterOrders(response);
         },
           (err: HandledError) => {
             this.errorHandlingService.handleUiError(errorKey, err);
           });
+    }
+
+    filterOrders(response: Admited[]) {
+      this.orders = response.filter(res => res.admission);
     }
 
    getRegions() {

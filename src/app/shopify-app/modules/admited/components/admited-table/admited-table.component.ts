@@ -108,6 +108,17 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
     return new FormGroup(group);
   }
 
+  onAdmission(orderId: string) {
+    this.admitedService.postAdmission(orderId).subscribe(response => {
+      this.toastr.success('Se completó la Admisión de forma correcta');
+      this.loadPage();
+    },
+      (err: HandledError) => {
+        this.toastr.error('No se pudo completar la Admisión, nos encontramos en trabajos de mantenimiento en los servicios de correos de chile, intentelo más tarde. Gracias!!!');
+        this.errorHandlingService.handleUiError(errorKey, err);
+      });
+  }
+
   loadPage() {
     this.getOrders();
   }
@@ -117,10 +128,20 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
       Object.assign({}, this.filter.value))
       .subscribe((response: Admited[]) => {
         this.orders = response;
+        this.detectErrors();
       },
         (err: HandledError) => {
           this.errorHandlingService.handleUiError(errorKey, err);
         });
+  }
+
+  detectErrors() {
+    this.orders.forEach( (order: Admited) => {
+      if (!order.admission) {
+        this.toastr.error('Encontramos Órdenes que no fueron admitidas correctamente, lo más probable es que se generaron por trabajos de mantenimiento en los servicios de correos de chile, por favor regenere la admisión de forma manual para las Órdenes marcadas en rojo. Gracias!!!');
+        return;
+      }
+    });
   }
 
   onFilter() {

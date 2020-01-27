@@ -112,6 +112,12 @@ export class RetiroTableComponent implements OnInit, AfterViewInit, OnDestroy {
         });
   }
 
+  getDateUTC(date: any): string {
+    const t: Date = new Date(date);
+    const dateUtc: string = `${t.getUTCDate()}` + '/' + `${t.getUTCMonth() + 1}` + '/' + `${t.getUTCFullYear()}`;
+    return dateUtc;
+  }
+
   onFilter() {
     this.loadPage();
   }

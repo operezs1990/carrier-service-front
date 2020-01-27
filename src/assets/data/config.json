@@ -33,6 +33,9 @@
     "label": {
       "apiEndpoint": "label/"
     },
+    "admission": {
+      "apiEndpoint": "admission"
+    },
 
     "server": {
       "apiEndpoint": "http://54.167.87.144:3000/api/v1/"

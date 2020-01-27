@@ -33,44 +33,44 @@
                 </tr>
               </thead>
               <tbody *ngIf="orders.length > 0 || retiro">
-                <tr
-                  *ngFor="let order of (retiro ? retiro.orders : orders) | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                <tr *ngFor="let order of (retiro ? retiro.orders : orders) | paginate: { itemsPerPage: 10, currentPage: p }; let i = index"
+                    [ngClass]="{'color-red': !order.admission}">
                   <td>
                     {{order.orderNumber}}
                   </td>
                   <td>
-                    {{order.admission.numeroEnvio}}
+                    {{order.admission ? order.admission.numeroEnvio : ''}}
                   </td>
                   <td>
                     {{getService(order.serviceCode)}}
                   </td>
                   <td>
-                    {{order.receiverContactName}}
+                    {{order.receiverContactName ? order.receiverContactName : ''}}
                   </td>
                   <td>
-                    {{order.admission.comunaDestino}}
+                    {{order.admission ? order.admission.comunaDestino : ''}}
                   </td>
                   <td>
-                    {{order.admission.direccionDestino}}
+                    {{order.admission ? order.admission.direccionDestino : ''}}
                   </td>
                   <td>
-                    {{order.subtotalPrice}}
+                    {{order.subtotalPrice ? order.subtotalPrice : ''}}
                   </td>
                   <td>
-                    {{order.totalPrice}}
+                    {{order.totalPrice ? order.totalPrice : ''}}
                   </td>
                   <td>
-                    {{order.totalPieces}}
+                    {{order.totalPieces ? order.totalPieces : ''}}
                   </td>
                   <td>
-                    {{order.admission.createdAt | date:'short'}}
+                    {{order.admission ? (order.admission.createdAt | date:'short') : ''}}
                   </td>
                   <td>
                     <div class="">
-                      <!-- <a data-toggle="tooltip" data-placement="top" title="{{'Detalles'|translate}}"
-                        class="mr-3 text-muted" href="javascript:void(0)" (click)="onDetails(rowIndex)">
-                        <i class="fa fa-eye font-size-24px" aria-hidden="true"></i></a> -->
-                      <a data-toggle="tooltip " data-placement="top" title="{{'Generar Etiqueta'|translate}}"
+                      <a *ngIf="!order.admission" data-toggle="tooltip" data-placement="top" title="{{'Regenerar Admisión'|translate}}"
+                        class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="onAdmission(order.id)">
+                        <i class="fa fa-history font-size-24px" aria-hidden="true"></i></a>
+                      <a *ngIf="order.admission" data-toggle="tooltip " data-placement="top" title="{{'Generar Etiqueta'|translate}}"
                         class="mr-3 text-muted padding-left-30px" href="javascript:void(0)"
                         (click)="generateLabel(order)">
                         <i class="fa fa-barcode font-size-24px" aria-hidden="true"></i></a>

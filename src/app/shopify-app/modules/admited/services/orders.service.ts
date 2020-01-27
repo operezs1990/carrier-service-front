@@ -23,12 +23,21 @@ export class AdmitedService {
 
     apiEndpointLabel: string
 
+    apiEndpointAdmission: string
+
+
     constructor(
         private configService: ConfigService,
         private http: ErrorHandlingHttpService,
         private httpClient: HttpClient) {
         this.apiEndpoint = this.configService.config.apiUrl + this.configService.config.apiConfigs.orders.apiEndpoint;
         this.apiEndpointLabel = this.configService.config.apiUrl + this.configService.config.apiConfigs.label.apiEndpoint;
+        this.apiEndpointAdmission = this.configService.config.apiUrl + this.configService.config.apiConfigs.admission.apiEndpoint;
+
+    }
+
+    postAdmission(orderId: string): Observable<any[]> {
+        return this.http.post<any[]>(this.apiEndpointAdmission + `?orderId=${orderId}`, '');
     }
 
     getAdmiteds(filter?: any): Observable<Admited[]> {
