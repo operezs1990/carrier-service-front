@@ -73,7 +73,6 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="popover"]').popover();
     this.getUser();
-
   }
 
   sort(key) {

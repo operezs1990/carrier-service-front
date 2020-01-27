@@ -36,8 +36,8 @@ export class AdmitedService {
 
     }
 
-    postAdmission(orderId: string): Observable<any[]> {
-        return this.http.post<any[]>(this.apiEndpointAdmission + `?orderId=${orderId}`, '');
+    postAdmission(orderId: string): Observable<any> {
+        return this.http.post<any>(this.apiEndpointAdmission, {orderId: orderId});
     }
 
     getAdmiteds(filter?: any): Observable<Admited[]> {
