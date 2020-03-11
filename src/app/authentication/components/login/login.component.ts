@@ -80,7 +80,10 @@ export class LoginComponent implements OnInit {
             this.authService.installApp(this.queryParams).subscribe(response => {
                 this.toastr.success('Su aplicación ha sido instalada con éxito...!');
                 this.navigateAfterLogin();
-            });
+            }, error => {
+                console.log('AAA', error);
+            },
+        );
 
         } else if (this.queryParams.shop) {
            this.loginAuth(this.queryParams.shop)
