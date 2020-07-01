@@ -5,17 +5,13 @@
 }
 
 table, tbody, tr, td, th {
-    border: black 1px solid;
     padding: 0px !important;
     
 }
 
 tr, td, th {
+    border: black 1px solid;
     padding-left: 2px !important; 
-}
-
-tr {
-    height: 30px;
 }
 
 th {
@@ -29,4 +25,9 @@ thead {
 .width-4pct {
     width: 4% !important;
 }
+
+.height-45px {
+    height: 45 !important;
+}
+
 

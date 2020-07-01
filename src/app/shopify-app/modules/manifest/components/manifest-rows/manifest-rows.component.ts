@@ -16,17 +16,10 @@ export class ManifestRowsComponent implements OnInit {
 
   @Input() retiro: Retiro;
 
-  arrayTemp: any[] = [];
-
   constructor() {
   }
 
   ngOnInit() {
-    if (this.retiro.orders.length < 16) {
-      for (let i = this.retiro.orders.length; i < 16; i++) {
-        this.arrayTemp.push('i');
-      }
-    }
   }
 
   getService(code: string): string {
