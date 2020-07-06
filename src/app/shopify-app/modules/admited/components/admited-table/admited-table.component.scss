@@ -102,3 +102,34 @@ i {
     background-color: #ffb4b4!important;
 }
 
+.status-card {
+    height: 20px;
+    width: 64px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    /* identical to box height */
+  
+    text-align: center;
+  
+    color: #6d543b;
+  }
+
+.cancelled-color {
+  background: #AD1313;
+  color: #FFFFFF;
+}
+
+.pending-color {
+  background: #ffc58b;
+}
+
+.authorized-color {
+    background: #ffea8a;
+}
+
+.paid-color {
+    background: #3CC985;
+}
+

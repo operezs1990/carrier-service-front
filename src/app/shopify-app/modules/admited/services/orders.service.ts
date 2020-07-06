@@ -85,6 +85,8 @@ export class AdmitedService {
         return this.http.get<Order[]>('assets/data/orders.json').pipe(map(response => response));
     }
 
-
+    deleteOrder(id: string): Observable<any> {
+        return this.http.delete<any>(this.apiEndpoint + id);
+    }
 }
 

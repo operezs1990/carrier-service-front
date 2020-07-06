@@ -240,6 +240,7 @@
                       <th>{{'Nombre Cliente'}}</th>
                       <th>{{'Comuna'|translate}}</th>
                       <th>{{'Dirección'|translate}}</th>
+                      <th>{{'Estado'|translate}}</th>
                       <th>{{'Sub Total'}}</th>
                       <th>{{'Total'}}</th>
                       <th>{{'Piezas'}}</th>
@@ -276,6 +277,12 @@
                       </td>
                       <td>
                         {{order.admission.direccionDestino}}
+                      </td>
+                      <td>
+                        <div *ngIf="order.financialStatus === 'paid'" [ngClass]="{'paid-color': order.financialStatus === 'paid', 'authorized-color': order.financialStatus === 'authorized'}"
+                          class="status-card display-flex justify-content-center align-items-center">{{'Paid'}}
+                        </div>
+                        <span *ngIf="order.financialStatus !== 'paid'">-</span>
                       </td>
                       <td>
                         {{order.subtotalPrice}}

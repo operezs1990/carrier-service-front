@@ -127,15 +127,30 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
       Object.assign({}, this.filter.value))
       .subscribe((response: Admited[]) => {
         this.orders = response;
-        this.detectErrors();
+        console.log(this.orders);
+        // this.detectErrors();
       },
         (err: HandledError) => {
           this.errorHandlingService.handleUiError(errorKey, err);
         });
   }
 
+  getStatus(status): string {
+    if (status === 'voided') {
+      return 'Cancelado';
+    } else if (status === 'pending') {
+      return 'Pendiente';
+    } else if (status === 'paid') {
+      return 'Pagado';
+    } else if (status === 'authorized') {
+      return 'Autorizado';
+    } else {
+      return '';
+    }
+  }
+
   detectErrors() {
-    this.orders.forEach( (order: Admited) => {
+    this.orders.forEach((order: Admited) => {
       if (!order.admission) {
         this.toastr.error('Encontramos Órdenes que no fueron admitidas correctamente, lo más probable es que se generaron por trabajos de mantenimiento en los servicios de correos de chile, por favor regenere la admisión de forma manual para las Órdenes marcadas en rojo. Gracias!!!');
         return;
@@ -163,7 +178,18 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-  onDelete(index: number) {
+  onDelete(id: string) {
+    this.confirmDialogService.confirm('Eliminar orden', 'Seguro que desea eliminar la orden?')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.admitedService.deleteOrder(id).subscribe(() => {
+              this.toastr.success('Orden eliminada con éxito');
+            this.loadPage();
+          }, error => this.errorHandlingService.handleUiError(errorKey, error));
+        }
+      })
+      .catch(() => {
+      });
   }
 
   clearDate() {
@@ -194,6 +220,6 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  
+
 
 }

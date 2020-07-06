@@ -25,6 +25,7 @@
                   <th>{{'Nombre Cliente'}}</th>
                   <th>{{'Comuna'|translate}}</th>
                   <th>{{'Dirección'|translate}}</th>
+                  <th>{{'Estado'|translate}}</th>
                   <th>{{'Sub Total'}}</th>
                   <th>{{'Total'}}</th>
                   <th>{{'Piezas'}}</th>
@@ -33,8 +34,8 @@
                 </tr>
               </thead>
               <tbody *ngIf="orders.length > 0 || retiro">
-                <tr *ngFor="let order of (retiro ? retiro.orders : orders) | paginate: { itemsPerPage: 10, currentPage: p }; let i = index"
-                    [ngClass]="{'color-red': !order.admission}">
+                <tr
+                  *ngFor="let order of (retiro ? retiro.orders : orders) | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                   <td>
                     {{order.orderNumber}}
                   </td>
@@ -51,7 +52,14 @@
                     {{order.admission ? order.admission.comunaDestino : ''}}
                   </td>
                   <td>
-                    {{order.admission ? order.admission.direccionDestino : ''}}
+                    {{order.admission ? order.admission.direccionDestino : order.receiverAddress || ''}}
+                  </td>
+                  <td>
+                    <div
+                      [ngClass]="{'cancelled-color': order.financialStatus=== 'voided', 'pending-color': order.financialStatus === 'pending', 'paid-color': order.financialStatus === 'paid', 'authorized-color': order.financialStatus === 'authorized'}"
+                      class="status-card display-flex justify-content-center align-items-center">
+                      {{getStatus(order.financialStatus)}}
+                    </div>
                   </td>
                   <td>
                     {{order.subtotalPrice ? order.subtotalPrice : ''}}
@@ -67,13 +75,24 @@
                   </td>
                   <td>
                     <div class="">
-                      <a *ngIf="!order.admission" data-toggle="tooltip" data-placement="top" title="{{'Regenerar Admisión'|translate}}"
-                        class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="onAdmission(order.id)">
-                        <i class="fa fa-history font-size-24px" aria-hidden="true"></i></a>
-                      <a *ngIf="order.admission" data-toggle="tooltip " data-placement="top" title="{{'Generar Etiqueta'|translate}}"
+                      <!-- <a *ngIf="!order.admission" data-toggle="tooltip" data-placement="top"
+                        title="{{'Regenerar Admisión'|translate}}" class="mr-3 text-muted padding-left-30px"
+                        href="javascript:void(0)" (click)="onAdmission(order.id)">
+                        <i class="fa fa-history font-size-24px" aria-hidden="true"></i></a> -->
+                      <a *ngIf="order.financialStatus === 'paid' && !order.admission" data-toggle="tooltip"
+                        data-placement="top" title="{{'Generar Admisión'|translate}}"
+                        class="mr-3 text-muted padding-left-30px" href="javascript:void(0)"
+                        (click)="onAdmission(order.id)">
+                        <i class="fa fa-file-text-o  font-size-24px" aria-hidden="true"></i></a>
+                      <a *ngIf="order.admission && order.financialStatus === 'paid'" data-toggle="tooltip "
+                        data-placement="top" title="{{'Generar Etiqueta'|translate}}"
                         class="mr-3 text-muted padding-left-30px" href="javascript:void(0)"
                         (click)="generateLabel(order)">
                         <i class="fa fa-barcode font-size-24px" aria-hidden="true"></i></a>
+                      <a *ngIf="order.financialStatus === 'voided'" (click)="onDelete(order.id)"
+                        class="mr-3 text-muted padding-left-30px" data-placement="top" data-toggle="tooltip"
+                        href="javascript:void(0)" title="{{'Eliminar'|translate}}">
+                        <i aria-hidden="true" class="fa fa-trash font-size-24px"></i></a>
                       <!-- <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
                               href="javascript:void(0)" (click)="onDelete(rowIndex)">
                               <i class="fa fa-times font-size-24px" aria-hidden="true"></i></a> -->

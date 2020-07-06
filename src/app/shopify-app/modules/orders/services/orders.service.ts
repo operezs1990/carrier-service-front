@@ -50,6 +50,5 @@ export class OrdersService {
     getStaticOrders(): Observable<Order[]> {
         return this.http.get<Order[]>('assets/data/orders.json').pipe(map(response => response));
     }
-
 }
 

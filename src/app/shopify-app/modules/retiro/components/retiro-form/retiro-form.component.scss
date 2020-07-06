@@ -205,5 +205,23 @@ i {
     justify-content: flex-end!important;
 }
 
+.status-card {
+    height: 20px;
+    width: 64px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    /* identical to box height */
+  
+    text-align: center;
+  
+    color: #6d543b;
+  }
+
+.paid-color {
+    background: #3CC985;
+}
+
 
 
