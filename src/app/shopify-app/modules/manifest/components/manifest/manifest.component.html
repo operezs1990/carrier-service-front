@@ -16,20 +16,25 @@
   </div>
 </div>
 
-<div class="padding-100px page-style" id="contentToConvert" #content>
-  <div *ngIf="retiro && user">
-    <div class="display-flex justify-content-center">
-      <h3 class="font-style">MANIFIESTO RESUMEN</h3>
-    </div>
-    <div>
-      <app-manifest-header [retiro] = "retiro" [user] = "user"></app-manifest-header>
-    </div>
-    <div class="padding-top-15px">
-      <app-manifest-rows [retiro] = "retiro">
-      </app-manifest-rows>
-    </div>
-    <div class="padding-top-15px">
-      <app-manifest-footer></app-manifest-footer>
+
+<div class="padding-100px">
+  <div class="page-style" id="contentToConvert" #content>
+    <div *ngIf="retiro && user">
+      <div class="display-flex justify-content-center">
+        <h3 class="font-style">MANIFIESTO RESUMEN</h3>
+      </div>
+      <div>
+        <app-manifest-header [retiro] = "retiro" [user] = "user"></app-manifest-header>
+      </div>
+      <div class="padding-top-15px">
+        <app-manifest-rows [retiro] = "retiro">
+        </app-manifest-rows>
+      </div>
+      <div class="padding-top-15px">
+        <app-manifest-footer></app-manifest-footer>
+      </div>
     </div>
   </div>
 </div>
+
+

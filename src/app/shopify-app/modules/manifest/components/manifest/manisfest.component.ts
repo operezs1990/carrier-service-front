@@ -4,7 +4,7 @@ import { Manifest } from 'app/shopify-app/models/manifest';
 import { ManifestService } from '../../services/manifest.service';
 
 import * as jsPDF from 'jspdf';
-
+import html2pdf from 'html2pdf.js';
 import html2canvas from 'html2canvas';
 import { ManifestRecord } from 'app/shopify-app/models/manifest-rows';
 import { Route, ActivatedRoute, Router } from '@angular/router';
@@ -90,41 +90,21 @@ export class ManifestComponent implements OnInit, AfterViewInit {
     );
   }
 
-
   captureScreen() {
-    var data = document.getElementById('contentToConvert');
-    html2canvas(data).then(canvas => {
-      // Few necessary setting options
-      var imgWidth = 208;
-      var pageHeight = 295;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
+    const data = document.getElementById('contentToConvert');
 
-      const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jsPDF('p', 'mm', 'A4'); // A4 size page of PDF
-      var position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-      pdf.save( `${this.retiro.withdrawalCode}` + '.pdf'); // Generated PDF
-    });
+    const opt = {
+      // [top, left, bottom, right]
+      margin:       [1, 0.5, 1, 0.5],
+      filename:     `${this.retiro.withdrawalCode}` + '.pdf',
+      pagebreak: { mode: 'avoid-all', after: '#after1' },
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 1 },
+      jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(data).save();
   }
 
-// downloadPdf() {
-//   let doc = new jsPDF();
-
-//   let specialElementHandlers = {
-//     '#editor': function (element, rendered) {
-//       return true;
-//     }
-//   };
-
-//   let content = this.content.nativeElement;
-//   doc.fromHTML(content.innerHTML, 15, 15, {
-//     'width': 190,
-//     'elementHandlers': specialElementHandlers,
-//   });
-
-//   doc.save('test.pdf');
-
-// }
 
 }
