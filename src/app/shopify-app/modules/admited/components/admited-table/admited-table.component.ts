@@ -127,7 +127,6 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
       Object.assign({}, this.filter.value))
       .subscribe((response: Admited[]) => {
         this.orders = response;
-        console.log(this.orders);
         // this.detectErrors();
       },
         (err: HandledError) => {
