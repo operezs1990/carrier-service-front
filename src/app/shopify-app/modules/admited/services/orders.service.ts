@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 
 import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
+import { Ids } from 'app/shopify-app/models/ids';
 
 export const ASCENDING = 'asc';
 
@@ -38,6 +39,10 @@ export class AdmitedService {
 
     postAdmission(orderId: string): Observable<any> {
         return this.http.post<any>(this.apiEndpointAdmission, {orderId: orderId});
+    }
+
+    postBulkAdmission(orderIds: Ids): Observable<any> {
+        return this.http.post<any>(`${this.apiEndpointAdmission}/bulk`, JSON.stringify(orderIds));
     }
 
     getAdmiteds(filter?: any): Observable<Admited[]> {

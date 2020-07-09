@@ -16,6 +16,7 @@ import { Retiro } from 'app/shopify-app/models/retiro';
 import { UserService } from 'app/shopify-app/modules/user/services/user.service';
 import { AuthService } from 'app/authentication/services/auth.service';
 import { User } from 'app/shopify-app/models/user';
+import { Ids } from 'app/shopify-app/models/ids';
 
 
 const errorKey = 'Error';
@@ -45,11 +46,19 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
   ordersList: Array<Order> = [];
 
   orders: Array<Admited> = [];
+  ordersToAdmission: Ids = { ids: []};
 
   @Input() retiro: Retiro;
 
   user: User;
   userId: string;
+
+  actions = [
+    {
+      id: 'admission',
+      name: 'Generar Admisión',
+    },
+  ]
 
 
   constructor(private confirmDialogService: ConfirmDialogService,
@@ -182,7 +191,7 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
       .then((confirmed) => {
         if (confirmed) {
           this.admitedService.deleteOrder(id).subscribe(() => {
-              this.toastr.success('Orden eliminada con éxito');
+            this.toastr.success('Orden eliminada con éxito');
             this.loadPage();
           }, error => this.errorHandlingService.handleUiError(errorKey, error));
         }
@@ -219,6 +228,39 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
+  selectAll(source) {
+    this.checkboxes = document.getElementsByName('checkboxes');
+    for (let i = 0, n = this.checkboxes.length; i < n; i++) {
+      this.checkboxes[i].checked = source.target.checked;
+    }
+  }
 
+  getCheckboxesOrders() {
+    this.checkboxes = document.getElementsByName('checkboxes');
+    for (let i = 0, n = this.checkboxes.length; i < n; i++) {
+      if (this.checkboxes[i].checked) {
+        this.ordersToAdmission.ids.push(this.orders[i].id);
+      }
+    }
+  }
+
+  generateBulkAdmissions() {
+    this.getCheckboxesOrders()
+    if (this.ordersToAdmission.ids.length > 0) {
+      this.admitedService.postBulkAdmission(this.ordersToAdmission).subscribe(response => {
+        this.toastr.success('Se completó la acción de forma correcta');
+      this.loadPage();
+    },
+      (err: HandledError) => {
+        this.toastr.error('No se pudo completar la acción!');
+        this.errorHandlingService.handleUiError(errorKey, err);
+      });
+    } else {
+      this.translate.get('ERROR_MESSAGE').subscribe((res: string) => {
+        this.toastr.error(res);
+      });
+      console.log('error');
+    }
+  }
 
 }

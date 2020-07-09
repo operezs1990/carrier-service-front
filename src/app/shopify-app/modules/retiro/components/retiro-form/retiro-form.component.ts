@@ -166,7 +166,7 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
    }
 
 
-   selectall(source) {
+   selectAll(source) {
       this.checkboxes = document.getElementsByName('checkboxes');
       for (let i = 0, n = this.checkboxes.length; i < n; i++) {
          this.checkboxes[i].checked = source.target.checked;
