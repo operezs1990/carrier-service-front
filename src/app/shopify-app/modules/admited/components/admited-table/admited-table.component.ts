@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DateRange } from '@uiowa/date-range-picker';
@@ -46,7 +46,7 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
   ordersList: Array<Order> = [];
 
   orders: Array<Admited> = [];
-  ordersToAdmission: Ids = { ids: []};
+  ordersToAdmission: Ids = { ids: [] };
 
   @Input() retiro: Retiro;
 
@@ -76,9 +76,9 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.getStaticOrders();
     this.userId = this.authService.currentUser.id;
     this.filter = this.createFilterFormGroup();
-
     this.filterValueChanges = this.filter.valueChanges.pipe(debounceTime(500))
       .subscribe(change => this.onFilter());
+
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="popover"]').popover();
     this.getUser();
@@ -98,7 +98,7 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.rowsNumber = this.filter.value.rowsNumber;
+    this.rowsNumber = 10;
     if (!this.retiro) {
       this.loadPage();
     }
@@ -110,9 +110,7 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   createFilterFormGroup() {
     const group: any = {};
-    group['rowsNumber'] = new FormControl(this.rowsNumber);
-    group['rangeDate'] = new FormControl('');
-    group['name'] = new FormControl('');
+    group['status'] = new FormControl('');
     return new FormGroup(group);
   }
 
@@ -249,16 +247,14 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.ordersToAdmission.ids.length > 0) {
       this.admitedService.postBulkAdmission(this.ordersToAdmission).subscribe(response => {
         this.toastr.success('Se completó la acción de forma correcta');
-      this.loadPage();
-    },
-      (err: HandledError) => {
-        this.toastr.error('No se pudo completar la acción!');
-        this.errorHandlingService.handleUiError(errorKey, err);
-      });
+        this.loadPage();
+      },
+        (err: HandledError) => {
+          this.toastr.error('No se pudo completar la acción!');
+          this.errorHandlingService.handleUiError(errorKey, err);
+        });
     } else {
-      this.translate.get('ERROR_MESSAGE').subscribe((res: string) => {
-        this.toastr.error(res);
-      });
+      this.toastr.error('Selexione al menos una órden');
       console.log('error');
     }
   }

@@ -10,121 +10,111 @@
   </div>
 </div>
 
-<form [formGroup]="filter" autocomplete="off">
-  <div class="chk-block invoice-v2-wrap mb-0">
-    <div class="chk-block-title pb-3">
-      <div class="row">
-        <div class="col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-          <div class="d-sm-flex d-inline-block">
-            <div class="mb-3 mb-sm-0 d-flex mr-3">
-              <div class="form-group form-field mr-2 mb-0 text-nowrap">
-                <select class="form-control h-auto p-cursor custom-select" #actionSelect>
-                  <option disabled hidden selected value="">{{'Acciones'|translate}}</option>
-                  <option *ngFor="let action of actions" [value]="action.name">
-                    {{action.name}}
-                  </option>
-                </select>
-              </div>
-              <div>
-                <button class="btn btn-outline-primary h-100" (click)="generateBulkAdmissions()" [disabled]="false">{{'Aplicar'}}</button>
-              </div>
-            </div>
-            <div class="mb-3 mb-sm-0 d-flex">
-              <div class="form-group form-field mr-2 mb-0 text-nowrap">
-                <select class="form-control h-auto p-cursor custom-select">
-                  <option disabled hidden selected value="">{{'Estados'|translate}}</option>
-                  <option>{{'Pagado'}}</option>
-                  <option>{{'Autorizado'}}</option>
-                  <option>{{'Pendiente'}}</option>
-                  <option>{{'Cancelado'}}</option>
-                </select>
-              </div>
-              <div>
-                <button class="btn btn-outline-primary h-100">{{'Filtrar'}}</button>
-              </div>
-            </div>
+<div class="chk-block invoice-v2-wrap mb-0">
+  <div class="chk-block-title pb-3">
+    <div class="d-flex justify-content-space-between">
+      <form [formGroup]="filter" autocomplete="off">
+        <div class="mb-3 mb-sm-0 d-flex">
+          <div class="form-group form-field mr-2 mb-0 text-nowrap">
+            <select class="form-control h-auto p-cursor custom-select form" formControlName="status">
+              <option selected [value]="''">{{'Todos los Estados'|translate}}</option>
+              <option [value]="'paid'">{{'Pagado'}}</option>
+              <option [value]="'authorized'">{{'Autorizado'}}</option>
+              <option [value]="'pending'">{{'Pendiente'}}</option>
+              <option [value]="'voided'">{{'Cancelado'}}</option>
+            </select>
           </div>
         </div>
+      </form>
+      <div class="mb-3 mb-sm-0 d-flex mr-3">
+
+        <div>
+          <button class="btn btn-outline-primary h-100" (click)="generateBulkAdmissions()"
+            [disabled]="false">{{'Generate Admision'}}
+          </button>
+        </div>
       </div>
+
     </div>
-    <div class="chk-block-content p-0">
-      <div class="table-responsive">
-        <table class="table table-striped mb-0">
-          <thead>
-            <tr>
-              <th scope="row">
-                <div class="custom-control custom-checkbox invoice-chkbox"><label class="text-relative"><input
-                      class="custom-control-input ng-untouched ng-pristine ng-valid" type="checkbox"
-                      (change)="selectAll($event)"><span class="custom-control-label p-cursor"></span></label></div>
-              </th>
-              <th scope="col">{{'No. Orden'|translate}}</th>
-              <th scope="col">{{'No. Envío'|translate}}</th>
-              <th scope="col" class="text-center">{{'Servicio'|translate}}</th>
-              <th scope="col" class="text-center">{{'Nombre Cliente'}}</th>
-              <th scope="col" class="text-center">{{'Comuna'|translate}}</th>
-              <th scope="col" class="text-center">{{'Dirección'|translate}}</th>
-              <th scope="col" class="text-center">{{'Estado'|translate}}</th>
-              <th scope="col" class="text-center">{{'Sub Total'}}</th>
-              <th scope="col" class="text-center">{{'Total'}}</th>
-              <th scope="col" class="text-center">{{'Piezas'}}</th>
-              <th scope="col" class="text-center">{{'Fecha'}}</th>
-              <th scope="col" class="text-center">{{'Acciones'}}</th>
-            </tr>
-          </thead>
-          <tbody *ngIf="orders.length > 0 || retiro">
-            <tr
-              *ngFor="let order of (retiro ? retiro.orders : orders) | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-              <th scope="row">
-                <div class="custom-control custom-checkbox invoice-chkbox"><label class="text-relative"><input
-                      class="custom-control-input ng-untouched ng-pristine ng-valid" type="checkbox"
-                      name="checkboxes"><span class="custom-control-label p-cursor"></span></label></div>
-              </th>
-              <td>{{order.orderNumber}}</td>
-              <td>{{order.admission ? order.admission.numeroEnvio : ''}}</td>
-              <td class="text-center">{{getService(order.serviceCode)}}</td>
-              <td class="text-center">{{order.receiverContactName ? order.receiverContactName : ''}}</td>
-              <td class="text-center">{{order.admission ? order.admission.comunaDestino : ''}}</td>
-              <td class="text-center">
-                {{order.admission ? order.admission.direccionDestino : order.receiverAddress || ''}}</td>
-              <td>
-                <div
-                  [ngClass]="{'cancelled-color': order.financialStatus=== 'voided', 'pending-color': order.financialStatus === 'pending', 'paid-color': order.financialStatus === 'paid', 'authorized-color': order.financialStatus === 'authorized'}"
-                  class="status-card display-flex justify-content-center align-items-center">
-                  {{getStatus(order.financialStatus)}}
-                </div>
-              </td>
-              <td class="text-center">{{order.subtotalPrice ? order.subtotalPrice : ''}}</td>
-              <td class="text-center">{{order.totalPrice ? order.totalPrice : ''}}</td>
-              <td class="text-center">{{order.totalPieces ? order.totalPieces : ''}}</td>
-              <td class="text-center">{{order.admission ? (order.admission.createdAt | date:'short') : ''}}</td>
-              <td>
-                <div class="">
-                  <!-- <a *ngIf="!order.admission" data-toggle="tooltip" data-placement="top"
+
+  </div>
+  <div class="chk-block-content p-0">
+    <div class="table-responsive">
+      <table class="table table-striped mb-0">
+        <thead>
+          <tr>
+            <th scope="row">
+              <div class="custom-control custom-checkbox invoice-chkbox"><label class="text-relative"><input
+                    class="custom-control-input ng-untouched ng-pristine ng-valid" type="checkbox"
+                    (change)="selectAll($event)"><span class="custom-control-label p-cursor"></span></label></div>
+            </th>
+            <th scope="col">{{'No. Orden'|translate}}</th>
+            <th scope="col">{{'No. Envío'|translate}}</th>
+            <th scope="col" class="text-center">{{'Servicio'|translate}}</th>
+            <th scope="col" class="text-center">{{'Nombre Cliente'}}</th>
+            <th scope="col" class="text-center">{{'Comuna'|translate}}</th>
+            <th scope="col" class="text-center">{{'Dirección'|translate}}</th>
+            <th scope="col" class="text-center">{{'Estado'|translate}}</th>
+            <th scope="col" class="text-center">{{'Sub Total'}}</th>
+            <th scope="col" class="text-center">{{'Total'}}</th>
+            <th scope="col" class="text-center">{{'Piezas'}}</th>
+            <th scope="col" class="text-center">{{'Fecha'}}</th>
+            <th scope="col" class="text-center">{{'Acciones'}}</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="orders.length > 0 || retiro">
+          <tr
+            *ngFor="let order of (retiro ? retiro.orders : orders) | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+            <th scope="row">
+              <div *ngIf="order.admission" class="custom-control custom-checkbox invoice-chkbox"><label class="text-relative"><input
+                    class="custom-control-input ng-untouched ng-pristine ng-valid" type="checkbox"
+                    name="checkboxes"><span class="custom-control-label p-cursor"></span></label></div>
+            </th>
+            <td>{{order.orderNumber}}</td>
+            <td>{{order.admission ? order.admission.numeroEnvio : ''}}</td>
+            <td class="text-center">{{getService(order.serviceCode)}}</td>
+            <td class="text-center">{{order.receiverContactName ? order.receiverContactName : ''}}</td>
+            <td class="text-center">{{order.admission ? order.admission.comunaDestino : ''}}</td>
+            <td class="text-center">
+              {{order.admission ? order.admission.direccionDestino : order.receiverAddress || ''}}</td>
+            <td>
+              <div
+                [ngClass]="{'cancelled-color': order.financialStatus=== 'voided', 'pending-color': order.financialStatus === 'pending', 'paid-color': order.financialStatus === 'paid', 'authorized-color': order.financialStatus === 'authorized'}"
+                class="status-card display-flex justify-content-center align-items-center">
+                {{getStatus(order.financialStatus)}}
+              </div>
+            </td>
+            <td class="text-center">{{order.subtotalPrice ? order.subtotalPrice : ''}}</td>
+            <td class="text-center">{{order.totalPrice ? order.totalPrice : ''}}</td>
+            <td class="text-center">{{order.totalPieces ? order.totalPieces : ''}}</td>
+            <td class="text-center">{{order.admission ? (order.admission.createdAt | date:'short') : ''}}</td>
+            <td>
+              <div class="">
+                <!-- <a *ngIf="!order.admission" data-toggle="tooltip" data-placement="top"
                   title="{{'Regenerar Admisión'|translate}}" class="mr-3 text-muted padding-left-30px"
                   href="javascript:void(0)" (click)="onAdmission(order.id)">
                   <i class="fa fa-history font-size-24px" aria-hidden="true"></i></a> -->
-                  <a *ngIf="order.financialStatus === 'paid' && !order.admission" data-toggle="tooltip"
-                    data-placement="top" title="{{'Generar Admisión'|translate}}"
-                    class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="onAdmission(order.id)">
-                    <i class="fa fa-file-text-o  font-size-24px" aria-hidden="true"></i></a>
-                  <a *ngIf="order.admission && order.financialStatus === 'paid'" data-toggle="tooltip "
-                    data-placement="top" title="{{'Generar Etiqueta'|translate}}"
-                    class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="generateLabel(order)">
-                    <i class="fa fa-barcode font-size-24px" aria-hidden="true"></i></a>
-                  <a *ngIf="order.financialStatus === 'voided'" (click)="onDelete(order.id)"
-                    class="mr-3 text-muted padding-left-30px" data-placement="top" data-toggle="tooltip"
-                    href="javascript:void(0)" title="{{'Eliminar'|translate}}">
-                    <i aria-hidden="true" class="fa fa-trash font-size-24px"></i></a>
-                  <!-- <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
+                <a *ngIf="order.financialStatus === 'paid' && !order.admission" data-toggle="tooltip"
+                  data-placement="top" title="{{'Generar Admisión'|translate}}"
+                  class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="onAdmission(order.id)">
+                  <i class="fa fa-file-text-o  font-size-24px" aria-hidden="true"></i></a>
+                <a *ngIf="order.admission && order.financialStatus === 'paid'" data-toggle="tooltip "
+                  data-placement="top" title="{{'Generar Etiqueta'|translate}}"
+                  class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="generateLabel(order)">
+                  <i class="fa fa-barcode font-size-24px" aria-hidden="true"></i></a>
+                <a *ngIf="order.financialStatus === 'voided'" (click)="onDelete(order.id)"
+                  class="mr-3 text-muted padding-left-30px" data-placement="top" data-toggle="tooltip"
+                  href="javascript:void(0)" title="{{'Eliminar'|translate}}">
+                  <i aria-hidden="true" class="fa fa-trash font-size-24px"></i></a>
+                <!-- <a data-toggle="tooltip" data-placement="top" title="{{'DELETE'|translate}}" class="mr-3 text-muted"
                         href="javascript:void(0)" (click)="onDelete(rowIndex)">
                         <i class="fa fa-times font-size-24px" aria-hidden="true"></i></a> -->
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <pagination-controls class="paginator-position" (pageChange)="p = $event"></pagination-controls>
-      </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls class="paginator-position" (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
-</form>
+</div>

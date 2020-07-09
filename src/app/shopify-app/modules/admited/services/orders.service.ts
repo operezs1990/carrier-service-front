@@ -46,9 +46,9 @@ export class AdmitedService {
     }
 
     getAdmiteds(filter?: any): Observable<Admited[]> {
-     //   const queryParams = this.formatQueryParams(filter);
-    //    return this.http.get<Admited[]>(this.apiEndpoint + queryParams);
-        return this.http.get<Admited[]>(this.apiEndpoint);
+       const queryParams = this.formatQueryParams(filter);
+       return this.http.get<Admited[]>(this.apiEndpoint + queryParams);
+       // return this.http.get<Admited[]>(this.apiEndpoint);
 
     }
 
@@ -73,14 +73,9 @@ export class AdmitedService {
     formatQueryParams(filter?: any, sortColumn?: string, sortDirection?: string, pageIndex?: number, pageSize?: number): string {
         let queryParams = '';
 
-        if (filter.name) {
+        if (filter.status) {
             queryParams += queryParams.length > 0 ? '&' : '?';
-            queryParams += `name=${filter.name}`;
-        }
-        if (filter.rangeDate) {
-            queryParams += queryParams.length > 0 ? '&' : '?';
-            queryParams += `startDate=${new Date(filter.rangeDate.start).toISOString()}` + '&';
-            queryParams += `endDate=${new Date(filter.rangeDate.end).toISOString()}`;
+            queryParams += `status=${filter.status}`;
         }
 
         return queryParams;
