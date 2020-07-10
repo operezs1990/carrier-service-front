@@ -66,7 +66,7 @@
           <tr
             *ngFor="let order of (retiro ? retiro.orders : orders) | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
             <th scope="row">
-              <div *ngIf="order.admission" class="custom-control custom-checkbox invoice-chkbox"><label class="text-relative"><input
+              <div *ngIf="!order.admission && order.financialStatus === 'paid'" class="custom-control custom-checkbox invoice-chkbox"><label class="text-relative"><input
                     class="custom-control-input ng-untouched ng-pristine ng-valid" type="checkbox"
                     name="checkboxes"><span class="custom-control-label p-cursor"></span></label></div>
             </th>

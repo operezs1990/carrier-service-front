@@ -73,9 +73,11 @@ export class AdmitedService {
     formatQueryParams(filter?: any, sortColumn?: string, sortDirection?: string, pageIndex?: number, pageSize?: number): string {
         let queryParams = '';
 
-        if (filter.status) {
-            queryParams += queryParams.length > 0 ? '&' : '?';
-            queryParams += `status=${filter.status}`;
+        if(filter) {
+            if (filter.status) {
+                queryParams += queryParams.length > 0 ? '&' : '?';
+                queryParams += `status=${filter.status}`;
+            }
         }
 
         return queryParams;
