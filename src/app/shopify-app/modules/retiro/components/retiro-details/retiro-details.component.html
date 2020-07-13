@@ -86,7 +86,7 @@
         <div class="font-weight-bold padding-top-28px">
           {{'Fecha de Retiro'|translate}}:
           <span class="font-weight-normal">
-            {{retiro.date | date:'dd/MM/yyyy'}}
+            {{getDateUTC(retiro.date)}}
           </span>
         </div>
 

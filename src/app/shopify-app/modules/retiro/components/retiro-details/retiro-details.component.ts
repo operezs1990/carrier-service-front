@@ -37,6 +37,12 @@ export class RetiroDetailsComponent implements OnInit {
 
    }
 
+   getDateUTC(date: any): string {
+      const t: Date = new Date(date);
+      const dateUtc: string = `${t.getUTCDate()}` + '/' + `${t.getUTCMonth() + 1}` + '/' + `${t.getUTCFullYear()}`;
+      return dateUtc;
+    }
+
    getRetiro() {
       this.retiroService.getRetiro(this.retiroId).subscribe((response: Retiro) => {
          this.retiro = response;
