@@ -94,7 +94,7 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
    createFormGroup() {
 
       const phoneControl = new FormControl(this.data.contactPhone, [
-         Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/), Validators.required
+         Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\/0-9]*$/), Validators.required
        ]);
       this.formGroup = this.fb.group({
          contact: [this.data.contact, Validators.compose([Validators.required, alphanumericValidator])],

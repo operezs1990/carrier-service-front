@@ -71,7 +71,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
   createFormGroup() {
 
     const phoneControl = new FormControl(this.data.phone, [
-      Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/), Validators.required
+      Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[\s\/0-9]*$/), Validators.required
     ]);
     this.formGroup = this.fb.group({
       firstName: [this.data.firstName, Validators.compose([Validators.required, alphanumericValidator])],
