@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Comuna } from 'app/shopify-app/models/comuna';
@@ -69,11 +69,15 @@ export class UserFormComponent implements OnInit, OnDestroy {
   }
 
   createFormGroup() {
+
+    const phoneControl = new FormControl(this.data.phone, [
+      Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/), Validators.required
+    ]);
     this.formGroup = this.fb.group({
       firstName: [this.data.firstName, Validators.compose([Validators.required, alphanumericValidator])],
       lastName: [this.data.lastName, Validators.compose([alphanumericValidator])],
       rut: [this.data.rut, [Validators.required, this.rutValidator]],
-      phone: [this.data.phone, Validators.compose([Validators.required, numberValidator])],
+      phone: phoneControl,
       email: [this.data.email, Validators.compose([Validators.required, Validators.email])],
 
       region: [this.data.region, Validators.compose([Validators.required])],

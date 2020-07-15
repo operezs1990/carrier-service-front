@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ErrorHandlingService } from 'app/error-handling/services/error-handling.service';
 import 'rxjs/Rx';
 import { Region } from 'app/shopify-app/models/region';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Comuna } from 'app/shopify-app/models/comuna';
 import { User } from 'app/shopify-app/models/user';
 import { Subscription } from 'rxjs/Rx';
@@ -92,9 +92,13 @@ export class RetiroFormComponent implements OnInit, OnDestroy {
    }
 
    createFormGroup() {
+
+      const phoneControl = new FormControl(this.data.contactPhone, [
+         Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/), Validators.required
+       ]);
       this.formGroup = this.fb.group({
          contact: [this.data.contact, Validators.compose([Validators.required, alphanumericValidator])],
-         contactPhone: [this.data.contactPhone, Validators.compose([Validators.required, numberValidator])],
+         contactPhone: phoneControl,
          date: ['', Validators.compose([Validators.required, retiroDate, retiroDateRange])],
          horaDesde: ['', Validators.compose([Validators.required, retiroHourIni])],
          horaHasta: ['', Validators.compose([Validators.required, retiroHourEnd])],
