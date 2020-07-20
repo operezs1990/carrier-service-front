@@ -22,7 +22,7 @@
                   <th>{{'No Orden'}}</th>
                   <th>{{'Envío'}}</th>
                   <th>{{'Código Retiro'|translate}}</th>
-                  <th>{{'Fecha de Admision'|translate}}</th>
+                  <th>{{'Fecha Retiro'|translate}}</th>
                   <th>{{'Cliente'}}</th>
                   <th>{{'Teléfono Cliente'}}</th>
                   <th>{{'Correo Cliente'}}</th>
@@ -43,7 +43,7 @@
                     {{retiros[retiroMap.get(order.id)].withdrawalCode}}
                   </td>
                   <td>
-                    {{order.admission.createdAt | date:'short'}}
+                    {{getDateUTC(retiros[retiroMap.get(order.id)].date)}}
                   </td>
                   <td>
                     {{order.receiverName}}
