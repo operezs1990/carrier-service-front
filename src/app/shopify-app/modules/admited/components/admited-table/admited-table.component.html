@@ -28,9 +28,9 @@
       </form>
       <div class="mb-3 mb-sm-0 d-flex mr-3">
 
-        <div>
+        <div *ngIf="!retiroView">
           <button class="btn btn-outline-primary h-100" (click)="generateBulkAdmissions()"
-            [disabled]="false">{{'Generate Admision'}}
+            [disabled]="false">{{'Generar Admision'}}
           </button>
         </div>
       </div>
@@ -43,7 +43,7 @@
       <table class="table table-striped mb-0">
         <thead>
           <tr>
-            <th scope="row">
+            <th *ngIf="!retiroView" scope="row">
               <div class="custom-control custom-checkbox invoice-chkbox"><label class="text-relative"><input
                     class="custom-control-input ng-untouched ng-pristine ng-valid" type="checkbox"
                     (change)="selectAll($event)"><span class="custom-control-label p-cursor"></span></label></div>
@@ -65,7 +65,7 @@
         <tbody *ngIf="orders.length > 0 || retiro">
           <tr
             *ngFor="let order of (retiro ? retiro.orders : orders) | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-            <th scope="row">
+            <th *ngIf="!retiroView" scope="row" >
               <div *ngIf="!order.admission && order.financialStatus === 'paid'" class="custom-control custom-checkbox invoice-chkbox"><label class="text-relative"><input
                     class="custom-control-input ng-untouched ng-pristine ng-valid" type="checkbox"
                     name="checkboxes"><span class="custom-control-label p-cursor"></span></label></div>

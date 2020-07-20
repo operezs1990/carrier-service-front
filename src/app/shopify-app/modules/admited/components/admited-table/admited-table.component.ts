@@ -50,6 +50,8 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() retiro: Retiro;
 
+  @Input() retiroView = false;
+
   user: User;
   userId: string;
 

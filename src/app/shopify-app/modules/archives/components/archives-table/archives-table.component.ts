@@ -148,5 +148,10 @@ export class ArchivesTableComponent implements OnInit, AfterViewInit, OnDestroy 
     return (code === '07') ? 'SUCURSAL' : 'DOMICILIO';
  }
 
+ getDateUTC(date: any): string {
+  const t: Date = new Date(date);
+  const dateUtc: string = `${t.getUTCDate()}` + '/' + `${t.getUTCMonth() + 1}` + '/' + `${t.getUTCFullYear()}`;
+  return dateUtc;
+}
 
 }
