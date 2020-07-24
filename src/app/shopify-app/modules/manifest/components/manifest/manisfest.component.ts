@@ -100,7 +100,7 @@ export class ManifestComponent implements OnInit, AfterViewInit {
       pagebreak: { mode: 'avoid-all', after: '#after1' },
       image:        { type: 'jpeg', quality: 0.98 },
       html2canvas:  { scale: 1 },
-      jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
+      jsPDF:        { unit: 'in', format: 'A4', orientation: 'landscape' }
     };
 
     html2pdf().set(opt).from(data).save();

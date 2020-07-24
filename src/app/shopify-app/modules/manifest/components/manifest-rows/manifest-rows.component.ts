@@ -28,7 +28,7 @@ export class ManifestRowsComponent implements OnInit {
   }
 
   getBarCodeNumber(order: Admited) {
-    return order.admission.codigoEncaminamiento + order.admission.numeroEnvio;
+    return `${order.admission.codigoEncaminamiento}${order.admission.numeroEnvio}001`;
   }
 
 }
