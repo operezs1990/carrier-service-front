@@ -40,9 +40,12 @@
         </td>
         <td class="">
           <div class="display-flex align-items-center justify-content-center ">
-            <ngx-barcode [bc-value]="getBarCodeNumber(order)" [bc-height]="25" [bc-display-value]="true" [bc-width]=""
+            <ngx-barcode [bc-value]="getBarCodeNumber(order)" [bc-height]="25" [bc-display-value]="false" [bc-width]=""
               [bc-font-size]="12">
             </ngx-barcode>
+            <div>
+              {{order.admission.numeroEnvio}}
+            </div>
           </div>
         </td>
         <td class="">
