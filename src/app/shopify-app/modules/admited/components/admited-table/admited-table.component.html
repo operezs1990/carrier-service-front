@@ -59,7 +59,7 @@
             <th scope="col" class="text-center">{{'Total'}}</th>
             <th scope="col" class="text-center">{{'Piezas'}}</th>
             <th scope="col" class="text-center">{{'Fecha'}}</th>
-            <th scope="col" class="text-center">{{'Acciones'}}</th>
+            <th *ngIf="!retiro" scope="col" class="text-center">{{'Acciones'}}</th>
           </tr>
         </thead>
         <tbody *ngIf="orders.length > 0 || retiro">
@@ -88,7 +88,7 @@
             <td class="text-center">{{order.totalPrice ? order.totalPrice : ''}}</td>
             <td class="text-center">{{order.totalPieces ? order.totalPieces : ''}}</td>
             <td class="text-center">{{order.admission ? (order.admission.createdAt | date:'short') : ''}}</td>
-            <td>
+            <td *ngIf="!retiro">
               <div class="">
                 <!-- <a *ngIf="!order.admission" data-toggle="tooltip" data-placement="top"
                   title="{{'Regenerar Admisión'|translate}}" class="mr-3 text-muted padding-left-30px"
@@ -98,7 +98,7 @@
                   data-placement="top" title="{{'Generar Admisión'|translate}}"
                   class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="onAdmission(order.id)">
                   <i class="fa fa-file-text-o  font-size-24px" aria-hidden="true"></i></a>
-                <a *ngIf="order.admission && order.financialStatus === 'paid' && !retiro" data-toggle="tooltip "
+                <a *ngIf="order.admission && order.financialStatus === 'paid'" data-toggle="tooltip "
                   data-placement="top" title="{{'Generar Etiqueta'|translate}}"
                   class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="generateLabel(order)">
                   <i class="fa fa-barcode font-size-24px" aria-hidden="true"></i></a>
