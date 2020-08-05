@@ -11,4 +11,5 @@ export class Admited {
   totalPieces: number;
   totalPrice: string;
   admission?: Admission;
+  generatedLabel?: boolean;
 }

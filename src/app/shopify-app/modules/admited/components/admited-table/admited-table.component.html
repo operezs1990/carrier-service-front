@@ -98,7 +98,7 @@
                   data-placement="top" title="{{'Generar Admisión'|translate}}"
                   class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="onAdmission(order.id)">
                   <i class="fa fa-file-text-o  font-size-24px" aria-hidden="true"></i></a>
-                <a *ngIf="order.admission && order.financialStatus === 'paid'" data-toggle="tooltip "
+                <a *ngIf="order.admission && order.financialStatus === 'paid' && !order.generatedLabel" data-toggle="tooltip "
                   data-placement="top" title="{{'Generar Etiqueta'|translate}}"
                   class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="generateLabel(order)">
                   <i class="fa fa-barcode font-size-24px" aria-hidden="true"></i></a>
