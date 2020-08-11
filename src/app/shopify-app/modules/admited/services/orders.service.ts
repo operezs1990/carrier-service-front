@@ -9,7 +9,6 @@ import { Order } from 'app/shopify-app/models/order';
 import { Admited } from 'app/shopify-app/models/admited';
 import { map } from 'rxjs/operators';
 
-import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
 import { Ids } from 'app/shopify-app/models/ids';
 
@@ -38,7 +37,7 @@ export class AdmitedService {
     }
 
     postAdmission(orderId: string): Observable<any> {
-        return this.http.post<any>(this.apiEndpointAdmission, {orderId: orderId});
+        return this.http.post<any>(this.apiEndpointAdmission, { orderId: orderId });
     }
 
     postBulkAdmission(orderIds: Ids): Observable<any> {
@@ -46,9 +45,9 @@ export class AdmitedService {
     }
 
     getAdmiteds(filter?: any): Observable<Admited[]> {
-       const queryParams = this.formatQueryParams(filter);
-       return this.http.get<Admited[]>(this.apiEndpoint + queryParams);
-       // return this.http.get<Admited[]>(this.apiEndpoint);
+        const queryParams = this.formatQueryParams(filter);
+        return this.http.get<Admited[]>(this.apiEndpoint + queryParams);
+        // return this.http.get<Admited[]>(this.apiEndpoint);
 
     }
 
@@ -56,24 +55,16 @@ export class AdmitedService {
         return this.http.get<Admited>(this.apiEndpoint + id);
     }
 
-    getLabel(order: Admited, labelForm: string) {
-        const labelFormat = labelForm === 'pdf' || labelForm === 'pdfs' ? 'pdf' : labelForm;
+    getLabel(order: Admited, labelForm: string, labelFormat: string): Observable<any> {
         const myUrl = this.apiEndpointLabel + '?orderId=' + order.id;
-        const mediaType = 'application/pdf';
-        this.httpClient.post(myUrl, { location: `${order.orderNumber}` + '.' + labelFormat }, { responseType: 'blob'}).subscribe(
-            (response) => {
-                const blob = new Blob([response], { type: mediaType });
-                saveAs(blob, `${order.orderNumber}` + '.' + labelFormat);
-            },
-            e => { throwError(e); }
-        );
+        return this.httpClient.post(myUrl, { location: `${order.orderNumber}` + '.' + labelFormat }, { responseType: 'blob' });
 
     }
 
     formatQueryParams(filter?: any, sortColumn?: string, sortDirection?: string, pageIndex?: number, pageSize?: number): string {
         let queryParams = '';
 
-        if(filter) {
+        if (filter) {
             if (filter.status) {
                 queryParams += queryParams.length > 0 ? '&' : '?';
                 queryParams += `status=${filter.status}`;

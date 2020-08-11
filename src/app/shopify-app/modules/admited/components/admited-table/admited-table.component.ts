@@ -1,23 +1,23 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, Input } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DateRange } from '@uiowa/date-range-picker';
+import { AuthService } from 'app/authentication/services/auth.service';
 import { ConfirmDialogService } from 'app/confirm-dialog/services/confirm-dialog.service';
 import { HandledError } from 'app/error-handling/models/handled-error';
 import { ErrorHandlingService } from 'app/error-handling/services/error-handling.service';
+import { Admited } from 'app/shopify-app/models/admited';
+import { Ids } from 'app/shopify-app/models/ids';
+import { Order } from 'app/shopify-app/models/order';
+import { Retiro } from 'app/shopify-app/models/retiro';
+import { User } from 'app/shopify-app/models/user';
+import { UserService } from 'app/shopify-app/modules/user/services/user.service';
+import { saveAs } from 'file-saver';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { AdmitedService } from '../../services/orders.service';
-import { Order } from 'app/shopify-app/models/order';
-import { Admited } from 'app/shopify-app/models/admited';
-import { Retiro } from 'app/shopify-app/models/retiro';
-import { UserService } from 'app/shopify-app/modules/user/services/user.service';
-import { AuthService } from 'app/authentication/services/auth.service';
-import { User } from 'app/shopify-app/models/user';
-import { Ids } from 'app/shopify-app/models/ids';
-
 
 const errorKey = 'Error';
 
@@ -182,7 +182,20 @@ export class AdmitedTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   generateLabel(order: Admited) {
-    this.admitedService.getLabel(order, this.user.labelFormat);
+    const labelForm = this.user.labelFormat;
+    const labelFormat = labelForm === 'pdf' || labelForm === 'pdfs' ? 'pdf' : labelForm;
+    const mediaType = 'application/pdf';
+
+    this.admitedService.getLabel(order, labelForm, labelFormat).subscribe(
+      (response) => {
+        const blob = new Blob([response], { type: mediaType });
+        saveAs(blob, `${order.orderNumber}` + '.' + labelFormat);
+        this.loadPage();
+      },
+      (err: HandledError) => {
+        this.toastr.error('No se pudo completar la Admisión, nos encontramos en trabajos de mantenimiento en los servicios de correos de chile, intentelo más tarde. Gracias!!!');
+        this.errorHandlingService.handleUiError(errorKey, err);
+      });
   }
 
 

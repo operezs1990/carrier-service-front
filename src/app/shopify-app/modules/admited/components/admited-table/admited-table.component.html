@@ -26,14 +26,14 @@
           </div>
         </div>
       </form>
-      <div class="mb-3 mb-sm-0 d-flex mr-3">
+      <!-- <div class="mb-3 mb-sm-0 d-flex mr-3">
 
         <div *ngIf="!retiroView">
           <button class="btn btn-outline-primary h-100" (click)="generateBulkAdmissions()"
             [disabled]="false">{{'Generar Admision'}}
           </button>
         </div>
-      </div>
+      </div> -->
 
     </div>
 
@@ -43,11 +43,11 @@
       <table class="table table-striped mb-0">
         <thead>
           <tr>
-            <th *ngIf="!retiroView" scope="row">
+            <!-- <th *ngIf="!retiroView" scope="row">
               <div class="custom-control custom-checkbox invoice-chkbox"><label class="text-relative"><input
                     class="custom-control-input ng-untouched ng-pristine ng-valid" type="checkbox"
                     (change)="selectAll($event)"><span class="custom-control-label p-cursor"></span></label></div>
-            </th>
+            </th> -->
             <th scope="col">{{'No. Orden'|translate}}</th>
             <th scope="col">{{'No. Envío'|translate}}</th>
             <th scope="col" class="text-center">{{'Servicio'|translate}}</th>
@@ -65,11 +65,11 @@
         <tbody *ngIf="orders.length > 0 || retiro">
           <tr
             *ngFor="let order of (retiro ? retiro.orders : orders) | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-            <th *ngIf="!retiroView" scope="row" >
+            <!-- <th *ngIf="!retiroView" scope="row" >
               <div *ngIf="!order.admission && order.financialStatus === 'paid'" class="custom-control custom-checkbox invoice-chkbox"><label class="text-relative"><input
                     class="custom-control-input ng-untouched ng-pristine ng-valid" type="checkbox"
                     name="checkboxes"><span class="custom-control-label p-cursor"></span></label></div>
-            </th>
+            </th> -->
             <td>{{order.orderNumber}}</td>
             <td>{{order.admission ? order.admission.numeroEnvio : ''}}</td>
             <td class="text-center">{{getService(order.serviceCode)}}</td>
@@ -94,11 +94,11 @@
                   title="{{'Regenerar Admisión'|translate}}" class="mr-3 text-muted padding-left-30px"
                   href="javascript:void(0)" (click)="onAdmission(order.id)">
                   <i class="fa fa-history font-size-24px" aria-hidden="true"></i></a> -->
-                <a *ngIf="order.financialStatus === 'paid' && !order.admission" data-toggle="tooltip"
+                <!-- <a *ngIf="order.financialStatus === 'paid' && !order.admission" data-toggle="tooltip"
                   data-placement="top" title="{{'Generar Admisión'|translate}}"
                   class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="onAdmission(order.id)">
-                  <i class="fa fa-file-text-o  font-size-24px" aria-hidden="true"></i></a>
-                <a *ngIf="order.admission && order.financialStatus === 'paid' && !order.generatedLabel" data-toggle="tooltip "
+                  <i class="fa fa-file-text-o  font-size-24px" aria-hidden="true"></i></a> -->
+                <a *ngIf="order.financialStatus === 'paid' && !order.generatedLabel" data-toggle="tooltip "
                   data-placement="top" title="{{'Generar Etiqueta'|translate}}"
                   class="mr-3 text-muted padding-left-30px" href="javascript:void(0)" (click)="generateLabel(order)">
                   <i class="fa fa-barcode font-size-24px" aria-hidden="true"></i></a>
