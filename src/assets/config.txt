@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+
+<system.webServer>
+  <rewrite>
+    <rules>
+                <clear />
+                <rule name="ReverseProxyInboundRule1" stopProcessing="true">
+                    <match url="api/v1(.*)" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false" />
+                    <action type="Rewrite" url="http://10.180.180.27:8080/api/v1{R:1}" />
+                </rule>
+				<rule name="Angular Routes" stopProcessing="true">
+                    <match url=".*" />
+                    <conditions logicalGrouping="MatchAll" trackAllCaptures="false">
+                        <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+                        <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+                    </conditions>
+                    <action type="Rewrite" url="./index.html" />
+                </rule>
+                <rule name="Http to Https" enabled="true" stopProcessing="true">
+          <match url="(.*)" />
+           <conditions logicalGrouping="MatchAny">
+            <add input="{HTTPS}" pattern="^OFF$" />
+           </conditions>
+          <action type="Redirect" url="https://{HTTP_HOST}{REQUEST_URI}" redirectType="Permanent" />
+        </rule>
+    </rules>
+  </rewrite>
+</system.webServer>
+
+</configuration>

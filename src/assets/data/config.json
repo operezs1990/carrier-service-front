@@ -35,10 +35,6 @@
     },
     "admission": {
       "apiEndpoint": "admission"
-    },
-
-    "server": {
-      "apiEndpoint": "http://134.122.25.186/api/v1/"
     }
   }
 }
