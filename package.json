@@ -39,7 +39,7 @@
     "angular-sortablejs": "^2.6.0",
     "angular-tree-component": "^8.2.0",
     "angularfire2": "^5.1.1",
-    "auth0-js": "^9.11.3",
+    "auth0-js": "^9.13.2",
     "card": "^2.4.0",
     "chart.js": "^2.7.3",
     "ckeditor": "^4.11.2",
