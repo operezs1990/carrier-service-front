@@ -185,17 +185,12 @@
                         {{'Dirección'|translate}}
                       </label>
                       <textarea class="form-control height-110px" [formControl]="formGroup.controls['address']"
-                        formControlName="address" required>
-                            </textarea>
+                        formControlName="address" maxlength="30" required>
+                      </textarea>
                       <small class="chankya-block"
                         *ngIf="formGroup.controls['address'].hasError('required') && (formGroup.controls['address'].touched ||  wasSubmitted)"
                         class="text-danger">
                         {{'Debe incluir una Dirección postal'|translate}}
-                      </small>
-                      <small class="chankya-block"
-                        *ngIf="formGroup.controls['address'].hasError('maxLength')"
-                        class="text-danger">
-                        {{'El campo Dirección admite un máximo de 30 caracteres.'|translate}}
                       </small>
                     </div>
                   </div>
