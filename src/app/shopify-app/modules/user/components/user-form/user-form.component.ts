@@ -82,7 +82,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
       region: [this.data.region, Validators.compose([Validators.required])],
       comuna: [this.data.comuna ? this.data.comuna.toUpperCase() : '', Validators.compose([Validators.required])],
-      address: [this.data.address, Validators.compose([Validators.required])],
+      address: [this.data.address, Validators.compose([Validators.required, Validators.maxLength(30)])],
       zip: [this.data.zip, Validators.compose([Validators.required, numberValidator])],
 
       userApiChile: [this.data.userApiChile, Validators.compose([Validators.required, alphanumericValidator])],

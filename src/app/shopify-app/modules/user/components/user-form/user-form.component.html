@@ -192,6 +192,11 @@
                         class="text-danger">
                         {{'Debe incluir una Dirección postal'|translate}}
                       </small>
+                      <small class="chankya-block"
+                        *ngIf="formGroup.controls['address'].hasError('maxLength')"
+                        class="text-danger">
+                        {{'El campo Dirección admite un máximo de 30 caracteres.'|translate}}
+                      </small>
                     </div>
                   </div>
                 </div>
