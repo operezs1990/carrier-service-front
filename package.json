@@ -91,7 +91,7 @@
     "ngx-toastr": "^9.1.1",
     "ngx-tour-core": "^4.0.1",
     "ngx-tour-ng-bootstrap": "^4.0.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "normalize.css": "^8.0.1",
     "nvd3": "^1.8.6",
     "perfect-scrollbar": "^1.4.0",
